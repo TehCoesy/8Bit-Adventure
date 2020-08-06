@@ -1,3 +1,6 @@
+// Precompiled Headers
+#include "stdafx.h"
+
 #include "Game.h"
 
 void Game::Update(float fDeltaTime) {
