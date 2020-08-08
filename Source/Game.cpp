@@ -18,6 +18,9 @@ void Game::Init() {
 	// Limit Display()
 	m_MainWindow.setFramerateLimit(static_cast<int>(FRAMERATE));
 
+	RM->Init();
+	SM->Init();
+
 	m_TestShape = sf::CircleShape(100.0f);
 	m_TestShape.setFillColor(sf::Color::Green);
 }
