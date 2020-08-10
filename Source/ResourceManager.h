@@ -21,5 +21,8 @@ private:
 	void LoadTexture(std::string strFilePath);
 	void LoadSoundBuffers(std::string strFilePath);
 public:
+	ResourceManager();
+	~ResourceManager();
+
 	void Init();
 };

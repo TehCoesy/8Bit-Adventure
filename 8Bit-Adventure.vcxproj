@@ -153,18 +153,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Floor.cpp" />
     <ClCompile Include="Source\Game.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Source\GameScene.cpp" />
     <ClCompile Include="Source\MainApplication.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Source\MainMenu.cpp" />
+    <ClCompile Include="Source\MyObject.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\ResourceManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
@@ -183,13 +188,20 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Source\Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Floor.h" />
     <ClInclude Include="Source\Game.h" />
+    <ClInclude Include="Source\GameScene.h" />
+    <ClInclude Include="Source\MainMenu.h" />
+    <ClInclude Include="Source\MyObject.h" />
+    <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\ResourceManager.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\Singleton.h" />
     <ClInclude Include="Source\stdafx.h" />
+    <ClInclude Include="Source\Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Mario.png" />

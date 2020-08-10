@@ -1,15 +1,21 @@
-// Precompiled Headers
+ // Precompiled Headers
 #include "stdafx.h"
 
 #include "Game.h"
 
+Game::Game() {
+
+}
+
+Game::~Game() {
+
+}
+
 void Game::Update(float fDeltaTime) {
-	m_TestShape.move(sf::Vector2f(10.0f * fDeltaTime, 10.0f * fDeltaTime));
 }
 
 void Game::Render() {
 	m_MainWindow.clear();
-	m_MainWindow.draw(m_TestShape);
 	m_MainWindow.display();
 }
 
@@ -20,9 +26,6 @@ void Game::Init() {
 
 	RM->Init();
 	SM->Init();
-
-	m_TestShape = sf::CircleShape(100.0f);
-	m_TestShape.setFillColor(sf::Color::Green);
 }
 
 void Game::RunMainLoop() {
