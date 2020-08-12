@@ -15,9 +15,6 @@
 #include "GameScene.h"
 #include "MainMenu.h"
 
-#define SM SceneManager::GetInstance()
-#define RM ResourceManager::GetInstance()
-
 class Game : public Singleton<Game> {
 private:
 	sf::RenderWindow m_MainWindow;

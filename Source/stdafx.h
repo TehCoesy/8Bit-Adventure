@@ -6,9 +6,12 @@
 #include <vector>
 
 // Macros
-#define WINDOW_W 500
-#define WINDOW_H 500
+#define WINDOW_W 800
+#define WINDOW_H 800
 #define WINDOW_TITLE "Chronicle: Rise"
 #define FRAMERATE 60.0f
 
 #define RESOURCESFOLDER "./Resources/"
+
+#define SM SceneManager::GetInstance()
+#define RM ResourceManager::GetInstance()

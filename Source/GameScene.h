@@ -11,12 +11,17 @@
 
 // Local
 #include "Singleton.h"
+#include "ResourceManager.h"
+#include "MyTexture.h"
 #include "MyObject.h"
 #include "Player.h"
 
 class GameScene {
 private:
 	//b2World* m_World = nullptr;
+
+	sf::Sprite m_PlayerSprite;
+	sf::Texture m_PlayerTexture;
 
 	std::vector<MyObject> m_SceneObjects;
 	Player m_Player;
@@ -28,5 +33,5 @@ public:
 	void Init();
 
 	void Update(float fDeltaTime);
-	void Render(sf::Window* MainWindow);
+	void Render(sf::RenderWindow* MainWindow);
 };

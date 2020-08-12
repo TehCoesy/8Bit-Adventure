@@ -8,16 +8,18 @@ Game::Game() {
 }
 
 Game::~Game() {
-
+	
 }
 
 void Game::Update(float fDeltaTime) {
+	// State?
 	m_GameScene.Update(fDeltaTime);
 }
 
 void Game::Render() {
 	m_MainWindow.clear();
-
+	
+	// State?
 	m_GameScene.Render(&m_MainWindow);
 
 	m_MainWindow.display();
@@ -30,6 +32,7 @@ void Game::Init() {
 
 	RM->InitWithFile("RM.txt");
 
+	m_GameScene.Init();
 }
 
 void Game::RunMainLoop() {

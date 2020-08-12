@@ -30,7 +30,7 @@ void ResourceManager::InitWithFile(std::string strFilePath) {
 			char strBuffer1[100], strBuffer2[100];
 			iVal = fscanf(FileStream, "TEX ID %d %s %s\n", &iID, strBuffer1, strBuffer2); // TEX ID [iID] [strTextureName] [strFilePath]
 
-			//printf("TEX ID %d %s %s\n", iID, strBuffer1, strBuffer2);
+			printf("TEX ID %d %s %s\n", iID, strBuffer1, strBuffer2);
 
 			if (iID != -1) {
 				LoadTexture(iID, std::string(strBuffer1), std::string(strBuffer2));
@@ -72,4 +72,13 @@ void ResourceManager::LoadSoundBuffers(std::string strFilePath) {
 		return;
 	}
 	m_aSoundBuffers.push_back(SoundBuffer);
+}
+
+MyTexture ResourceManager::GetTexture(std::string strName) {
+	for (int i = 0; i < m_aTextures.size(); i++) {
+		if (*m_aTextures.at(i).GetID() != -1 && *m_aTextures.at(i).GetName() == strName) {
+			return m_aTextures.at(i);
+		}
+	}
+	return MyTexture();
 }

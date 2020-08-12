@@ -21,6 +21,6 @@ public:
 	int* GetID();
 	std::string* GetName();
 
-	sf::Texture* GetTexture();
+	sf::Texture GetTexture();
 	void Fetch(sf::Sprite* ObjectSprite);
 };

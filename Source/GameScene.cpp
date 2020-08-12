@@ -20,13 +20,14 @@ void GameScene::AddObject(MyObject NewObject) {
 }
 
 void GameScene::Init() {
-
+	m_PlayerTexture.loadFromFile("./Resources/Textures/PLAYER_D_0.png");
+	m_PlayerSprite.setTexture(m_PlayerTexture);
 }
 
 void GameScene::Update(float fDeltaTime) {
 
 }
 
-void GameScene::Render(sf::Window* MainWindow) {
-
+void GameScene::Render(sf::RenderWindow* MainWindow) {
+	MainWindow->draw(m_PlayerSprite);
 }

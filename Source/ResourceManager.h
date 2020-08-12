@@ -31,4 +31,6 @@ public:
 	~ResourceManager();
 
 	void InitWithFile(std::string strFilePath);
+
+	MyTexture GetTexture(std::string strName);
 };
