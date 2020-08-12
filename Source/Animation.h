@@ -10,7 +10,7 @@ class Animation {
 private:
 	int m_iID = -1;
 	int m_iFrameSteps = 10, m_iFrameIndex = 0;
-	std::string m_iName = "";
+	std::string m_strName = "";
 
 	std::vector<sf::Texture> m_Sprites;
 

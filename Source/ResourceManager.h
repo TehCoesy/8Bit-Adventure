@@ -9,17 +9,23 @@
 
 // Local
 #include "Singleton.h"
+#include "Animation.h"
+#include "MyTexture.h"
 
 // Macros
 #define ResourcesFolder "./Resources/"
 
 class ResourceManager : public Singleton<ResourceManager> {
 private:
-	std::vector<sf::Texture> m_aTextures;
+	std::vector<MyTexture> m_aTextures;
+	std::vector<Animation> m_aAnimations;
 	std::vector<sf::SoundBuffer> m_aSoundBuffers;
 
-	void LoadTexture(std::string strFilePath);
+	void LoadTexture(int iID, std::string strName, std::string strFilePath);
+	void LoadAnimation();
 	void LoadSoundBuffers(std::string strFilePath);
+
+	int m_iTexturesCount = 0, m_iAnimationsCount = 0, m_iSoundsCount = 0;
 public:
 	ResourceManager();
 	~ResourceManager();

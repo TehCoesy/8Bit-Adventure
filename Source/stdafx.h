@@ -11,4 +11,4 @@
 #define WINDOW_TITLE "Chronicle: Rise"
 #define FRAMERATE 60.0f
 
-#define RESOURCESFOLDER "../Resources/"
+#define RESOURCESFOLDER "./Resources/"
