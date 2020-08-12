@@ -12,12 +12,8 @@
 #include "Singleton.h"
 #include "SceneManager.h"
 #include "ResourceManager.h" 
-
-// Macros
-#define WINDOW_W 500
-#define WINDOW_H 500
-#define WINDOW_TITLE "8Bit-Adventure"
-#define FRAMERATE 60.0f
+#include "GameScene.h"
+#include "MainMenu.h"
 
 #define SM SceneManager::GetInstance()
 #define RM ResourceManager::GetInstance()
@@ -28,6 +24,7 @@ private:
 	sf::Clock m_Clock;
 
 	GameScene m_GameScene;
+	MainMenu m_MainMenu;
 
 	void Update(float fDeltaTime);
 	void Render();

@@ -12,10 +12,14 @@ Game::~Game() {
 }
 
 void Game::Update(float fDeltaTime) {
+	m_GameScene.Update(fDeltaTime);
 }
 
 void Game::Render() {
 	m_MainWindow.clear();
+
+	m_GameScene.Render(&m_MainWindow);
+
 	m_MainWindow.display();
 }
 
@@ -24,8 +28,8 @@ void Game::Init() {
 	// Limit Display()
 	m_MainWindow.setFramerateLimit(static_cast<int>(FRAMERATE));
 
-	RM->Init();
-	SM->Init();
+	RM->InitWithFile("RM.txt");
+
 }
 
 void Game::RunMainLoop() {

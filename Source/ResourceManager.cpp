@@ -11,8 +11,15 @@ ResourceManager::~ResourceManager() {
 
 }
 
-void ResourceManager::Init() {
+void ResourceManager::InitWithFile(std::string strFilePath) {
+	FILE* FileStream;
+	strFilePath = RESOURCESFOLDER + strFilePath;
+	FileStream = fopen(strFilePath.c_str(), "r");
 
+	if (FileStream) {
+		// Close FileStream
+		fclose(FileStream);
+	}
 }
 
 void ResourceManager::LoadTexture(std::string strFilePath) {

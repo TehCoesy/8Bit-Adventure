@@ -24,5 +24,5 @@ public:
 	ResourceManager();
 	~ResourceManager();
 
-	void Init();
+	void InitWithFile(std::string strFilePath);
 };

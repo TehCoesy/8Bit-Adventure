@@ -11,12 +11,17 @@ SceneManager::~SceneManager() {
 
 }
 
-void SceneManager::Init() {
-	
-}
+void SceneManager::LoadGameScene(GameScene* GameScene, std::string strFilePath) {
+	FILE* FileStream;
+	strFilePath = RESOURCESFOLDER + strFilePath;
+	FileStream = fopen(strFilePath.c_str(), "r");
 
-void SceneManager::LoadGameScene(std::string strFilePath) {
+	if (FileStream) {
+		// PlaceHolder Scene, for testing;
 
+		// Close FileStream
+		fclose(FileStream);
+	}
 }
 
 void SceneManager::LoadMainMenu() {

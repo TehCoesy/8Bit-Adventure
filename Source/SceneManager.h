@@ -14,10 +14,6 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	GameScene m_GameScene;
-
-	void Init();
-
-	void LoadGameScene(std::string strFilePath);
+	void LoadGameScene(GameScene* GameScene, std::string strFilePath);
 	void LoadMainMenu();
 };
