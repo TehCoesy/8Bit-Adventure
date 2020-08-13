@@ -20,8 +20,8 @@ void GameScene::AddObject(MyObject NewObject) {
 }
 
 void GameScene::Init() {
-	m_PlayerTexture.loadFromFile("./Resources/Textures/PLAYER_D_0.png");
-	m_PlayerSprite.setTexture(m_PlayerTexture);
+	m_PlayerTexture = RM->GetTexture("PLAYER_D_0");
+	m_PlayerSprite.setTexture(*m_PlayerTexture.GetTexture());
 }
 
 void GameScene::Update(float fDeltaTime) {

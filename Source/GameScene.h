@@ -21,7 +21,7 @@ private:
 	//b2World* m_World = nullptr;
 
 	sf::Sprite m_PlayerSprite;
-	sf::Texture m_PlayerTexture;
+	MyTexture m_PlayerTexture;
 
 	std::vector<MyObject> m_SceneObjects;
 	Player m_Player;

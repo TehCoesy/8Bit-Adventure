@@ -29,8 +29,8 @@ std::string* MyTexture::GetName() {
 	return &m_strName;
 }
 
-sf::Texture MyTexture::GetTexture() {
-	return m_Texture;
+sf::Texture* MyTexture::GetTexture() {
+	return &m_Texture;
 }
 
 void MyTexture::Fetch(sf::Sprite* ObjectSprite) {

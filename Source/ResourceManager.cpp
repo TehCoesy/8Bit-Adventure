@@ -30,7 +30,7 @@ void ResourceManager::InitWithFile(std::string strFilePath) {
 			char strBuffer1[100], strBuffer2[100];
 			iVal = fscanf(FileStream, "TEX ID %d %s %s\n", &iID, strBuffer1, strBuffer2); // TEX ID [iID] [strTextureName] [strFilePath]
 
-			printf("TEX ID %d %s %s\n", iID, strBuffer1, strBuffer2);
+			//printf("TEX ID %d %s %s\n", iID, strBuffer1, strBuffer2);
 
 			if (iID != -1) {
 				LoadTexture(iID, std::string(strBuffer1), std::string(strBuffer2));
