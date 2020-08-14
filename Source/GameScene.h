@@ -12,6 +12,7 @@
 // Local
 #include "Singleton.h"
 #include "ResourceManager.h"
+#include "Keyboard.h"
 #include "MyTexture.h"
 #include "MyObject.h"
 #include "Player.h"

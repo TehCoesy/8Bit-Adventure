@@ -163,6 +163,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\GameScene.cpp" />
+    <ClCompile Include="Source\Keyboard.cpp" />
     <ClCompile Include="Source\MainApplication.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
@@ -200,6 +201,7 @@
     <ClInclude Include="Source\Floor.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\GameScene.h" />
+    <ClInclude Include="Source\Keyboard.h" />
     <ClInclude Include="Source\MainMenu.h" />
     <ClInclude Include="Source\MyObject.h" />
     <ClInclude Include="Source\Player.h" />
