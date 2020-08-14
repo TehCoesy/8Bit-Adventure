@@ -5,8 +5,6 @@
 
 // External Libraries
 #include "SFML/Graphics.hpp"
-#include "Box2D/Box2D.h"
-#include "Box2D/b2_world.h"
 
 // Local
 #include "Singleton.h"

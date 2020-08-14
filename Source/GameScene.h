@@ -4,10 +4,10 @@
 #include "stdafx.h"
 
 // External Libraries
-#include "Box2D/Box2D.h"
 
 // External Libraries
 #include "SFML/Graphics.hpp"
+#include "Box2D/Box2D.h"
 
 // Local
 #include "Singleton.h"
@@ -19,7 +19,7 @@
 
 class GameScene {
 private:
-	//b2World* m_World = nullptr;
+	b2World* m_World;
 
 	sf::Sprite m_PlayerSprite;
 	MyTexture m_PlayerTexture;
