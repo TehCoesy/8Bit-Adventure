@@ -11,10 +11,10 @@ private:
 	int m_iID = -1;
 	std::string m_strName = "";
 
-	sf::Texture m_Texture;
+	sf::Texture* m_Texture;
 public:
 	MyTexture();
-	MyTexture(int iID, std::string strName, sf::Texture Texture);
+	MyTexture(int iID, std::string strName, sf::Texture* Texture);
 	MyTexture(const MyTexture& cMyTexture);
 	~MyTexture();
 

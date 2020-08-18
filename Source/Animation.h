@@ -12,7 +12,7 @@ private:
 	int m_iFrameSteps = 10, m_iFrameIndex = 0;
 	std::string m_strName = "";
 
-	std::vector<sf::Texture> m_AnimationFrames;
+	std::vector<sf::Texture*> m_AnimationFrames;
 
 	bool m_bIsPlaying = false;
 public:

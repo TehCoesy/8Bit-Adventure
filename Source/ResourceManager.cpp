@@ -50,8 +50,8 @@ void ResourceManager::InitWithFile(std::string strFilePath) {
 void ResourceManager::LoadTexture(int iID, std::string strName, std::string strFilePath) {
 	strFilePath = RESOURCESFOLDER + strFilePath;
 
-	sf::Texture Texture;
-	if (!Texture.loadFromFile(strFilePath)) 
+	sf::Texture* Texture = new sf::Texture;
+	if (!Texture->loadFromFile(strFilePath)) 
 	{
 		printf("(ResourceManager) Error loading texture! @%s", strFilePath.c_str());
 		return;

@@ -4,9 +4,10 @@
 #include "MyTexture.h"
 
 MyTexture::MyTexture() {
+	m_Texture = new sf::Texture();
 }
 
-MyTexture::MyTexture(int iID, std::string strName, sf::Texture Texture) {
+MyTexture::MyTexture(int iID, std::string strName, sf::Texture* Texture) {
 	m_iID = iID;
 	m_strName = strName;
 	m_Texture = Texture;
@@ -30,11 +31,11 @@ std::string* MyTexture::GetName() {
 }
 
 sf::Texture* MyTexture::GetTexture() {
-	return &m_Texture;
+	return m_Texture;
 }
 
 void MyTexture::Fetch(sf::Sprite* ObjectSprite) {
 	if (m_iID != -1) {
-		ObjectSprite->setTexture(m_Texture);
+		ObjectSprite->setTexture(*m_Texture);
 	}
 }
