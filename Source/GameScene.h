@@ -24,14 +24,16 @@ private:
 	sf::Sprite m_PlayerSprite;
 	MyTexture m_PlayerTexture;
 
+	sf::RectangleShape m_PhysicsBodyBox, m_SpriteBox;
+	b2Body* m_PlayerPhysicsBody;
+
 	std::vector<MyObject> m_SceneObjects;
 	Player m_Player;
 public:
 	GameScene();
 	~GameScene();
 
-	void AddObject(MyObject NewObject);
-	void Init();
+	void LoadFromFile(std::string strFile);
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* MainWindow);

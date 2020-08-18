@@ -31,8 +31,8 @@ void Game::Init() {
 	m_MainWindow.setFramerateLimit(static_cast<int>(FRAMERATE));
 
 	RM->InitWithFile("RM.txt");
-
-	m_GameScene.Init();
+	
+	m_GameScene.LoadFromFile("Stage1.txt");
 }
 
 void Game::RunMainLoop() {

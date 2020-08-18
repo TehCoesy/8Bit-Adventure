@@ -15,3 +15,6 @@
 
 #define SM SceneManager::GetInstance()
 #define RM ResourceManager::GetInstance()
+
+#define TILE_SIZE 64.0f
+#define PIXELS_METERS 30.0f
