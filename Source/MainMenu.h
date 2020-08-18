@@ -8,5 +8,10 @@
 #include "MyObject.h"
 
 class MainMenu {
+private:
+public:
+	MainMenu();
+	~MainMenu();
 
+	void LoadFromFile(std::string strFilePath);
 };

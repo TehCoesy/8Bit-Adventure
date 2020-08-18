@@ -2,10 +2,10 @@
 
 // Precompiled Headers
 #include "stdafx.h"
+
 #include "MyObject.h"
 #include "Animation.h"
-#include "Game.h"
-#include <math.h>
+
 using namespace std;
 class Player : public MyObject{
 public:

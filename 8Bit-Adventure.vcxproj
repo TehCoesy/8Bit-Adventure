@@ -181,12 +181,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Source\SceneManager.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="Source\ShopKeeper.cpp" />
     <ClCompile Include="Source\StateManager.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
@@ -211,7 +205,6 @@
     <ClInclude Include="Source\MyObject.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\ResourceManager.h" />
-    <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\ShopKeeper.h" />
     <ClInclude Include="Source\Singleton.h" />
     <ClInclude Include="Source\StateManager.h" />

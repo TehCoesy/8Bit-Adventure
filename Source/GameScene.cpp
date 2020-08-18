@@ -52,6 +52,17 @@ void GameScene::LoadFromFile(std::string strFilePath) {
 	m_PhysicsBodyBox.setOutlineThickness(2.0f);
 
 	m_PlayerSprite.setPosition(m_PlayerPhysicsBody->GetPosition().x * PIXELS_METERS, m_PlayerPhysicsBody->GetPosition().y * PIXELS_METERS);
+
+	FILE* FileStream;
+	strFilePath = RESOURCESFOLDER + strFilePath;
+	FileStream = fopen(strFilePath.c_str(), "r");
+
+	if (FileStream) {
+		// PlaceHolder Scene, for testing;
+
+		// Close FileStream
+		fclose(FileStream);
+	}
 }
 
 void GameScene::Update(float fDeltaTime) {

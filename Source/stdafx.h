@@ -13,7 +13,6 @@
 
 #define RESOURCESFOLDER "./Resources/"
 
-#define SM SceneManager::GetInstance()
 #define RM ResourceManager::GetInstance()
 
 #define TILE_SIZE 64.0f
