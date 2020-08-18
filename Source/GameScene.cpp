@@ -66,18 +66,29 @@ void GameScene::LoadFromFile(std::string strFilePath) {
 }
 
 void GameScene::Update(float fDeltaTime) {
+	// Update Input
+	float VelX = 0.0f, VelY = 0.0f;
+
 	if (Keyboard::GetKey(Keyboard::UP)) {
-		m_PlayerSprite.move(sf::Vector2f(0.0f, -1.0f));
+		VelY = -2.0f;
 	}
 	if (Keyboard::GetKey(Keyboard::DOWN)) {
-		m_PlayerSprite.move(sf::Vector2f(0.0f, 1.0f));
+		VelY = 2.0f;
 	}
 	if (Keyboard::GetKey(Keyboard::LEFT)) {
-		m_PlayerSprite.move(sf::Vector2f(-1.0f, 0.0f));
+		VelX = -2.0f;
 	}
 	if (Keyboard::GetKey(Keyboard::RIGHT)) {
-		m_PlayerSprite.move(sf::Vector2f(1.0f, 0.0f));
+		VelX = 2.0f;
 	}
+
+	m_PlayerPhysicsBody->SetLinearVelocity(b2Vec2(VelX, VelY));
+
+	// Update Sprites
+	m_PhysicsBodyBox.setPosition(m_PlayerPhysicsBody->GetPosition().x * PIXELS_METERS, m_PlayerPhysicsBody->GetPosition().y * PIXELS_METERS + 32.0f);
+	m_PlayerSprite.setPosition(m_PlayerPhysicsBody->GetPosition().x * PIXELS_METERS, m_PlayerPhysicsBody->GetPosition().y * PIXELS_METERS);
+
+	m_World->Step(fDeltaTime, 4, 2);
 }
 
 void GameScene::Render(sf::RenderWindow* MainWindow) {
