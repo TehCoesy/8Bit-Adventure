@@ -21,18 +21,18 @@ class GameScene {
 private:
 	b2World* m_World;
 
-	sf::Sprite m_PlayerSprite;
-	MyTexture m_PlayerTexture;
+	
 
 	sf::RectangleShape m_PhysicsBodyBox, m_SpriteBox;
 	b2Body* m_PlayerPhysicsBody;
+	Player m_Player;
 
 	std::vector<MyObject> m_SceneObjects;
-	Player m_Player;
 public:
 	GameScene();
 	~GameScene();
 
+	void LoadPlayer(std::string strFilePath);
 	void LoadFromFile(std::string strFile);
 
 	void Update(float fDeltaTime);

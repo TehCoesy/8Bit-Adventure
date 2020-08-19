@@ -22,8 +22,8 @@ MyTexture::MyTexture(const MyTexture& cMyTexture) {
 MyTexture::~MyTexture() {
 }
 
-int* MyTexture::GetID() {
-	return &m_iID;
+int MyTexture::GetID() {
+	return m_iID;
 }
 
 std::string* MyTexture::GetName() {
