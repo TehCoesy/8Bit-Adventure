@@ -24,7 +24,7 @@ void MyObject::Update(float fDeltaTime) {
 void MyObject::Render(sf::RenderWindow* MainWindow) {
 	for (int i = 0; i < m_AnimationList.size(); i++)
 	{
-		if (m_AnimationList.at(i).GetID() == m_iDirection)
+		if (m_AnimationList.at(i).GetAnimationID() == m_iDirection)
 		{
 			for (int k = 0; k < m_AnimationList.at(i).GetAnimationFrames().size(); k++)
 			{
@@ -50,7 +50,7 @@ void MyObject::SetDirection(int iDirection)
 void MyObject::AddAnimation(int iAnimID) {
 	for (int i = 0; i < RM->GetAnimationList().size(); i++)
 	{
-		if (RM->GetAnimationList().at(i).GetID() == iAnimID)
+		if (RM->GetAnimationList().at(i).GetAnimationID() == iAnimID)
 		{
 			m_AnimationList.push_back(RM->GetAnimationList().at(i));
 			break;
