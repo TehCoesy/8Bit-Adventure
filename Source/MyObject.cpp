@@ -9,14 +9,18 @@ MyObject::MyObject() {
 MyObject::~MyObject() {
 }
 
-void MyObject::CreateObject(sf::Texture Texture) {
-	m_Sprite.setTexture(Texture);
+int* MyObject::GetID() {
+	return &m_iID;
+}
+
+std::string* MyObject::GetName() {
+	return &m_strName;
 }
 
 void MyObject::Update(float fDeltaTime) {
 
 }
 
-void MyObject::Render() {
+void MyObject::Render(sf::RenderWindow* RenderWindow) {
 
 }
