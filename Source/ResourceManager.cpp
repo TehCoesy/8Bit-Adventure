@@ -16,7 +16,6 @@ void ResourceManager::InitWithFile(std::string strFilePath) {
 
 	if (FileStream) {
 		int iVal;
-		//TODO: repair load texture
 #pragma region Loading (Static) Textures
 
 		int iTexturesCount = 0;
