@@ -9,6 +9,7 @@
 
 // External Libraries
 #include "SFML/Graphics.hpp"
+#include "ResourceManager.h"
 #include "Box2D/Box2D.h"
 
 class MyObject {
@@ -23,6 +24,11 @@ protected:
 
 	MyTexture m_StaticTexture;
 	Animation m_Animation;
+
+	MyTexture m_Texture;
+	std::vector<Animation> m_AnimationList{};
+	int m_iDirection = 1; //down
+	float m_fVelocity = 0.0f;
 public:
 	MyObject();
 	~MyObject();
@@ -31,5 +37,8 @@ public:
 	std::string* GetName();
 
 	virtual void Update(float fDeltaTime);
-	virtual void Render(sf::RenderWindow* RenderWindow);
+	virtual void Render(sf::RenderWindow* MainWindow);
+
+	void SetDirection(int iDirection);
+	void AddAnimation(int iAnimID);
 };

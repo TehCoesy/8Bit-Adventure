@@ -15,11 +15,31 @@ GameScene::~GameScene() {
 	if (m_World) { delete(m_World); m_World = nullptr; }
 }
 
+void GameScene::LoadPlayer(std::string strFilePath) {
+	FILE* FileStream;
+	strFilePath = RESOURCESFOLDER + strFilePath;
+	FileStream = fopen(strFilePath.c_str(), "r");
+
+	std::vector<int> aAnims;
+	if (FileStream) {
+		int iVal, iNumAnim;
+		iVal = fscanf(FileStream, "#PLAYER\n");
+		iVal = fscanf(FileStream, "ANIM: %d\n", &iNumAnim);
+		for (int i = 0; i < iNumAnim; i++)
+		{
+			int iAnimID;
+			iVal = fscanf(FileStream, "ANIM_ID %d\n", &iAnimID);
+			m_Player.AddAnimation(iAnimID);
+		}
+		// Close FileStream
+		fclose(FileStream);
+	}
+
+}
+
 void GameScene::LoadFromFile(std::string strFilePath) {
-	// Experimental Player Object
-	m_PlayerTexture = RM->GetTexture("PLAYER_D_0");
-	m_PlayerSprite.setTexture(*m_PlayerTexture.GetTexture());
-	m_PlayerSprite.setScale(sf::Vector2f(2.0f, 2.0f));
+
+	//LoadPlayer(strFilePath);
 
 	float PositionX = 0.0f, PositionY = 0.0f; // Pixel Coordinate
 
@@ -71,15 +91,19 @@ void GameScene::Update(float fDeltaTime) {
 
 	if (Keyboard::GetKey(Keyboard::UP)) {
 		VelY = -2.0f;
+		//m_Player.Walk(Keyboard::UP);
 	}
 	if (Keyboard::GetKey(Keyboard::DOWN)) {
 		VelY = 2.0f;
+		//m_Player.Walk(Keyboard::DOWN);
 	}
 	if (Keyboard::GetKey(Keyboard::LEFT)) {
 		VelX = -2.0f;
+		//m_Player.Walk(Keyboard::LEFT);
 	}
 	if (Keyboard::GetKey(Keyboard::RIGHT)) {
 		VelX = 2.0f;
+		//m_Player.Walk(Keyboard::RIGHT);
 	}
 
 	m_PlayerPhysicsBody->SetLinearVelocity(b2Vec2(VelX, VelY));

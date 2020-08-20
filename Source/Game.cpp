@@ -17,12 +17,12 @@ void Game::Update(float fDeltaTime) {
 }
 
 void Game::Render() {
-	m_MainWindow.clear();
+	//m_MainWindow.clear();
 	
 	// State?
 	m_GameScene.Render(&m_MainWindow);
 
-	m_MainWindow.display();
+	//m_MainWindow.display();
 }
 
 void Game::Init() {

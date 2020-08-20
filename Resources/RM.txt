@@ -1,11 +1,45 @@
-#TEXTURES: 1
+#TEXTURES: 12
 
-TEX ID 0 PLAYER_D_0 Textures/PLAYER_D_0.png
+TEX ID 0 PLAYER_IDLE_DOWN Textures/idle/player/PLAYER_IDLE_DOWN/sprite_0.png
+TEX ID 1 PLAYER_IDLE_DOWN Textures/idle/player/PLAYER_IDLE_DOWN/sprite_1.png
+TEX ID 2 PLAYER_IDLE_DOWN Textures/idle/player/PLAYER_IDLE_DOWN/sprite_2.png
 
-#ANIMATIONS: 0
+TEX ID 3 PLAYER_IDLE_UP Textures/idle/player/PLAYER_IDLE_UP/sprite_0.png
+TEX ID 4 PLAYER_IDLE_UP Textures/idle/player/PLAYER_IDLE_UP/sprite_1.png
+TEX ID 5 PLAYER_IDLE_UP Textures/idle/player/PLAYER_IDLE_UP/sprite_2.png
 
-ANI ID 0 FRAMES 4 TIMESTEP 10
-0 Textures/PLAYER_D_0.png
-1 Textures/PLAYER_D_1.png
-2 Textures/PLAYER_D_0.png
-3 Textures/PLAYER_D_2.png
+TEX ID 6 PLAYER_IDLE_LEFT Textures/idle/player/PLAYER_IDLE_LEFT/sprite_0.png
+TEX ID 7 PLAYER_IDLE_LEFT Textures/idle/player/PLAYER_IDLE_LEFT/sprite_1.png
+TEX ID 8 PLAYER_IDLE_LEFT Textures/idle/player/PLAYER_IDLE_LEFT/sprite_2.png
+
+TEX ID 9 PLAYER_IDLE_RIGHT Textures/idle/player/PLAYER_IDLE_RIGHT/sprite_0.png
+TEX ID 10 PLAYER_IDLE_RIGHT Textures/idle/player/PLAYER_IDLE_RIGHT/sprite_1.png
+TEX ID 11 PLAYER_IDLE_RIGHT Textures/idle/player/PLAYER_IDLE_RIGHT/sprite_2.png
+
+#ANIMATIONS: 5
+
+ANI ID 0 NAME PLAYER_IDLE_UP FRAMES 3 TIMESTEP 10
+3 Textures/idle/player/PLAYER_IDLE_UP/sprite_0.png
+4 Textures/idle/player/PLAYER_IDLE_UP/sprite_1.png
+5 Textures/idle/player/PLAYER_IDLE_UP/sprite_2.png
+
+ANI ID 1 NAME PLAYER_IDLE_DOWN FRAMES 3 TIMESTEP 10
+0 Textures/idle/player/PLAYER_IDLE_DOWN/sprite_0.png
+1 Textures/idle/player/PLAYER_IDLE_DOWN/sprite_1.png
+2 Textures/idle/player/PLAYER_IDLE_DOWN/sprite_2.png
+
+ANI ID 2 NAME PLAYER_IDLE_LEFT FRAMES 3 TIMESTEP 10
+6 Textures/idle/player/PLAYER_IDLE_LEFT/sprite_0.png
+7 Textures/idle/player/PLAYER_IDLE_LEFT/sprite_1.png
+8 Textures/idle/player/PLAYER_IDLE_LEFT/sprite_2.png
+
+ANI ID 3 NAME PLAYER_IDLE_RIGHT FRAMES 3 TIMESTEP 10
+9 Textures/idle/player/PLAYER_IDLE_RIGHT/sprite_0.png
+10 Textures/idle/player/PLAYER_IDLE_RIGHT/sprite_1.png
+11 Textures/idle/player/PLAYER_IDLE_RIGHT/sprite_2.png
+
+ANI ID 4 NAME PLAYER_MOVE_DOWN FRAMES 4 TIMESTEP 10
+0 Textures/move/PLAYER_D_0.png
+1 Textures/move/PLAYER_D_1.png
+2 Textures/move/PLAYER_D_0.png
+3 Textures/move/PLAYER_D_2.png

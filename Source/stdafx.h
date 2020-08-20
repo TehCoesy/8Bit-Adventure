@@ -17,3 +17,9 @@
 
 #define TILE_SIZE 64.0f
 #define PIXELS_METERS 30.0f
+
+//Animation
+#define OBJECT_IDLE_UP 0
+#define OBJECT_IDLE_DOWN 1
+#define OBJECT_IDLE_LEFT 2
+#define OBJECT_IDLE_RIGHT 3

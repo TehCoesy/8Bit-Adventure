@@ -18,7 +18,7 @@ public:
 	MyTexture(const MyTexture& cMyTexture);
 	~MyTexture();
 
-	int* GetID();
+	int GetID();
 	std::string* GetName();
 
 	sf::Texture* GetTexture();

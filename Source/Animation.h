@@ -5,6 +5,7 @@
 
 // Local
 #include "SFML/Graphics.hpp"
+#include "MyTexture.h"
 
 class Animation {
 private:
@@ -12,16 +13,19 @@ private:
 	int m_iFrameSteps = 10, m_iFrameIndex = 0;
 	std::string m_strName = "";
 
-	std::vector<sf::Texture*> m_AnimationFrames;
+	std::vector<MyTexture> m_AnimationFrames;
 
 	bool m_bIsPlaying = false;
 public:
-	Animation();
+	Animation(int iID, int iFrames, int iTimeSteps, std::string strName, std::vector<MyTexture> aAnimationFrames);
 	~Animation();
 
 	void Stop();
 	void Play();
 
+	int GetID();
+
 	void Update(float fDeltaTime);
 	void Fetch(sf::Sprite* ObjectSprite);
+	std::vector<MyTexture> GetAnimationFrames();
 };

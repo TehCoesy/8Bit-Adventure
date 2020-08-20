@@ -22,7 +22,7 @@ private:
 	std::vector<sf::SoundBuffer> m_aSoundBuffers;
 
 	void LoadTexture(int iID, std::string strName, std::string strFilePath);
-	void LoadAnimation();
+	void LoadAnimation(int iID, std::vector<int> aIDTexture, std::string strAnimationName, int iFrames, int iTimeSteps, std::vector<std::string> strFilePath);
 	void LoadSoundBuffers(std::string strFilePath);
 
 	int m_iTexturesCount = 0, m_iAnimationsCount = 0, m_iSoundsCount = 0;
@@ -31,6 +31,7 @@ public:
 	~ResourceManager();
 
 	void InitWithFile(std::string strFilePath);
+	std::vector<Animation> GetAnimationList();
 
-	MyTexture GetTexture(std::string strName);
+	MyTexture GetTexture(int iID);
 };
