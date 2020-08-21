@@ -3,73 +3,67 @@
 
 #include "Player.h"
 
-#define iTICK 100
-
-bool death = false;
-
 Player::Player() {
-	m_fVelocity = 3.0f;
-	SetState(&Player::Spawn);
-	Init();
-}
-/*
-Player::Player(Vector3 pos, Vector3 scale, Vector3 rotation) : Player()
-{
-	//Update transform
-	UpdatePosition(pos.x, pos.y, pos.z);
-	UpdateRotation(rotation.x, rotation.y, rotation.z);
-	UpdateScale(scale.x, scale.y, scale.z);
 
-	Init();
 }
-*/
+
+Player::Player(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody) {
+	m_iID = iID;
+	m_strName = strName;
+
+	m_Animation = RM->GetAnimation(strAnimationName);
+	m_PhysicsBody = PhysicsBody;
+
+	m_Animation.Fetch(&m_Sprite);
+}
+
+Player::Player(const Player& cObject) {
+	m_iID = cObject.m_iID;
+	m_strName = cObject.m_strName;
+
+	m_StaticTexture = cObject.m_StaticTexture;
+	m_PhysicsBody = cObject.m_PhysicsBody;
+
+	m_StaticTexture.Fetch(&m_Sprite);
+}
+
 Player::~Player() {
+
 }
 
-void Player::Init() {};
-
-void Player::UpdateHP() {};
-
-void Player::SetColliable(bool state) {};
-
-void Player::Spawn() {};
-
-void Player::Walk(int iDirect) {
-	switch (iDirect)
-	{
-	case 0://up
-		m_Sprite.move(0.0f, -m_fVelocity);
-		break;
-	case 1://down
-		m_Sprite.move(0.0f, m_fVelocity);
-		break;
-	case 2://left
-		m_Sprite.move(-m_fVelocity, 0.0f);
-		break;
-	case 3://right
-		m_Sprite.move(m_fVelocity, 0.0f);
-		break;
-	default:
-		break;
+void Player::Update(float fDeltaTime) {
+	if (m_iID != -1) {
+		m_Animation.Update(fDeltaTime);
+		m_Animation.Fetch(&m_Sprite);
 	}
-	m_iDirection = iDirect;
-};
+}
 
-void Player::Run() {};
+void Player::Render(sf::RenderWindow* RenderWindow) {
+	if (m_iID != -1) {
+		RenderWindow->draw(m_Sprite);
+	}
+}
 
-void Player::GetHit() {};
+void Player::MoveDown(float fDeltaTime) {
+	if (m_iID != -1) {
 
-void Player::Death() {};
+	}
+}
 
-void Player::CalculateVelocity() {};
+void Player::MoveUp(float fDeltaTime) {
+	if (m_iID != -1) {
 
-void Player::CalculateAngle() {};
+	}
+}
 
-void Player::CheckCollision(MyObject* tempObj) {};
+void Player::MoveLeft(float fDeltaTime) {
+	if (m_iID != -1) {
 
-void Player::Update(float deltaTime) {
-};
+	}
+}
 
-sf::Sprite Player::GetSprite() {
-	return m_Sprite;
+void Player::MoveRight(float fDeltaTime) {
+	if (m_iID != -1) {
+
+	}
 }

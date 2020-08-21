@@ -1,37 +1,23 @@
 #pragma once
 
+// Precompiled Headers
 #include "stdafx.h"
-#include "MyObject.h"
-#include "Animation.h"
-#include "Game.h"
-#include <math.h>
 
-using namespace std;
-class Boss :
-	public MyObject
-{
+// Local
+#include "MyObject.h"
+
+class Boss : public MyObject {
 public:
 	Boss();
-	//Boss(Vector3 pos, Vector3 scale, Vector3 rotation);
+	Boss(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody);
+	Boss(const Boss& cObject);
 	~Boss();
 
-	void SetState(void(Boss::* state)()) {
-		activeState = state;
-	}
-	float x, y, velX, velY, distance;
+	void Update(float fDeltaTime);
+	void Render(sf::RenderWindow* RenderWindow);
 
-	void PlayAnimation(int key);
-	void Spawn();
-
-	void WalkLeft();
-	void WalkRight();
-	void Death();
-	void CalculateVelocity(float mX, float mY);
-	void DoStuff();
-	void Update(float deltaTime);
-	void CheckCollision(MyObject* tempObj);
-	void Init();
-	void(Boss::* activeState)() = NULL;
-	int activeAnimation = -1;
-	vector<Animation*> animeList{};
+	void MoveDown(float fDeltaTime);
+	void MoveUp(float fDeltaTime);
+	void MoveLeft(float fDeltaTime);
+	void MoveRight(float fDeltaTime);
 };

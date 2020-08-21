@@ -36,6 +36,12 @@
     <Filter Include="Source Files\Scenes">
       <UniqueIdentifier>{64ac2d45-b393-4189-bc46-261f9eace3ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\AI">
+      <UniqueIdentifier>{b1b633fd-a1c4-4ee7-a2fa-769342555849}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI">
+      <UniqueIdentifier>{1dce74b1-a7f7-49c7-a87b-9c3015072db3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\MainApplication.cpp">
@@ -83,13 +89,13 @@
     <ClCompile Include="Source\Keyboard.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ShopKeeper.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Boss.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BotTest.cpp">
+    <ClCompile Include="Source\ShopKeeper.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -139,14 +145,14 @@
     <ClInclude Include="Source\Boss.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BotTest.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ShopKeeper.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Source\MainMenu.h">
       <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShopKeeper.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

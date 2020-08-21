@@ -1,13 +1,13 @@
 // Precompiled Headers
 #include "stdafx.h"
 
-#include "Boss.h"
+#include "Enemy.h"
 
-Boss::Boss() {
+Enemy::Enemy() {
 
 }
 
-Boss::Boss(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody) {
+Enemy::Enemy(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody) {
 	m_iID = iID;
 	m_strName = strName;
 
@@ -17,7 +17,7 @@ Boss::Boss(int iID, std::string strName, std::string strAnimationName, b2Body* P
 	m_Animation.Fetch(&m_Sprite);
 }
 
-Boss::Boss(const Boss& cObject) {
+Enemy::Enemy(const Enemy& cObject) {
 	m_iID = cObject.m_iID;
 	m_strName = cObject.m_strName;
 
@@ -27,42 +27,42 @@ Boss::Boss(const Boss& cObject) {
 	m_StaticTexture.Fetch(&m_Sprite);
 }
 
-Boss::~Boss() {
+Enemy::~Enemy() {
 
 }
 
-void Boss::Update(float fDeltaTime) {
+void Enemy::Update(float fDeltaTime) {
 	if (m_iID != -1) {
 		m_Animation.Update(fDeltaTime);
 		m_Animation.Fetch(&m_Sprite);
 	}
 }
 
-void Boss::Render(sf::RenderWindow* RenderWindow) {
+void Enemy::Render(sf::RenderWindow* RenderWindow) {
 	if (m_iID != -1) {
 		RenderWindow->draw(m_Sprite);
 	}
 }
 
-void Boss::MoveDown(float fDeltaTime) {
+void Enemy::MoveDown(float fDeltaTime) {
 	if (m_iID != -1) {
 
 	}
 }
 
-void Boss::MoveUp(float fDeltaTime) {
+void Enemy::MoveUp(float fDeltaTime) {
 	if (m_iID != -1) {
 
 	}
 }
 
-void Boss::MoveLeft(float fDeltaTime) {
+void Enemy::MoveLeft(float fDeltaTime) {
 	if (m_iID != -1) {
 
 	}
 }
 
-void Boss::MoveRight(float fDeltaTime) {
+void Enemy::MoveRight(float fDeltaTime) {
 	if (m_iID != -1) {
 
 	}

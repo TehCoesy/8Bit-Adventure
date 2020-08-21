@@ -3,15 +3,15 @@
 // Precompiled Headers
 #include "stdafx.h"
 
+// Local
 #include "MyObject.h"
 
-class Floor : public MyObject {
-private:
+class Enemy : public MyObject {
 public:
-	Floor();
-	Floor(int iID, std::string strName, std::string strTextureName, b2Body* PhysicsBody);
-	Floor(const Floor& cObject);
-	~Floor();
+	Enemy();
+	Enemy(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody);
+	Enemy(const Enemy& cObject);
+	~Enemy();
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);

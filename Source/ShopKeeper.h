@@ -8,8 +8,7 @@
 #include <math.h>
 using namespace std;
 
-class ShopKeeper :
-	public MyObject
+class ShopKeeper
 {
 public:
 	ShopKeeper();

@@ -7,14 +7,14 @@ Wall::Wall() {
 
 }
 
-Wall::Wall(int iID, std::string strName, MyTexture NewTexture, b2Body* PhysicsBody) {
+Wall::Wall(int iID, std::string strName, std::string strTextureName, b2Body* PhysicsBody) {
 	m_iID = iID;
 	m_strName = strName;
 
-	m_StaticTexture = NewTexture;
+	m_StaticTexture = RM->GetTexture(strTextureName);
 	m_PhysicsBody = PhysicsBody;
 
-	m_Sprite.setTexture(*m_StaticTexture.GetTexture());
+	m_StaticTexture.Fetch(&m_Sprite);
 }
 
 Wall::Wall(const Wall& cObject) {
@@ -24,9 +24,45 @@ Wall::Wall(const Wall& cObject) {
 	m_StaticTexture = cObject.m_StaticTexture;
 	m_PhysicsBody = cObject.m_PhysicsBody;
 
-	m_Sprite.setTexture(*m_StaticTexture.GetTexture());
+	m_StaticTexture.Fetch(&m_Sprite);
 }
 
 Wall::~Wall() {
 
+}
+
+void Wall::Update(float fDeltaTime) {
+	if (m_iID != -1) {
+
+	}
+}
+
+void Wall::Render(sf::RenderWindow* RenderWindow) {
+	if (m_iID != -1) {
+		RenderWindow->draw(m_Sprite);
+	}
+}
+
+void Wall::MoveDown(float fDeltaTime) {
+	if (m_iID != -1) {
+
+	}
+}
+
+void Wall::MoveUp(float fDeltaTime) {
+	if (m_iID != -1) {
+
+	}
+}
+
+void Wall::MoveLeft(float fDeltaTime) {
+	if (m_iID != -1) {
+
+	}
+}
+
+void Wall::MoveRight(float fDeltaTime) {
+	if (m_iID != -1) {
+
+	}
 }

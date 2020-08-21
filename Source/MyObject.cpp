@@ -39,3 +39,19 @@ void MyObject::NewAnimation(std::string strName) {
 void MyObject::NewTexture(std::string strName) {
 	m_StaticTexture = RM->GetTexture(strName);
 }
+
+void MyObject::MoveDown(float fDeltaTime) {
+
+}
+
+void MyObject::MoveUp(float fDeltaTime) {
+
+}
+
+void MyObject::MoveLeft(float fDeltaTime) {
+
+}
+
+void MyObject::MoveRight(float fDeltaTime) {
+
+}
