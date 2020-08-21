@@ -3,12 +3,28 @@
 
 #include "Animation.h"
 
-Animation::Animation(int iID, int iFrames, int iTimeSteps, std::string strName, std::vector<MyTexture> aAnimationFrames) {
+Animation::Animation() {
+
+}
+
+Animation::Animation(int iID, std::string strName, int iSteps, std::vector<sf::Texture*> AnimationFrames) {
 	m_iID = iID;
-	m_iFrameSteps = iTimeSteps;
-	m_iFrameIndex = iFrames;
 	m_strName = strName;
-	m_AnimationFrames = aAnimationFrames;
+	m_iFrameSteps = iSteps;
+
+	m_AnimationFrames = AnimationFrames;
+
+	m_iFrameIndex = 0;
+}
+
+Animation::Animation(const Animation& cObject) {
+	m_iID = cObject.m_iID;
+	m_strName = cObject.m_strName;
+	m_iFrameSteps = cObject.m_iFrameSteps;
+
+	m_AnimationFrames = cObject.m_AnimationFrames;
+
+	m_iFrameIndex = 0;
 }
 
 Animation::~Animation() {
@@ -24,18 +40,31 @@ void Animation::Play() {
 	m_bIsPlaying = true;
 }
 
-int Animation::GetID() {
-	return m_iID;
+int* Animation::GetID() {
+	return &m_iID;
+}
+
+std::string* Animation::GetName() {
+	return &m_strName;
 }
 
 void Animation::Update(float fDeltaTime) {
-
+	if (m_bIsPlaying && m_iID != -1) {
+		m_iCount++;
+		if (m_iCount == m_iFrameSteps) {
+			m_iCount = 0;
+			if (m_iFrameIndex == m_AnimationFrames.size() - 1) {
+				m_iFrameIndex = 0;
+			}
+			else {
+				m_iFrameIndex++;
+			}
+		}
+	}
 }
 
 void Animation::Fetch(sf::Sprite* ObjectSprite) {
-
-}
-
-std::vector<MyTexture> Animation::GetAnimationFrames() {
-	return m_AnimationFrames;
+	if (m_iID != -1) {
+		ObjectSprite->setTexture(*m_AnimationFrames.at(m_iFrameIndex));
+	}
 }

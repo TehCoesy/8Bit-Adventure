@@ -33,7 +33,6 @@ public:
 	GameScene();
 	~GameScene();
 
-	void LoadPlayer(std::string strFilePath);
 	void LoadFromFile(std::string strFile);
 
 	void Update(float fDeltaTime);

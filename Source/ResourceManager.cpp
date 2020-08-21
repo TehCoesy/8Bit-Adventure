@@ -16,13 +16,11 @@ void ResourceManager::InitWithFile(std::string strFilePath) {
 
 	if (FileStream) {
 		int iVal;
-		//TODO: repair load texture
-#pragma region Loading (Static) Textures
 
-		int iTexturesCount = 0;
-		iVal = fscanf(FileStream, "#TEXTURES: %d\n", &iTexturesCount);
+		// Loading static Textures
+		iVal = fscanf(FileStream, "#TEXTURES: %d\n", &m_iTexturesCount);
 
-		for (int i = 0; i < iTexturesCount; i++) {
+		for (int i = 0; i < m_iTexturesCount; i++) {
 			int iID = -1;
 			char strBuffer1[100], strBuffer2[100];
 			iVal = fscanf(FileStream, "TEX ID %d %s %s\n", &iID, strBuffer1, strBuffer2); // TEX ID [iID] [strTextureName] [strFilePath]
@@ -33,37 +31,30 @@ void ResourceManager::InitWithFile(std::string strFilePath) {
 				LoadTexture(iID, std::string(strBuffer1), std::string(strBuffer2));
 			}
 		}
-#pragma endregion
 
-#pragma region Loading Animations
+		// Loading Animations
+		iVal = fscanf(FileStream, "#ANIMATIONS: %d\n", &m_iAnimationsCount);
 
-		int iAnimCounts = 0;
-		iVal = fscanf(FileStream, "#ANIMATIONS: %d\n", &iAnimCounts);
+		for (int i = 0; i < m_iAnimationsCount; i++) {
+			int iID = -1;
+			int iFrames = 0, iTimeSteps = 0;
+			char strBuffer1[100], strBuffer2[100];
+			iVal = fscanf(FileStream, "ANI ID %d NAME %s FRAMES %d TIMESTEP %d\n", &iID, strBuffer1, &iFrames, &iTimeSteps); // ANI ID [iID] NAME [cName] FRAMES[iFrames] TIMESTEP[iTimeStep]
 
-		for (int i = 0; i < iAnimCounts; i++) {
-			int iID = -1, iFrames, iTimeSteps;
-			int iIDTexture;
-			std::vector<int> aIDTexture;
-			char cName[100];
-			iVal = fscanf(FileStream, "ANI ID %d NAME %s FRAMES %d TIMESTEP %d\n", &iID, cName, &iFrames, &iTimeSteps); // ANI ID [iID] NAME [cName] FRAMES[iFrames] TIMESTEP[iTimeStep]
+			std::vector<std::string> strFilePaths;
 
-			std::vector<std::string> aStrFilePath;
-			for (int j = 0; j < iFrames; j++) {
-				char strBuffer[100];
+			for (int k = 0; k < iFrames; k++) {
+				iVal = fscanf(FileStream, "%*d %s\n", strBuffer2);
 
-				iVal = fscanf(FileStream, "%d %s\n", &iIDTexture, strBuffer);
-				//printf("%s\n", strBuffer);
-				aIDTexture.push_back(iIDTexture);
-				aStrFilePath.push_back(std::string(strBuffer));
+				strFilePaths.push_back(std::string(strBuffer2));
 			}
 
 			//printf("ANI ID %d FRAMES %d TIMESTEP %d\n", iID, iFrames, iTimeSteps);
 
 			if (iID != -1) {
-				LoadAnimation(iID, aIDTexture, cName, iFrames, iTimeSteps, aStrFilePath);
+				LoadAnimation(iID, std::string(strBuffer1), iTimeSteps, strFilePaths);
 			}
 		}
-#pragma endregion
 
 		// Loading Sounds
 
@@ -88,48 +79,46 @@ void ResourceManager::LoadTexture(int iID, std::string strName, std::string strF
 	m_aTextures.push_back(NewTexture);
 }
 
-void ResourceManager::LoadAnimation(int iID, std::vector<int> aIDTexture, std::string strAnimationName, int iFrames, int iTimeSteps, std::vector<std::string> aStrFilePath) {
-	//load animation frames
-	std::vector<MyTexture> aAnimationFrames;
-	for (int i = 0; i < aStrFilePath.size(); i++)
+void ResourceManager::LoadAnimation(int iID, std::string strName, int iTimeSteps, std::vector<std::string> strFilePaths) {
+	std::vector<sf::Texture*> AnimationFrames;
+
+	for (int i = 0; i < strFilePaths.size(); i++)
 	{
-		aStrFilePath.at(i) = RESOURCESFOLDER + aStrFilePath.at(i);
+		std::string strFilePath = RESOURCESFOLDER + strFilePaths.at(i);
 
 		sf::Texture* Texture = new sf::Texture;
 
-		if (!Texture->loadFromFile(aStrFilePath.at(i)))
+		if (!Texture->loadFromFile(strFilePath))
 		{
-			printf("(ResourceManager) Error loading texture! @%s", aStrFilePath.at(i).c_str());
+			printf("(ResourceManager) Error loading texture! @%s", strFilePath.c_str());
 			return;
 		}
 
-		MyTexture NewTexture(aIDTexture.at(i), "", Texture);
-		aAnimationFrames.push_back(NewTexture);
+		AnimationFrames.push_back(Texture);
 	}
 
-	Animation NewAnimation(iID, iFrames, iTimeSteps, strAnimationName, aAnimationFrames);
+	Animation NewAnimation(iID, strName, iTimeSteps, AnimationFrames);
 	m_aAnimations.push_back(NewAnimation);
 }
 
 void ResourceManager::LoadSoundBuffers(std::string strFilePath) {
-	sf::SoundBuffer SoundBuffer;
-	if (!SoundBuffer.loadFromFile(strFilePath)) // .wav Files
-	{
-		printf("(ResourceManager) Error loading sound! @%s", strFilePath.c_str());
-		return;
-	}
-	m_aSoundBuffers.push_back(SoundBuffer);
+
 }
 
-std::vector<Animation> ResourceManager::GetAnimationList() {
-	return m_aAnimations;
-}
-
-MyTexture ResourceManager::GetTexture(int iID) {
+MyTexture ResourceManager::GetTexture(std::string strName) {
 	for (int i = 0; i < m_aTextures.size(); i++) {
-		if (m_aTextures.at(i).GetID() == iID) {
+		if (*m_aTextures.at(i).GetName() == strName) {
 			return m_aTextures.at(i);
 		}
 	}
 	return MyTexture();
+}
+
+Animation ResourceManager::GetAnimation(std::string strName) {
+	for (int i = 0; i < m_aAnimations.size(); i++) {
+		if (*m_aAnimations.at(i).GetName() == strName) {
+			return m_aAnimations.at(i);
+		}
+	}
+	return Animation();
 }

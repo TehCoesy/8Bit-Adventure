@@ -22,16 +22,12 @@ MyTexture::MyTexture(const MyTexture& cMyTexture) {
 MyTexture::~MyTexture() {
 }
 
-int MyTexture::GetID() {
-	return m_iID;
+int* MyTexture::GetID() {
+	return &m_iID;
 }
 
 std::string* MyTexture::GetName() {
 	return &m_strName;
-}
-
-sf::Texture* MyTexture::GetTexture() {
-	return m_Texture;
 }
 
 void MyTexture::Fetch(sf::Sprite* ObjectSprite) {

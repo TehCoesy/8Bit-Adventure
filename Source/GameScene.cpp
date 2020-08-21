@@ -15,28 +15,6 @@ GameScene::~GameScene() {
 	if (m_World) { delete(m_World); m_World = nullptr; }
 }
 
-void GameScene::LoadPlayer(std::string strFilePath) {
-	FILE* FileStream;
-	strFilePath = RESOURCESFOLDER + strFilePath;
-	FileStream = fopen(strFilePath.c_str(), "r");
-
-	std::vector<int> aAnims;
-	if (FileStream) {
-		int iVal, iNumAnim;
-		iVal = fscanf(FileStream, "#PLAYER\n");
-		iVal = fscanf(FileStream, "ANIM: %d\n", &iNumAnim);
-		for (int i = 0; i < iNumAnim; i++)
-		{
-			int iAnimID;
-			iVal = fscanf(FileStream, "ANIM_ID %d\n", &iAnimID);
-			m_Player.AddAnimation(iAnimID);
-		}
-		// Close FileStream
-		fclose(FileStream);
-	}
-
-}
-
 void GameScene::LoadFromFile(std::string strFilePath) {
 
 	//LoadPlayer(strFilePath);
