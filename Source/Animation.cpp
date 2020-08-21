@@ -28,11 +28,9 @@ Animation::Animation(const Animation& cObject) {
 }
 
 Animation::~Animation() {
-
 }
 
 void Animation::Stop() {
-	m_iFrameIndex = 0;
 	m_bIsPlaying = false;
 }
 
