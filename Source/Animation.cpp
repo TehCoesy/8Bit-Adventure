@@ -63,6 +63,10 @@ void Animation::Update(float fDeltaTime) {
 
 void Animation::Fetch(sf::Sprite* ObjectSprite) {
 	if (m_iID != -1) {
+		sf::Texture* Texture = m_AnimationFrames.at(m_iFrameIndex);
 		ObjectSprite->setTexture(*m_AnimationFrames.at(m_iFrameIndex));
+		if (Texture->getSize().x == 32 && Texture->getSize().y == 32) {
+			ObjectSprite->setScale(sf::Vector2f(2.0f, 2.0f));
+		}
 	}
 }

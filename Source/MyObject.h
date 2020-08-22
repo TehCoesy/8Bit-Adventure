@@ -35,6 +35,9 @@ protected:
 	// Fetch new Animation / Texture from RM
 	void NewAnimation(std::string strName);
 	void NewTexture(std::string strName);
+
+	// Synchronize Sprite with PhysicsBody
+	void SynchronizeBody();
 public:
 	MyObject();
 	~MyObject();
@@ -55,4 +58,9 @@ public:
 	virtual void MoveUp(float fDeltaTime);
 	virtual void MoveLeft(float fDeltaTime);
 	virtual void MoveRight(float fDeltaTime);
+
+	virtual void StopDown(float fDeltaTime);
+	virtual void StopUp(float fDeltaTime);
+	virtual void StopLeft(float fDeltaTime);
+	virtual void StopRight(float fDeltaTime);
 };

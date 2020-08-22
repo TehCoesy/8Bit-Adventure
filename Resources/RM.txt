@@ -1,50 +1,10 @@
-#TEXTURES: 12
+#TEXTURES: 1
 
-TEX ID 0 PLAYER_IDLE_DOWN Textures/idle/player/down/sprite_0.png
-TEX ID 1 PLAYER_IDLE_DOWN Textures/idle/player/down/sprite_1.png
-TEX ID 2 PLAYER_IDLE_DOWN Textures/idle/player/down/sprite_2.png
+TEX ID 0 DUNGEON_WALL Textures/Tilesets/Dungeon/Objects/sprite_21.png
 
-TEX ID 3 PLAYER_IDLE_UP Textures/idle/player/up/sprite_0.png
-TEX ID 4 PLAYER_IDLE_UP Textures/idle/player/up/sprite_1.png
-TEX ID 5 PLAYER_IDLE_UP Textures/idle/player/up/sprite_2.png
+#ANIMATIONS: 1
 
-TEX ID 6 PLAYER_IDLE_LEFT Textures/idle/player/left/sprite_0.png
-TEX ID 7 PLAYER_IDLE_LEFT Textures/idle/player/left/sprite_1.png
-TEX ID 8 PLAYER_IDLE_LEFT Textures/idle/player/left/sprite_2.png
-
-TEX ID 9 PLAYER_IDLE_RIGHT Textures/idle/player/right/sprite_0.png
-TEX ID 10 PLAYER_IDLE_RIGHT Textures/idle/player/right/sprite_1.png
-TEX ID 11 PLAYER_IDLE_RIGHT Textures/idle/player/right/sprite_2.png
-
-TEX ID 12 PLAYER_MOVE_DOWN Textures/move/down/sprite_00.png
-TEX ID 13 PLAYER_MOVE_DOWN Textures/move/down/sprite_01.png
-TEX ID 14 PLAYER_MOVE_DOWN Textures/move/down/sprite_00.png
-TEX ID 15 PLAYER_MOVE_DOWN Textures/move/down/sprite_02.png
-
-#ANIMATIONS: 5
-
-ANI ID 0 NAME PLAYER_IDLE_UP FRAMES 3 TIMESTEP 10
-3 Textures/idle/player/up/sprite_0.png
-4 Textures/idle/player/up/sprite_1.png
-5 Textures/idle/player/up/sprite_2.png
-
-ANI ID 1 NAME PLAYER_IDLE_DOWN FRAMES 3 TIMESTEP 10
-0 Textures/idle/player/down/sprite_0.png
-1 Textures/idle/player/down/sprite_1.png
-2 Textures/idle/player/down/sprite_2.png
-
-ANI ID 2 NAME PLAYER_IDLE_LEFT FRAMES 3 TIMESTEP 10
-6 Textures/idle/player/left/sprite_0.png
-7 Textures/idle/player/left/sprite_1.png
-8 Textures/idle/player/left/sprite_2.png
-
-ANI ID 3 NAME PLAYER_IDLE_RIGHT FRAMES 3 TIMESTEP 10
-9 Textures/idle/player/right/sprite_0.png
-10 Textures/idle/player/right/sprite_1.png
-11 Textures/idle/player/right/sprite_2.png
-
-ANI ID 4 NAME PLAYER_MOVE_DOWN FRAMES 4 TIMESTEP 10
-12 Textures/move/down/sprite_00.png
-13 Textures/move/down/sprite_01.png
-14 Textures/move/down/sprite_00.png
-15 Textures/move/down/sprite_02.png
+ANI ID 0 NAME PLAYER_IDLE_DOWN FRAMES 3 TIMESTEP 10
+0 Textures/Idle/player/down/sprite_0.png
+1 Textures/Idle/player/down/sprite_1.png
+2 Textures/Idle/player/down/sprite_2.png

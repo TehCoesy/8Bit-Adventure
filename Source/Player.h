@@ -8,7 +8,7 @@
 
 class Player : public MyObject {
 private:
-
+	float fVelX = 0.0f, fVelY = 0.0f;
 public:
 	Player();
 	Player(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody);
@@ -22,4 +22,9 @@ public:
 	void MoveUp(float fDeltaTime);
 	void MoveLeft(float fDeltaTime);
 	void MoveRight(float fDeltaTime);
+
+	void StopDown(float fDeltaTime);
+	void StopUp(float fDeltaTime);
+	void StopLeft(float fDeltaTime);
+	void StopRight(float fDeltaTime);
 };

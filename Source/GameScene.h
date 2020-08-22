@@ -13,27 +13,31 @@
 #include "Singleton.h"
 #include "ResourceManager.h"
 #include "Keyboard.h"
-#include "MyTexture.h"
+
 #include "MyObject.h"
+#include "Wall.h"
+#include "Floor.h"
 #include "Player.h"
+#include "Enemy.h"
+#include "Boss.h"
 
 class GameScene {
 private:
 	b2World* m_World;
 
-	sf::Sprite m_PlayerSprite;
-	MyTexture m_PlayerTexture;
+	std::vector<Wall> m_Walls;
+	std::vector<Floor> m_Floors;
 
-	sf::RectangleShape m_PhysicsBodyBox, m_SpriteBox;
-	b2Body* m_PlayerPhysicsBody;
-
-	std::vector<MyObject> m_SceneObjects;
 	Player m_Player;
+	Boss m_Boss;
+	std::vector<Enemy> m_Enemies;
 public:
 	GameScene();
 	~GameScene();
 
 	void LoadFromFile(std::string strFile);
+
+	b2Body* CreateBody(int iX, int iY, int iSizeX, int iSizeY, bool bStatic);
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* MainWindow);

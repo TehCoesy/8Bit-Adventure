@@ -32,6 +32,13 @@ void MyObject::Update(float fDeltaTime) {
 void MyObject::Render(sf::RenderWindow* MainWindow) {
 }
 
+void MyObject::SynchronizeBody() {
+	if (m_iID != -1 && m_PhysicsBody) {
+		m_Sprite.setPosition(m_PhysicsBody->GetPosition().x * PIXELS_METERS, m_PhysicsBody->GetPosition().y * PIXELS_METERS);
+		//m_PhysicsBox.setPosition(m_PhysicsBody->GetPosition().x * PIXELS_METERS, m_PhysicsBody->GetPosition().y * PIXELS_METERS);
+	}
+}
+
 void MyObject::NewAnimation(std::string strName) {
 	m_Animation = RM->GetAnimation(strName);
 }
@@ -53,5 +60,21 @@ void MyObject::MoveLeft(float fDeltaTime) {
 }
 
 void MyObject::MoveRight(float fDeltaTime) {
+
+}
+
+void MyObject::StopDown(float fDeltaTime) {
+
+}
+
+void MyObject::StopUp(float fDeltaTime) {
+
+}
+
+void MyObject::StopLeft(float fDeltaTime) {
+
+}
+
+void MyObject::StopRight(float fDeltaTime) {
 
 }
