@@ -4,9 +4,9 @@
 #include "stdafx.h"
 
 // Local
-#include "MyObject.h"
+#include "DynamicObject.h"
 
-class Enemy : public MyObject {
+class Enemy : public DynamicObject {
 public:
 	Enemy();
 	Enemy(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody);
@@ -15,9 +15,4 @@ public:
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);
-
-	void MoveDown(float fDeltaTime);
-	void MoveUp(float fDeltaTime);
-	void MoveLeft(float fDeltaTime);
-	void MoveRight(float fDeltaTime);
 };

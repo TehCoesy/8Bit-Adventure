@@ -43,27 +43,3 @@ void Enemy::Render(sf::RenderWindow* RenderWindow) {
 		RenderWindow->draw(m_Sprite);
 	}
 }
-
-void Enemy::MoveDown(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}
-
-void Enemy::MoveUp(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}
-
-void Enemy::MoveLeft(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}
-
-void Enemy::MoveRight(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}

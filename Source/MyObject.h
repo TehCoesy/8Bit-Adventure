@@ -20,17 +20,13 @@ protected:
 
 	// Properties
 	float m_fHealth = 100.0f;
-	int m_iDirection = 0; // 0 = Down; 1 = Up; 2 = Left; 3 = Right
-	float m_fVelocity = 0.0f;
 
 	// Graphics
 	sf::Sprite m_Sprite;
-	sf::RectangleShape m_PhysicsBox;
-
-	b2Body* m_PhysicsBody;
-
 	MyTexture m_StaticTexture;
 	Animation m_Animation;
+
+	b2Body* m_PhysicsBody;
 
 	// Fetch new Animation / Texture from RM
 	void NewAnimation(std::string strName);
@@ -48,19 +44,7 @@ public:
 
 	// Properties
 	float* GetHealth();
-	float* GetVel();
 
 	virtual void Update(float fDeltaTime);
 	virtual void Render(sf::RenderWindow* MainWindow);
-
-	// Movement (does nothing for StaticObjects)
-	virtual void MoveDown(float fDeltaTime);
-	virtual void MoveUp(float fDeltaTime);
-	virtual void MoveLeft(float fDeltaTime);
-	virtual void MoveRight(float fDeltaTime);
-
-	virtual void StopDown(float fDeltaTime);
-	virtual void StopUp(float fDeltaTime);
-	virtual void StopLeft(float fDeltaTime);
-	virtual void StopRight(float fDeltaTime);
 };

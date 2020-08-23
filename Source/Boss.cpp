@@ -43,27 +43,3 @@ void Boss::Render(sf::RenderWindow* RenderWindow) {
 		RenderWindow->draw(m_Sprite);
 	}
 }
-
-void Boss::MoveDown(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}
-
-void Boss::MoveUp(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}
-
-void Boss::MoveLeft(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}
-
-void Boss::MoveRight(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}

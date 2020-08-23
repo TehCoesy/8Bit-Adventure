@@ -61,28 +61,28 @@ b2Body* GameScene::CreateBody(int iX, int iY, int iSizeX, int iSizeY, bool bStat
 void GameScene::Update(float fDeltaTime) {
 	// Update Input
 	if (Keyboard::GetKey(Keyboard::UP)) {
-		m_Player.MoveUp(fDeltaTime);
+		m_Player.Move(fDeltaTime, 1);
 	}
 	else {
-		m_Player.StopUp(fDeltaTime);
+		m_Player.Stop(fDeltaTime, 1);
 	}
 	if (Keyboard::GetKey(Keyboard::DOWN)) {
-		m_Player.MoveDown(fDeltaTime);
+		m_Player.Move(fDeltaTime, 0);
 	}
 	else {
-		m_Player.StopDown(fDeltaTime);
+		m_Player.Stop(fDeltaTime, 0);
 	}
 	if (Keyboard::GetKey(Keyboard::LEFT)) {
-		m_Player.MoveLeft(fDeltaTime);
+		m_Player.Move(fDeltaTime, 2);
 	}
 	else {
-		m_Player.StopLeft(fDeltaTime);
+		m_Player.Stop(fDeltaTime, 2);
 	}
 	if (Keyboard::GetKey(Keyboard::RIGHT)) {
-		m_Player.MoveRight(fDeltaTime);
+		m_Player.Move(fDeltaTime, 3);
 	}
 	else {
-		m_Player.StopDown(fDeltaTime);
+		m_Player.Stop(fDeltaTime, 3);
 	}
 
 	m_Player.Update(fDeltaTime);
