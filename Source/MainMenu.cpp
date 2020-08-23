@@ -11,7 +11,7 @@ MainMenu::MainMenu() {
 	text.setFont(font);
 	text.setPosition(100, 300);
 	text.setCharacterSize(24);                         
-	text.setOutlineColor(sf::Color::White);   
+	text.setFillColor(sf::Color::White);   
 	text.setStyle(sf::Text::Bold); 
 
 	for (int i = 0; i < NUM_BUTTONS; i++)
@@ -28,7 +28,7 @@ MainMenu::MainMenu() {
 	title.setCharacterSize(40);
 	title.setPosition(220, 100);
 	title.setString("CHRONICLE: RISE");
-	title.setOutlineColor(sf::Color::White);
+	title.setFillColor(sf::Color::White);
 	title.setStyle(sf::Text::Bold);
 }
 
@@ -64,6 +64,63 @@ void MainMenu::Render(sf::RenderWindow *window) {
 	window->draw(title);
 }
 
-void MainMenu::HandleInput() {
+bool MainMenu::isTextClicked(sf::RenderWindow* window,sf::Text text) {
+	sf::IntRect rect(text.getPosition().x, text.getPosition().y, text.getGlobalBounds().width, text.getGlobalBounds().height);
 
+	if (rect.contains(sf::Mouse::getPosition(*window)))
+		return true;
+
+
+	//Otherwise, don't do anything
+	return false;
+}
+
+void MainMenu::HandleInput(sf::RenderWindow* window) {
+	sf::Event event;
+
+	while (window->pollEvent(event))
+	{
+		switch (event.type)
+		{
+			/* Close the window */
+		case sf::Event::Closed:
+			window->close();
+			break;
+
+			/* Change Between game states */
+		case sf::Event::KeyPressed:
+			if (event.key.code == sf::Keyboard::Escape)
+				window->close();
+			else if (event.key.code == sf::Keyboard::Return) {
+				//loadgame();
+			}
+			break;
+
+		case sf::Event::MouseMoved:
+			if (isTextClicked(window,buttons[0]))
+				buttons[0].setFillColor(sf::Color::Yellow);
+			else
+				buttons[0].setFillColor(sf::Color::White);
+			if (isTextClicked(window,buttons[1]))
+				buttons[1].setFillColor(sf::Color::Yellow);
+			else
+				buttons[1].setFillColor(sf::Color::White);
+			if (isTextClicked(window,buttons[2]))
+				buttons[2].setFillColor(sf::Color::Yellow);
+			else
+				buttons[2].setFillColor(sf::Color::White);
+			break;
+		}
+	}
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		if (isTextClicked(window, buttons[0])) {
+		//	loadgame();
+		}
+		else if (isTextClicked(window,buttons[2]))
+			window->close();
+
+
+	}
 }
