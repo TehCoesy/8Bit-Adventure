@@ -15,6 +15,8 @@ Animation::Animation(int iID, std::string strName, int iSteps, std::vector<sf::T
 	m_AnimationFrames = AnimationFrames;
 
 	m_iFrameIndex = 0;
+
+	Play();
 }
 
 Animation::Animation(const Animation& cObject) {
@@ -25,6 +27,8 @@ Animation::Animation(const Animation& cObject) {
 	m_AnimationFrames = cObject.m_AnimationFrames;
 
 	m_iFrameIndex = 0;
+
+	Play();
 }
 
 Animation::~Animation() {

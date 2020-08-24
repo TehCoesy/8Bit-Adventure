@@ -2,9 +2,48 @@
 
 TEX ID 0 DUNGEON_WALL Textures/Tilesets/Dungeon/Objects/sprite_21.png
 
-#ANIMATIONS: 1
+#ANIMATIONS: 8
 
-ANI ID 0 NAME PLAYER_IDLE_DOWN FRAMES 3 TIMESTEP 10
+ANI ID 0 NAME PLAYER_IDLE_DOWN FRAMES 3 TIMESTEP 20
 0 Textures/Idle/player/down/sprite_0.png
 1 Textures/Idle/player/down/sprite_1.png
 2 Textures/Idle/player/down/sprite_2.png
+
+ANI ID 1 NAME PLAYER_IDLE_UP FRAMES 3 TIMESTEP 20
+0 Textures/Idle/player/up/sprite_0.png
+1 Textures/Idle/player/up/sprite_1.png
+2 Textures/Idle/player/up/sprite_2.png
+
+ANI ID 2 NAME PLAYER_IDLE_LEFT FRAMES 3 TIMESTEP 20
+0 Textures/Idle/player/left/sprite_0.png
+1 Textures/Idle/player/left/sprite_1.png
+2 Textures/Idle/player/left/sprite_2.png
+
+ANI ID 3 NAME PLAYER_IDLE_RIGHT FRAMES 3 TIMESTEP 20
+0 Textures/Idle/player/right/sprite_0.png
+1 Textures/Idle/player/right/sprite_1.png
+2 Textures/Idle/player/right/sprite_2.png
+
+ANI ID 4 NAME PLAYER_MOVE_DOWN FRAMES 4 TIMESTEP 10
+0 Textures/Move/player/down/sprite_0.png
+1 Textures/Move/player/down/sprite_1.png
+2 Textures/Move/player/down/sprite_2.png
+3 Textures/Move/player/down/sprite_1.png
+
+ANI ID 5 NAME PLAYER_MOVE_UP FRAMES 4 TIMESTEP 10
+0 Textures/Move/player/up/sprite_0.png
+1 Textures/Move/player/up/sprite_1.png
+2 Textures/Move/player/up/sprite_2.png
+3 Textures/Move/player/up/sprite_1.png
+
+ANI ID 6 NAME PLAYER_MOVE_LEFT FRAMES 4 TIMESTEP 10
+0 Textures/Move/player/left/sprite_0.png
+1 Textures/Move/player/left/sprite_1.png
+2 Textures/Move/player/left/sprite_2.png
+3 Textures/Move/player/left/sprite_1.png
+
+ANI ID 7 NAME PLAYER_MOVE_RIGHT FRAMES 4 TIMESTEP 10
+0 Textures/Move/player/right/sprite_0.png
+1 Textures/Move/player/right/sprite_1.png
+2 Textures/Move/player/right/sprite_2.png
+3 Textures/Move/player/right/sprite_1.png
