@@ -56,9 +56,6 @@
     <ClCompile Include="Source\Wall.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Floor.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MyObject.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
@@ -95,6 +92,9 @@
     <ClCompile Include="Source\DynamicObject.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Ground.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Game.h">
@@ -113,9 +113,6 @@
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Source\Wall.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Floor.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Source\MyObject.h">
@@ -153,6 +150,9 @@
     </ClInclude>
     <ClInclude Include="Source\MainMenu.h">
       <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Ground.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,13 @@ void GameScene::LoadFromFile(std::string strFilePath) {
 
 		m_Player = Player(0, "PLAYER", "PLAYER_IDLE_DOWN", PlayerBody);
 
+		for (int i = 0; i < 20; i++) {
+			for (int k = 0; k < 20; k++) {
+				Ground NewGround("DUNGEON_GROUND", k, i);
+				m_GroundTiles.push_back(NewGround);
+			}
+		}
+
 		// Close FileStream
 		fclose(FileStream);
 	}
@@ -91,5 +98,9 @@ void GameScene::Update(float fDeltaTime) {
 }
 
 void GameScene::Render(sf::RenderWindow* MainWindow) {
+	for (int i = 0; i < m_GroundTiles.size(); i++) {
+		m_GroundTiles.at(i).Render(MainWindow);
+	}
+
 	m_Player.Render(MainWindow);
 }

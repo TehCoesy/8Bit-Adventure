@@ -15,9 +15,4 @@ public:
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);
-
-	void MoveDown(float fDeltaTime);
-	void MoveUp(float fDeltaTime);
-	void MoveLeft(float fDeltaTime);
-	void MoveRight(float fDeltaTime);
 };

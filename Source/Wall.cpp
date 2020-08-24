@@ -42,27 +42,3 @@ void Wall::Render(sf::RenderWindow* RenderWindow) {
 		RenderWindow->draw(m_Sprite);
 	}
 }
-
-void Wall::MoveDown(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}
-
-void Wall::MoveUp(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}
-
-void Wall::MoveLeft(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}
-
-void Wall::MoveRight(float fDeltaTime) {
-	if (m_iID != -1) {
-
-	}
-}

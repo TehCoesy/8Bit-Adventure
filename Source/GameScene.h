@@ -16,7 +16,7 @@
 
 #include "MyObject.h"
 #include "Wall.h"
-#include "Floor.h"
+#include "Ground.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Boss.h"
@@ -26,7 +26,7 @@ private:
 	b2World* m_World;
 
 	std::vector<Wall> m_Walls;
-	std::vector<Floor> m_Floors;
+	std::vector<Ground> m_GroundTiles;
 
 	Player m_Player;
 	Boss m_Boss;

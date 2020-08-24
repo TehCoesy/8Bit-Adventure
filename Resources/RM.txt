@@ -1,6 +1,7 @@
-#TEXTURES: 1
+#TEXTURES: 2
 
 TEX ID 0 DUNGEON_WALL Textures/Tilesets/Dungeon/Objects/sprite_21.png
+TEX ID 1 DUNGEON_GROUND Textures/Tilesets/Dungeon/Ground/sprite_01.png
 
 #ANIMATIONS: 8
 
