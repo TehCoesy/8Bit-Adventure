@@ -28,6 +28,8 @@ private:
 	std::vector<Wall> m_Walls;
 	std::vector<Ground> m_GroundTiles;
 
+	Wall m_Wall;
+
 	Player m_Player;
 	Boss m_Boss;
 	std::vector<Enemy> m_Enemies;

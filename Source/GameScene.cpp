@@ -34,6 +34,10 @@ void GameScene::LoadFromFile(std::string strFilePath) {
 			}
 		}
 
+		b2Body* WallBody = CreateBody(1, 1, 1, 1, true);
+
+		m_Wall = Wall(0, "WALL", "DUNGEON_WALL", WallBody);
+
 		// Close FileStream
 		fclose(FileStream);
 	}
@@ -50,14 +54,15 @@ b2Body* GameScene::CreateBody(int iX, int iY, int iSizeX, int iSizeY, bool bStat
 	else {
 		BodyDef.type = b2_dynamicBody;
 	}
+	BodyDef.fixedRotation = true;
 
 	b2Body* PhysicsBody = m_World->CreateBody(&BodyDef);
 
 	b2PolygonShape BodyShape;
-	BodyShape.SetAsBox((TILE_SIZE * iSizeX) / 2, (TILE_SIZE * iSizeY) / 2); // Takes 1/2 Width and 1/2 Height
+	BodyShape.SetAsBox(((TILE_SIZE * iSizeX) / 2) / PIXELS_METERS, ((TILE_SIZE * iSizeY) / 2) / PIXELS_METERS); // Takes 1/2 Width and 1/2 Height
 
 	b2FixtureDef FixtureDef;
-	FixtureDef.density = 0.0f;
+	FixtureDef.density = 1.0f;
 	FixtureDef.shape = &BodyShape;
 
 	PhysicsBody->CreateFixture(&FixtureDef);
@@ -93,6 +98,7 @@ void GameScene::Update(float fDeltaTime) {
 	}
 
 	m_Player.Update(fDeltaTime);
+	m_Wall.Update(fDeltaTime);
 
 	m_World->Step(fDeltaTime, 4, 2);
 }
@@ -101,6 +107,8 @@ void GameScene::Render(sf::RenderWindow* MainWindow) {
 	for (int i = 0; i < m_GroundTiles.size(); i++) {
 		m_GroundTiles.at(i).Render(MainWindow);
 	}
+
+	m_Wall.Render(MainWindow);
 
 	m_Player.Render(MainWindow);
 }

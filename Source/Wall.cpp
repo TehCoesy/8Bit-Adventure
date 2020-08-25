@@ -33,7 +33,7 @@ Wall::~Wall() {
 
 void Wall::Update(float fDeltaTime) {
 	if (m_iID != -1) {
-
+		SynchronizeBody();
 	}
 }
 

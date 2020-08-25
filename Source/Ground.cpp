@@ -11,8 +11,6 @@ Ground::Ground(std::string strTextureName, int TileX, int TileY) {
 	RM->GetTexture(strTextureName).Fetch(&m_Sprite);
 
 	m_Sprite.setPosition(sf::Vector2f(TILE_SIZE * TileX, TILE_SIZE * TileY));
-
-	m_Sprite.setScale(sf::Vector2f(4.0f, 4.0f));
 }
 
 Ground::Ground(const Ground& cObject) {
