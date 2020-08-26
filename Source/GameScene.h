@@ -28,16 +28,17 @@ private:
 	std::vector<Wall> m_Walls;
 	std::vector<Ground> m_GroundTiles;
 
-	Wall m_Wall;
-
 	Player m_Player;
 	Boss m_Boss;
 	std::vector<Enemy> m_Enemies;
+
+	// Scene loading functions
+	void LoadTerrain(std::string strFilePath);
 public:
 	GameScene();
 	~GameScene();
 
-	void LoadFromFile(std::string strFile);
+	void LoadFromFile(std::string strFilePath);
 
 	b2Body* CreateBody(int iX, int iY, int iSizeX, int iSizeY, bool bStatic);
 

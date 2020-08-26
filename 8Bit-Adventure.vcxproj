@@ -220,6 +220,7 @@
   <ItemGroup>
     <Text Include="Resources\RM.txt" />
     <Text Include="Resources\Stage1.txt" />
+    <Text Include="Resources\Stage1_Terrain.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

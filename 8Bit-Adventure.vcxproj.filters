@@ -165,5 +165,8 @@
     <Text Include="Resources\Stage1.txt">
       <Filter>Resources</Filter>
     </Text>
+    <Text Include="Resources\Stage1_Terrain.txt">
+      <Filter>Resources</Filter>
+    </Text>
   </ItemGroup>
 </Project>

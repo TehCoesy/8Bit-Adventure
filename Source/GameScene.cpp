@@ -23,22 +23,47 @@ void GameScene::LoadFromFile(std::string strFilePath) {
 	if (FileStream) {
 		// PlaceHolder Scene, for testing;
 
-		b2Body* PlayerBody = CreateBody(0, 0, 1, 1, false);
+		b2Body* PlayerBody = CreateBody(2, 2, 1, 1, false);
 
 		m_Player = Player(0, "PLAYER", "PLAYER_IDLE_DOWN", PlayerBody);
 
-		for (int i = 0; i < 20; i++) {
-			for (int k = 0; k < 20; k++) {
-				Ground NewGround("DUNGEON_GROUND", k, i);
-				m_GroundTiles.push_back(NewGround);
+		LoadTerrain("Stage1_Terrain.txt");
+
+		// Close FileStream
+		fclose(FileStream);
+	}
+}
+
+void GameScene::LoadTerrain(std::string strFilePath) {
+	FILE* FileStream;
+	strFilePath = RESOURCESFOLDER + strFilePath;
+	FileStream = fopen(strFilePath.c_str(), "r");
+
+	if (FileStream) {
+		int iVal;
+		int iSizeX, iSizeY;
+
+		iVal = fscanf(FileStream, "#SIZE %d %d\n", &iSizeX, &iSizeY);
+
+		for (int i = 0; i < iSizeY; i++) {
+			for (int k = 0; k < iSizeX; k++) {
+				int iTerrainVal = 0;
+				iVal = fscanf(FileStream, "%d", &iTerrainVal);
+
+				if (iTerrainVal == 0) {
+					Ground NewGround("DUNGEON_GROUND", k, i);
+					m_GroundTiles.push_back(NewGround);
+				}
+				else if (iVal == 1) {
+					b2Body* WallBody = CreateBody(k, i, 1, 1, true);
+
+					Wall NewWall(0, "WALL", "DUNGEON_WALL", WallBody);
+
+					m_Walls.push_back(NewWall);
+				}
 			}
 		}
 
-		b2Body* WallBody = CreateBody(1, 1, 1, 1, true);
-
-		m_Wall = Wall(0, "WALL", "DUNGEON_WALL", WallBody);
-
-		// Close FileStream
 		fclose(FileStream);
 	}
 }
@@ -98,7 +123,6 @@ void GameScene::Update(float fDeltaTime) {
 	}
 
 	m_Player.Update(fDeltaTime);
-	m_Wall.Update(fDeltaTime);
 
 	m_World->Step(fDeltaTime, 4, 2);
 }
@@ -107,8 +131,10 @@ void GameScene::Render(sf::RenderWindow* MainWindow) {
 	for (int i = 0; i < m_GroundTiles.size(); i++) {
 		m_GroundTiles.at(i).Render(MainWindow);
 	}
-
-	m_Wall.Render(MainWindow);
+	
+	for (int i = 0; i < m_Walls.size(); i++) {
+		m_Walls.at(i).Render(MainWindow);
+	}
 
 	m_Player.Render(MainWindow);
 }
