@@ -36,6 +36,12 @@
     <Filter Include="Source Files\AI">
       <UniqueIdentifier>{1dce74b1-a7f7-49c7-a87b-9c3015072db3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Objects\Entities">
+      <UniqueIdentifier>{e7d962ec-fa72-48f6-a7b5-b6d38c418fde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Entities">
+      <UniqueIdentifier>{48131d38-91e0-41f4-8034-af7ef12cf64a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\MainApplication.cpp">
@@ -49,12 +55,6 @@
     </ClCompile>
     <ClCompile Include="Source\stdafx.cpp">
       <Filter>Source Files\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Player.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Wall.cpp">
-      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Source\MyObject.cpp">
       <Filter>Source Files\Objects</Filter>
@@ -80,20 +80,32 @@
     <ClCompile Include="Source\Keyboard.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Boss.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Source\ShopKeeper.cpp">
       <Filter>Source Files\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Enemy.cpp">
-      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Source\DynamicObject.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>Source Files\Objects\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Boss.cpp">
+      <Filter>Source Files\Objects\Entities</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Ground.cpp">
-      <Filter>Source Files\Objects</Filter>
+      <Filter>Source Files\Objects\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Source Files\Objects\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Wall.cpp">
+      <Filter>Source Files\Objects\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemySpawner.cpp">
+      <Filter>Source Files\Objects\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Projectile.cpp">
+      <Filter>Source Files\Objects\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -108,12 +120,6 @@
     </ClInclude>
     <ClInclude Include="Source\stdafx.h">
       <Filter>Header Files\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Player.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Wall.h">
-      <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Source\MyObject.h">
       <Filter>Header Files\Objects</Filter>
@@ -136,14 +142,8 @@
     <ClInclude Include="Source\Keyboard.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Boss.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ShopKeeper.h">
       <Filter>Header Files\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Enemy.h">
-      <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Source\DynamicObject.h">
       <Filter>Header Files\Objects</Filter>
@@ -151,8 +151,26 @@
     <ClInclude Include="Source\MainMenu.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Boss.h">
+      <Filter>Header Files\Objects\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>Header Files\Objects\Entities</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Ground.h">
-      <Filter>Header Files\Objects</Filter>
+      <Filter>Header Files\Objects\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h">
+      <Filter>Header Files\Objects\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wall.h">
+      <Filter>Header Files\Objects\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemySpawner.h">
+      <Filter>Header Files\Objects\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Projectile.h">
+      <Filter>Header Files\Objects\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
