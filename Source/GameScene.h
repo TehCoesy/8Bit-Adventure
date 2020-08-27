@@ -40,6 +40,8 @@ public:
 
 	void LoadFromFile(std::string strFilePath);
 
+	b2Body* CreateProjectile(float fX, float fY, float fVelocityX, float fVelocityY);
+	b2Body* CreateSensor(float fX, float fY, float fSizeX, float fSizeY);
 	b2Body* CreateBody(int iX, int iY, int iSizeX, int iSizeY, bool bStatic);
 
 	void Update(float fDeltaTime);

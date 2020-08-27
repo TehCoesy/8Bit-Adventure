@@ -13,6 +13,7 @@ Boss::Boss(int iID, std::string strName, std::string strAnimationName, b2Body* P
 
 	m_Animation = RM->GetAnimation(strAnimationName);
 	m_PhysicsBody = PhysicsBody;
+	m_PhysicsBody->SetUserData(this);
 
 	m_Animation.Fetch(&m_Sprite);
 }
@@ -23,6 +24,7 @@ Boss::Boss(const Boss& cObject) {
 
 	m_StaticTexture = cObject.m_StaticTexture;
 	m_PhysicsBody = cObject.m_PhysicsBody;
+	m_PhysicsBody->SetUserData(this);
 
 	m_StaticTexture.Fetch(&m_Sprite);
 }

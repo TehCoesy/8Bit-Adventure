@@ -34,11 +34,8 @@ void MyTexture::Fetch(sf::Sprite* ObjectSprite) {
 	if (m_iID != -1) {
 		ObjectSprite->setTexture(*m_Texture);
 
-		if (m_Texture->getSize().x == 32 && m_Texture->getSize().y == 32) {
-			ObjectSprite->setScale(sf::Vector2f(2.0f, 2.0f));
-		}
-		else if (m_Texture->getSize().x == 16 && m_Texture->getSize().y == 16) {
-			ObjectSprite->setScale(sf::Vector2f(4.0f, 4.0f));
-		}
+		float fScaleX = TILE_SIZE / m_Texture->getSize().x;
+		float fScaleY = TILE_SIZE / m_Texture->getSize().y;
+		ObjectSprite->setScale(sf::Vector2f(fScaleX, fScaleY));
 	}
 }

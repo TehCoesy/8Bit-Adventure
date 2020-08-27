@@ -27,6 +27,9 @@ unsigned int Keyboard::GetInput() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		SetBit(&uiKeysPressed, Keys::RIGHT);
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		SetBit(&uiKeysPressed, Keys::ATTACK);
+	}
 
 	return uiKeysPressed;
 }

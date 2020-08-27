@@ -13,11 +13,10 @@ Player::Player(int iID, std::string strName, std::string strAnimationName, b2Bod
 
 	m_Animation = RM->GetAnimation(strAnimationName);
 	m_PhysicsBody = PhysicsBody;
+	m_PhysicsBody->SetUserData(this);
 
 	m_Animation.Fetch(&m_Sprite);
 	m_Animation.Play();
-
-	m_fMaxVelocity = 5.0f;
 }
 
 Player::Player(const Player& cObject) {
@@ -26,11 +25,10 @@ Player::Player(const Player& cObject) {
 
 	m_Animation = cObject.m_Animation;
 	m_PhysicsBody = cObject.m_PhysicsBody;
+	m_PhysicsBody->SetUserData(this);
 
 	m_Animation.Fetch(&m_Sprite);
 	m_Animation.Play();
-
-	m_fMaxVelocity = 5.0f;
 }
 
 Player::~Player() {

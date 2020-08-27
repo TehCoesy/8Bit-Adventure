@@ -68,6 +68,50 @@ void GameScene::LoadTerrain(std::string strFilePath) {
 	}
 }
 
+b2Body* GameScene::CreateProjectile(float fPositionX, float fPositionY, float fVelocityX, float fVelocityY) {
+	b2BodyDef BodyDef;
+	BodyDef.position = b2Vec2(fPositionX / PIXELS_METERS, fPositionY / PIXELS_METERS);
+	BodyDef.type = b2_dynamicBody;
+	BodyDef.fixedRotation = true;
+
+	b2Body* PhysicsBody = m_World->CreateBody(&BodyDef);
+
+	b2PolygonShape BodyShape;
+	BodyShape.SetAsBox((10 / 2) / PIXELS_METERS, (10 / 2) / PIXELS_METERS); // Takes 1/2 Width and 1/2 Height
+
+	b2FixtureDef FixtureDef;
+	FixtureDef.density = 1.0f;
+	FixtureDef.shape = &BodyShape;
+	FixtureDef.isSensor = true;
+
+	PhysicsBody->CreateFixture(&FixtureDef);
+
+	PhysicsBody->SetLinearVelocity(b2Vec2(fVelocityX, fVelocityY));
+
+	return PhysicsBody;
+}
+
+b2Body* GameScene::CreateSensor(float fPositionX, float fPositionY, float fSizeX, float fSizeY) {
+	b2BodyDef BodyDef;
+	BodyDef.position = b2Vec2(fPositionX / PIXELS_METERS, fPositionY / PIXELS_METERS);
+	BodyDef.type = b2_dynamicBody;
+	BodyDef.fixedRotation = true;
+
+	b2Body* PhysicsBody = m_World->CreateBody(&BodyDef);
+
+	b2PolygonShape BodyShape;
+	BodyShape.SetAsBox(((fSizeX) / 2) / PIXELS_METERS, ((fSizeY) / 2) / PIXELS_METERS); // Takes 1/2 Width and 1/2 Height
+
+	b2FixtureDef FixtureDef;
+	FixtureDef.density = 1.0f;
+	FixtureDef.shape = &BodyShape;
+	FixtureDef.isSensor = true;
+
+	PhysicsBody->CreateFixture(&FixtureDef);
+
+	return PhysicsBody;
+}
+
 b2Body* GameScene::CreateBody(int iX, int iY, int iSizeX, int iSizeY, bool bStatic)
 {
 	float fPositionX = TILE_SIZE * iX, fPositionY = TILE_SIZE * iY;

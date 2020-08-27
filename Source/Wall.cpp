@@ -13,6 +13,7 @@ Wall::Wall(int iID, std::string strName, std::string strTextureName, b2Body* Phy
 
 	m_StaticTexture = RM->GetTexture(strTextureName);
 	m_PhysicsBody = PhysicsBody;
+	m_PhysicsBody->SetUserData(this);
 
 	m_StaticTexture.Fetch(&m_Sprite);
 
@@ -25,6 +26,7 @@ Wall::Wall(const Wall& cObject) {
 
 	m_StaticTexture = cObject.m_StaticTexture;
 	m_PhysicsBody = cObject.m_PhysicsBody;
+	m_PhysicsBody->SetUserData(this);
 
 	m_StaticTexture.Fetch(&m_Sprite);
 

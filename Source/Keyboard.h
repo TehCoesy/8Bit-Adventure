@@ -13,7 +13,7 @@ private:
 	static bool GetBit(unsigned int* uiKeys, int iPosition);
 public:
 	enum Keys {
-		UP, DOWN, LEFT, RIGHT
+		UP, DOWN, LEFT, RIGHT, ATTACK
 	};
 
 	Keyboard();
