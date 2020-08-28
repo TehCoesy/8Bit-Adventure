@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Animation.cpp" />
+    <ClCompile Include="Source\Attack.cpp" />
     <ClCompile Include="Source\Boss.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\DynamicObject.cpp" />
@@ -198,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Attack.h" />
     <ClInclude Include="Source\Boss.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\DynamicObject.h" />

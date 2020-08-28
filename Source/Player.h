@@ -5,8 +5,11 @@
 
 // Local
 #include "DynamicObject.h"
+#include "Attack.h"
 
 class Player : public DynamicObject {
+private:
+	Attack m_MeleeAttack;
 public:
 	Player();
 	Player(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody);

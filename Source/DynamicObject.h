@@ -21,6 +21,8 @@ public:
 	};
 
 	float* GetMaxVelocity();
+		
+	void Death();
 
 	void Move(float fDeltaTime, int iDirection);
 	void Stop(float fDeltaTime, int iDirection);

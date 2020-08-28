@@ -15,6 +15,10 @@ float* DynamicObject::GetMaxVelocity() {
 	return &m_fMaxVelocity;
 }
 
+void DynamicObject::Death() {
+
+}
+
 void DynamicObject::Move(float fDeltaTime, int iDirection) {
 	if (m_iID != 1 && m_PhysicsBody) {
 		// 0 = Down; 1 = Up; 2 = Left; 3 = Right;

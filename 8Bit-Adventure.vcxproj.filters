@@ -110,6 +110,9 @@
     <ClCompile Include="Source\MyContactListener.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Attack.cpp">
+      <Filter>Source Files\Objects\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Game.h">
@@ -177,6 +180,9 @@
     </ClInclude>
     <ClInclude Include="Source\MyContactListener.h">
       <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Attack.h">
+      <Filter>Header Files\Objects\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
