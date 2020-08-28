@@ -11,11 +11,18 @@
 
 class Attack {
 private:
+	int m_iSteps = 20, m_iCount = 0;
 	int m_iOwnerID = -1;
+
+	bool m_bDone = false;
 	b2Body* m_SensorBody;
 public:
 	Attack();
 	Attack(int iOwnerID, b2Body* SensorBody);
 	Attack(const Attack& cObject);
 	~Attack();
+
+	void Update(float fDeltaTime);
+	void Finish();
+	bool IsFinished();
 };

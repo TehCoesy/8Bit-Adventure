@@ -8,6 +8,7 @@ GameScene::GameScene() {
 	if (!m_World) {
 		b2Vec2 Gravity(0.0f, 0.0f);
 		m_World = new b2World(Gravity);
+		m_World->SetContactListener(&m_myContactListener);
 	}
 }
 

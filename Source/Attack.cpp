@@ -20,3 +20,20 @@ Attack::Attack(const Attack& cObject) {
 Attack::~Attack() {
 
 }
+
+void Attack::Update(float fDeltaTime) {
+	m_iCount++;
+	if (m_iCount == m_iSteps) {
+		Finish();
+	}
+}
+
+void Attack::Finish() {
+	m_bDone = true;
+	// Safely delete SensorBody
+	m_SensorBody->GetWorld()->DestroyBody(m_SensorBody);
+}
+
+bool Attack::IsFinished() {
+	return m_bDone;
+}

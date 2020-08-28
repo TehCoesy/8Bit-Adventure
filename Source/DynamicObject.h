@@ -12,6 +12,8 @@ protected:
 
 	float m_fMaxVelocity = 5.0f;
 	float m_fCurrentVelocityX = 0.0f, m_fCurrentVelocityY = 0.0f;
+
+	bool bIsDead;
 public:
 	DynamicObject();
 	~DynamicObject();

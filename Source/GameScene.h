@@ -12,6 +12,7 @@
 // Local
 #include "Singleton.h"
 #include "ResourceManager.h"
+#include "MyContactListener.h"
 #include "Keyboard.h"
 
 #include "MyObject.h"
@@ -23,6 +24,7 @@
 
 class GameScene {
 private:
+	MyContactListener m_myContactListener;
 	b2World* m_World;
 
 	std::vector<Wall> m_Walls;

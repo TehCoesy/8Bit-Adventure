@@ -176,6 +176,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\MainMenu.cpp" />
+    <ClCompile Include="Source\Music.cpp" />
     <ClCompile Include="Source\MyContactListener.cpp" />
     <ClCompile Include="Source\MyObject.cpp" />
     <ClCompile Include="Source\Player.cpp" />
@@ -187,6 +188,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\ShopKeeper.cpp" />
+    <ClCompile Include="Source\SoundEffect.cpp" />
+    <ClCompile Include="Source\SoundManager.cpp" />
     <ClCompile Include="Source\StateManager.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -210,6 +213,7 @@
     <ClInclude Include="Source\GameScene.h" />
     <ClInclude Include="Source\Keyboard.h" />
     <ClInclude Include="Source\MainMenu.h" />
+    <ClInclude Include="Source\Music.h" />
     <ClInclude Include="Source\MyContactListener.h" />
     <ClInclude Include="Source\MyObject.h" />
     <ClInclude Include="Source\Player.h" />
@@ -217,6 +221,8 @@
     <ClInclude Include="Source\ResourceManager.h" />
     <ClInclude Include="Source\ShopKeeper.h" />
     <ClInclude Include="Source\Singleton.h" />
+    <ClInclude Include="Source\SoundEffect.h" />
+    <ClInclude Include="Source\SoundManager.h" />
     <ClInclude Include="Source\StateManager.h" />
     <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="Source\MyTexture.h" />
