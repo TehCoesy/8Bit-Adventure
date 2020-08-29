@@ -10,14 +10,18 @@ class SoundEffect {
 private:
 	sf::Sound m_Sound;
 public:
-	SoundEffect(sf::SoundBuffer SoundBuffer);
+	SoundEffect();
+	SoundEffect(sf::SoundBuffer* SoundBuffer);
 	SoundEffect(const SoundEffect& cObject);
 	~SoundEffect();
+	
+	void SetBuffer(sf::SoundBuffer* SoundBuffer);
 
 	bool IsDone();
 
 	void Play();
 	void Pause();
 	void Stop();
-	void Repeat();
-}
+
+	void ToggleRepeat();
+};

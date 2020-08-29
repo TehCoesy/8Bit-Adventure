@@ -12,8 +12,8 @@ private:
 	sf::Music m_Music;
 
 	bool m_bIsValid;
-	bool m_bRepeat;
 public:
+	Music();
 	Music(std::string strFilePath);
 	Music(const Music& cObject);
 	~Music();

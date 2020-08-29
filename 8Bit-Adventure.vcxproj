@@ -233,6 +233,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\RM.txt" />
+    <Text Include="Resources\Sound.txt" />
     <Text Include="Resources\Stage1.txt" />
     <Text Include="Resources\Stage1_Terrain.txt" />
   </ItemGroup>

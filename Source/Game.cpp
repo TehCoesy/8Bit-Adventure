@@ -33,6 +33,8 @@ void Game::Init() {
 	RM->InitWithFile("RM.txt");
 	
 	m_GameScene.LoadFromFile("Stage1.txt");
+
+	SoundManager::GetInstance()->LoadFromFile("Sound.txt");
 }
 
 void Game::RunMainLoop() {

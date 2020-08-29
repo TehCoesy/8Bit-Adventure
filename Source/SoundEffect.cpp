@@ -3,34 +3,49 @@
 
 #include "SoundEffect.h"
 
-SoundEffect::SoundEffect(sf::SoundBuffer SoundBuffer) {
+SoundEffect::SoundEffect() {
 
 }
 
-SoundEffect::SoundEffect(const SoundEffect& cObject) {
+SoundEffect::SoundEffect(sf::SoundBuffer* SoundBuffer) {
+	m_Sound.setBuffer(*SoundBuffer);
+	Play();
+}
 
+SoundEffect::SoundEffect(const SoundEffect& cObject) {
+	
 }
 
 SoundEffect::~SoundEffect() {
 
 }
 
+void SoundEffect::SetBuffer(sf::SoundBuffer* SoundBuffer) {
+	m_Sound.setBuffer(*SoundBuffer);
+	Play();
+}
+
 bool SoundEffect::IsDone() {
-	return m_bIsDone;
+	if (m_Sound.getStatus() == sf::SoundSource::Status::Stopped) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 void SoundEffect::Play() {
-
+	m_Sound.play();
 }
 
 void SoundEffect::Pause() {
-
+	m_Sound.pause();
 }
 
 void SoundEffect::Stop() {
-
+	m_Sound.stop();
 }
 
-void SoundEffect::Repeat() {
-
+void SoundEffect::ToggleRepeat() {
+	m_Sound.setLoop(!m_Sound.getLoop());
 }

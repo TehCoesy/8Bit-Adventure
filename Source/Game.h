@@ -9,6 +9,7 @@
 // Local
 #include "Singleton.h"
 #include "ResourceManager.h" 
+#include "SoundManager.h"
 #include "GameScene.h"
 #include "MainMenu.h"
 

@@ -166,6 +166,9 @@ void GameScene::Update(float fDeltaTime) {
 	else {
 		m_Player.Stop(fDeltaTime, 3);
 	}
+	if (Keyboard::GetKey(Keyboard::ATTACK)) {
+		SoundManager::GetInstance()->PlayEffectByName("PLAYER_ATTACK");
+	}
 
 	m_Player.Update(fDeltaTime);
 

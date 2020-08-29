@@ -1,0 +1,5 @@
+#SOUNDEFFECTS: 1
+
+SB PLAYER_ATTACK Sounds/Effects/Weapon_Blow.wav
+
+#MUSICS: 0
