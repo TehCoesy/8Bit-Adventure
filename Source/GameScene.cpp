@@ -142,31 +142,32 @@ b2Body* GameScene::CreateBody(int iX, int iY, int iSizeX, int iSizeY, bool bStat
 
 void GameScene::Update(float fDeltaTime) {
 	// Update Input
-	if (Keyboard::GetKey(Keyboard::UP)) {
+	if (Keyboard::GetInstance()->GetKeyPressed(Keyboard::UP)) {
 		m_Player.Move(fDeltaTime, 1);
 	}
-	else {
+	else if (Keyboard::GetInstance()->GetKeyReleased(Keyboard::UP)) {
 		m_Player.Stop(fDeltaTime, 1);
 	}
-	if (Keyboard::GetKey(Keyboard::DOWN)) {
+	if (Keyboard::GetInstance()->GetKeyPressed(Keyboard::DOWN)) {
 		m_Player.Move(fDeltaTime, 0);
 	}
-	else {
+	else if (Keyboard::GetInstance()->GetKeyReleased(Keyboard::DOWN)) {
 		m_Player.Stop(fDeltaTime, 0);
 	}
-	if (Keyboard::GetKey(Keyboard::LEFT)) {
+	if (Keyboard::GetInstance()->GetKeyPressed(Keyboard::LEFT)) {
 		m_Player.Move(fDeltaTime, 2);
 	}
-	else {
+	else if (Keyboard::GetInstance()->GetKeyReleased(Keyboard::LEFT)) {
 		m_Player.Stop(fDeltaTime, 2);
 	}
-	if (Keyboard::GetKey(Keyboard::RIGHT)) {
+	if (Keyboard::GetInstance()->GetKeyPressed(Keyboard::RIGHT)) {
 		m_Player.Move(fDeltaTime, 3);
 	}
-	else {
+	else if (Keyboard::GetInstance()->GetKeyReleased(Keyboard::RIGHT)) {
 		m_Player.Stop(fDeltaTime, 3);
 	}
-	if (Keyboard::GetKey(Keyboard::ATTACK)) {
+
+	if (Keyboard::GetInstance()->GetKeyPressed(Keyboard::ATTACK)) {
 		SoundManager::GetInstance()->PlayEffectByName("PLAYER_ATTACK");
 	}
 
