@@ -142,28 +142,31 @@ b2Body* GameScene::CreateBody(int iX, int iY, int iSizeX, int iSizeY, bool bStat
 
 void GameScene::Update(float fDeltaTime) {
 	// Update Input
-	if (Keyboard::GetInstance()->GetKeyPressed(Keyboard::UP)) {
-		m_Player.Move(fDeltaTime, 1);
-	}
-	else if (Keyboard::GetInstance()->GetKeyReleased(Keyboard::UP)) {
-		m_Player.Stop(fDeltaTime, 1);
-	}
-	if (Keyboard::GetInstance()->GetKeyPressed(Keyboard::DOWN)) {
+	if (Keyboard::GetInstance()->GetKeyHold(Keyboard::DOWN)) {
 		m_Player.Move(fDeltaTime, 0);
 	}
-	else if (Keyboard::GetInstance()->GetKeyReleased(Keyboard::DOWN)) {
+	else {
 		m_Player.Stop(fDeltaTime, 0);
 	}
-	if (Keyboard::GetInstance()->GetKeyPressed(Keyboard::LEFT)) {
+
+	if (Keyboard::GetInstance()->GetKeyHold(Keyboard::UP)) {
+		m_Player.Move(fDeltaTime, 1);
+	}
+	else {
+		m_Player.Stop(fDeltaTime, 1);
+	}
+
+	if (Keyboard::GetInstance()->GetKeyHold(Keyboard::LEFT)) {
 		m_Player.Move(fDeltaTime, 2);
 	}
-	else if (Keyboard::GetInstance()->GetKeyReleased(Keyboard::LEFT)) {
+	else {
 		m_Player.Stop(fDeltaTime, 2);
 	}
-	if (Keyboard::GetInstance()->GetKeyPressed(Keyboard::RIGHT)) {
+
+	if (Keyboard::GetInstance()->GetKeyHold(Keyboard::RIGHT)) {
 		m_Player.Move(fDeltaTime, 3);
 	}
-	else if (Keyboard::GetInstance()->GetKeyReleased(Keyboard::RIGHT)) {
+	else {
 		m_Player.Stop(fDeltaTime, 3);
 	}
 
