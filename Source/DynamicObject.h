@@ -3,9 +3,9 @@
 // Precompiled Headers
 #include "stdafx.h"
 
-#include "MyObject.h"
+#include "SpriteObject.h"
 
-class DynamicObject : public MyObject {
+class DynamicObject : public SpriteObject {
 protected:
 	bool m_bMovingDown, m_bMovingUp, m_bMovingLeft, m_bMovingRight;
 	int m_iDirection = 0; // 0 = Down; 1 = Up; 2 = Left; 3 = Right

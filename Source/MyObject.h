@@ -12,38 +12,34 @@
 #include "Animation.h"
 #include "ResourceManager.h"
 
+enum class ObjectType { OBJ, PLAYER, ENEMY, STATIC, MELEE, PROJECTILE };
+
 class MyObject {
 protected:
-	// Identity
-	int m_iID = -1;
-	std::string m_strName = "";
-
-	// Properties
-	float m_fHealth = 100.0f;
-
-	// Graphics
-	sf::Sprite m_Sprite;
-	MyTexture m_StaticTexture;
-	Animation m_Animation;
-
-	b2Body* m_PhysicsBody;
-
-	// Fetch new Animation / Texture from RM
-	void NewAnimation(std::string strName);
-	void NewTexture(std::string strName);
-
-	// Synchronize Sprite with PhysicsBody
-	void SynchronizeBody();
-public:
 	MyObject();
 	~MyObject();
-	
+
+	// Identity
+	int m_iID = -1;
+	ObjectType m_ObjectType = ObjectType::OBJ;
+	std::string m_strName = "";
+
+	// Physics
+	b2Body* m_PhysicsBody;
+
+	// States
+	bool m_bIsActive = false;
+public:
 	// Identity
 	int* GetID();
 	std::string* GetName();
+	ObjectType GetObjectType();
 
-	// Properties
-	float* GetHealth();
+	// Physics
+	b2Body* GetPhysicsBody();
+
+	// States
+	bool IsActive();
 
 	virtual void Update(float fDeltaTime);
 	virtual void Render(sf::RenderWindow* MainWindow);

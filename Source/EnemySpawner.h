@@ -3,9 +3,9 @@
 // Precompiled Headers
 #include "stdafx.h"
 
-#include "MyObject.h"
+#include "SpriteObject.h"
 
-class EnemySpawner : public MyObject {
+class EnemySpawner : public SpriteObject {
 private:
 public:
 	EnemySpawner();

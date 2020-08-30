@@ -12,7 +12,6 @@
 // Local
 #include "Singleton.h"
 #include "ResourceManager.h"
-#include "SoundManager.h"
 #include "MyContactListener.h"
 #include "Keyboard.h"
 

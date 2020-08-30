@@ -17,6 +17,9 @@ Player::Player(int iID, std::string strName, std::string strAnimationName, b2Bod
 
 	m_Animation.Fetch(&m_Sprite);
 	m_Animation.Play();
+
+	m_ObjectType = ObjectType::PLAYER;
+	m_bIsActive = true;
 }
 
 Player::Player(const Player& cObject) {
@@ -29,6 +32,9 @@ Player::Player(const Player& cObject) {
 
 	m_Animation.Fetch(&m_Sprite);
 	m_Animation.Play();
+
+	m_ObjectType = ObjectType::PLAYER;
+	m_bIsActive = true;
 }
 
 Player::~Player() {
@@ -87,6 +93,7 @@ void Player::Render(sf::RenderWindow* RenderWindow) {
 
 void Player::MeleeAttack() {
 	if (!m_bIsAttacking) {
+		SoundManager::GetInstance()->PlayEffectByName("PLAYER_ATTACK");
 		m_bIsAttacking = true;
 		m_iCount = 0;
 		if (m_iDirection == 0) {

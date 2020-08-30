@@ -5,6 +5,7 @@
 
 // Local
 #include "DynamicObject.h"
+#include "SoundManager.h"
 #include "Attack.h"
 
 class Player : public DynamicObject {

@@ -187,9 +187,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Source\SensorObject.cpp" />
     <ClCompile Include="Source\ShopKeeper.cpp" />
     <ClCompile Include="Source\SoundEffect.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
+    <ClCompile Include="Source\SpriteObject.cpp" />
     <ClCompile Include="Source\StateManager.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -219,10 +221,12 @@
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Projectile.h" />
     <ClInclude Include="Source\ResourceManager.h" />
+    <ClInclude Include="Source\SensorObject.h" />
     <ClInclude Include="Source\ShopKeeper.h" />
     <ClInclude Include="Source\Singleton.h" />
     <ClInclude Include="Source\SoundEffect.h" />
     <ClInclude Include="Source\SoundManager.h" />
+    <ClInclude Include="Source\SpriteObject.h" />
     <ClInclude Include="Source\StateManager.h" />
     <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="Source\MyTexture.h" />

@@ -16,6 +16,9 @@ Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* Phy
 	m_PhysicsBody->SetUserData(this);
 
 	m_Animation.Fetch(&m_Sprite);
+
+	m_ObjectType = ObjectType::ENEMY;
+	m_bIsActive = true;
 }
 
 Enemy::Enemy(const Enemy& cObject) {
@@ -27,6 +30,8 @@ Enemy::Enemy(const Enemy& cObject) {
 	m_PhysicsBody->SetUserData(this);
 
 	m_StaticTexture.Fetch(&m_Sprite);
+
+	m_bIsActive = true;
 }
 
 Enemy::~Enemy() {

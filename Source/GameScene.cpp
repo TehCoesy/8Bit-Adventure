@@ -177,7 +177,6 @@ void GameScene::Update(float fDeltaTime) {
 
 	if (Keyboard::GetInstance()->GetKeyPressed(Keyboard::ATTACK)) {
 		m_Player.MeleeAttack();
-		SoundManager::GetInstance()->PlayEffectByName("PLAYER_ATTACK");
 	}
 
 	m_Player.Update(fDeltaTime);

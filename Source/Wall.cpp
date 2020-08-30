@@ -17,6 +17,8 @@ Wall::Wall(int iID, std::string strName, std::string strTextureName, b2Body* Phy
 
 	m_StaticTexture.Fetch(&m_Sprite);
 
+	m_bIsActive = true;
+
 	SynchronizeBody();
 }
 
@@ -29,6 +31,8 @@ Wall::Wall(const Wall& cObject) {
 	m_PhysicsBody->SetUserData(this);
 
 	m_StaticTexture.Fetch(&m_Sprite);
+
+	m_bIsActive = true;
 
 	SynchronizeBody();
 }

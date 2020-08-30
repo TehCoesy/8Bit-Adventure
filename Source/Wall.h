@@ -3,9 +3,9 @@
 // Precompiled Headers
 #include "stdafx.h"
 
-#include "MyObject.h"
+#include "SpriteObject.h"
 
-class Wall : public MyObject {
+class Wall : public SpriteObject {
 private:
 public:
 	Wall();
