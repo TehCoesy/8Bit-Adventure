@@ -31,6 +31,7 @@ void Game::Init() {
 	m_MainWindow.setFramerateLimit(static_cast<int>(FRAMERATE));
 
 	RM->InitWithFile("RM.txt");
+	MainMenu::GetInstance()->LoadFromFile("Resources/Textures/bg/main.jpg");
 	
 	m_GameScene.LoadFromFile("Stage1.txt");
 
@@ -43,8 +44,16 @@ void Game::RunMainLoop() {
 	
 	float fCurrentTime = m_Clock.getElapsedTime().asSeconds();
 	float fAccumulator = 0.0f;
-
+	bool isMainMenu = true;
 	while (m_MainWindow.isOpen()) {
+		if (isMainMenu) {
+			int t = MainMenu::GetInstance()->HandleInput(&m_MainWindow);
+			m_MainWindow.clear();
+			MainMenu::GetInstance()->Render(&m_MainWindow);
+			m_MainWindow.display();
+			if (t == 1) isMainMenu = 0;
+			continue;
+		}
 		sf::Event event;
 		while (m_MainWindow.pollEvent(event))
 		{
