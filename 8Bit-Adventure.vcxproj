@@ -192,6 +192,7 @@
     <ClCompile Include="Source\SoundEffect.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
     <ClCompile Include="Source\SpriteObject.cpp" />
+    <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\StateManager.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -227,6 +228,7 @@
     <ClInclude Include="Source\SoundEffect.h" />
     <ClInclude Include="Source\SoundManager.h" />
     <ClInclude Include="Source\SpriteObject.h" />
+    <ClInclude Include="Source\State.h" />
     <ClInclude Include="Source\StateManager.h" />
     <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="Source\MyTexture.h" />
