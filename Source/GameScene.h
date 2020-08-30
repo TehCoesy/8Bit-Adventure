@@ -33,7 +33,7 @@ private:
 
 	Player m_Player;
 	Boss m_Boss;
-	std::vector<Enemy> m_Enemies;
+	std::vector<Enemy*> m_Enemies;
 
 	// Scene loading functions
 	void LoadTerrain(std::string strFilePath);

@@ -8,8 +8,12 @@
 
 class Enemy : public DynamicObject {
 public:
+	enum {
+		SKELE, GHOST, DARKELF
+	};
+
 	Enemy();
-	Enemy(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody);
+	Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* PhysicsBody);
 	Enemy(const Enemy& cObject);
 	~Enemy();
 

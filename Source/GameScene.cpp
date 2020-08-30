@@ -23,12 +23,17 @@ void GameScene::LoadFromFile(std::string strFilePath) {
 
 	if (FileStream) {
 		// PlaceHolder Scene, for testing;
+		LoadTerrain("Stage1_Terrain.txt");
 
 		b2Body* PlayerBody = CreateBody(2, 2, 1, 1, false);
 
 		m_Player = Player(0, "PLAYER", "PLAYER_IDLE_DOWN", PlayerBody);
 
-		LoadTerrain("Stage1_Terrain.txt");
+		b2Body* EnemyBody = CreateBody(5, 5, 1, 1, false);
+
+		Enemy* Skele = new Enemy(0, "SKELE", "SKELE", EnemyBody);
+
+		m_Enemies.push_back(Skele);
 
 		// Close FileStream
 		fclose(FileStream);
@@ -177,6 +182,10 @@ void GameScene::Update(float fDeltaTime) {
 
 	m_Player.Update(fDeltaTime);
 
+	for (int i = 0; i < m_Enemies.size(); i++) {
+		m_Enemies.at(i)->Update(fDeltaTime);
+	}
+
 	m_World->Step(fDeltaTime, 4, 2);
 }
 
@@ -187,6 +196,10 @@ void GameScene::Render(sf::RenderWindow* MainWindow) {
 	
 	for (int i = 0; i < m_Walls.size(); i++) {
 		m_Walls.at(i).Render(MainWindow);
+	}
+
+	for (int i = 0; i < m_Enemies.size(); i++) {
+		m_Enemies.at(i)->Render(MainWindow);
 	}
 
 	m_Player.Render(MainWindow);

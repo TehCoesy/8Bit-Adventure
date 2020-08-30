@@ -3,7 +3,7 @@
 TEX ID 0 DUNGEON_WALL Textures/Tilesets/Dungeon/Objects/sprite_21.png
 TEX ID 1 DUNGEON_GROUND Textures/Tilesets/Dungeon/Ground/sprite_01.png
 
-#ANIMATIONS: 12
+#ANIMATIONS: 13
 
 ANI ID 8 NAME PLAYER_DOWN_ATTACK FRAMES 4 TIMESTEP 5
 0 Textures/Attack/player/down/sprite_0.png
@@ -72,3 +72,8 @@ ANI ID 7 NAME PLAYER_MOVE_RIGHT FRAMES 4 TIMESTEP 10
 1 Textures/Move/player/right/sprite_1.png
 2 Textures/Move/player/right/sprite_2.png
 3 Textures/Move/player/right/sprite_1.png
+
+ANI ID 12 NAME SKELE_IDLE_DOWN FRAMES 3 TIMESTEP 20
+0 Textures/Idle/skeleton/down/sprite_0.png
+1 Textures/Idle/skeleton/down/sprite_1.png
+2 Textures/Idle/skeleton/down/sprite_2.png
