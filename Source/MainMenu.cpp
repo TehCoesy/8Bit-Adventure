@@ -7,10 +7,10 @@ MainMenu::MainMenu() {
 	menuSprite = nullptr;
 	menuTexture = nullptr;
 	sf::Text text;
-	font.loadFromFile("Resources/Font/font1.ttf");
+	font.loadFromFile("Resources/Font/font2.ttf");
 	text.setFont(font);
 	text.setPosition(100, 300);
-	text.setCharacterSize(24);                         
+	text.setCharacterSize(30);                         
 	text.setFillColor(sf::Color::White);   
 	text.setStyle(sf::Text::Bold); 
 
@@ -23,13 +23,13 @@ MainMenu::MainMenu() {
 	buttons[0].setString("Play Game");
 	buttons[1].setString("Options");
 	buttons[2].setString("Quit");
-	titleFont.loadFromFile("Resources/Font/font2.ttf");
+	/*titleFont.loadFromFile("Resources/Font/font2.ttf");
 	title.setFont(titleFont);
 	title.setCharacterSize(40);
 	title.setPosition(220, 100);
 	title.setString("CHRONICLE: RISE");
 	title.setFillColor(sf::Color::White);
-	title.setStyle(sf::Text::Bold);
+	title.setStyle(sf::Text::Bold);*/
 }
 
 MainMenu::~MainMenu() {
@@ -61,7 +61,6 @@ void MainMenu::Update(const float dt) {
 void MainMenu::Render(sf::RenderWindow *window) {
 	window->draw(*(MainMenu::GetInstance()->menuSprite));
 	for (auto x : buttons) window->draw(x);
-	window->draw(title);
 }
 
 bool MainMenu::isTextClicked(sf::RenderWindow* window,sf::Text text) {
@@ -75,7 +74,7 @@ bool MainMenu::isTextClicked(sf::RenderWindow* window,sf::Text text) {
 	return false;
 }
 
-void MainMenu::HandleInput(sf::RenderWindow* window) {
+int MainMenu::HandleInput(sf::RenderWindow* window) {
 	sf::Event event;
 
 	while (window->pollEvent(event))
@@ -92,6 +91,7 @@ void MainMenu::HandleInput(sf::RenderWindow* window) {
 			if (event.key.code == sf::Keyboard::Escape)
 				window->close();
 			else if (event.key.code == sf::Keyboard::Return) {
+				return 1;
 				//loadgame();
 			}
 			break;
@@ -116,6 +116,7 @@ void MainMenu::HandleInput(sf::RenderWindow* window) {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		if (isTextClicked(window, buttons[0])) {
+			return 1;
 		//	loadgame();
 		}
 		else if (isTextClicked(window,buttons[2]))
@@ -123,4 +124,5 @@ void MainMenu::HandleInput(sf::RenderWindow* window) {
 
 
 	}
+	return 0;
 }

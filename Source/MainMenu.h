@@ -22,6 +22,6 @@ public:
 	~MainMenu();
 	void Update(const float dt);
 	void Render(sf::RenderWindow *window);
-	void HandleInput(sf::RenderWindow* window);
+	int HandleInput(sf::RenderWindow* window);
 	void LoadFromFile(std::string strFilePath);
 };
