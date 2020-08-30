@@ -9,7 +9,9 @@
 
 class Player : public DynamicObject {
 private:
-	bool bIsAttacking;
+	bool m_bIsAttacking = false;
+	int m_iCount;
+	int m_iSteps = 20;
 
 	Attack m_MeleeAttack;
 public:
@@ -18,8 +20,11 @@ public:
 	Player(const Player& cObject);
 	~Player();
 
-	void MeleeAttack(b2Body* SensorBody);
+	void MeleeAttack();
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);
+
+	void Move(float fDeltaTime, int iDirection);
+	void Stop(float fDeltaTime, int iDirection);
 };

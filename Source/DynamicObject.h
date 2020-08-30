@@ -26,6 +26,6 @@ public:
 		
 	void Death();
 
-	void Move(float fDeltaTime, int iDirection);
-	void Stop(float fDeltaTime, int iDirection);
+	virtual void Move(float fDeltaTime, int iDirection);
+	virtual void Stop(float fDeltaTime, int iDirection);
 };
