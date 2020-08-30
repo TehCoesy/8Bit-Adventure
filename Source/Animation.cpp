@@ -68,7 +68,7 @@ void Animation::Update(float fDeltaTime) {
 void Animation::Fetch(sf::Sprite* ObjectSprite) {
 	if (m_iID != -1) {
 		sf::Texture* Texture = m_AnimationFrames.at(m_iFrameIndex);
-		ObjectSprite->setTexture(*m_AnimationFrames.at(m_iFrameIndex));
+		ObjectSprite->setTexture(*Texture, true);
 
 		float fScaleX = TILE_SIZE / Texture->getSize().x;
 		float fScaleY = TILE_SIZE / Texture->getSize().y;
