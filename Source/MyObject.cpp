@@ -30,6 +30,10 @@ bool MyObject::IsActive() {
 	return m_bIsActive;
 }
 
+void MyObject::ToggleActive() {
+	m_bIsActive = !m_bIsActive;
+}
+
 void MyObject::Update(float fDeltaTime) {
 }
 

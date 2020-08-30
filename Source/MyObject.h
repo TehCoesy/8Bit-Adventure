@@ -40,6 +40,7 @@ public:
 
 	// States
 	bool IsActive();
+	void ToggleActive();
 
 	virtual void Update(float fDeltaTime);
 	virtual void Render(sf::RenderWindow* MainWindow);

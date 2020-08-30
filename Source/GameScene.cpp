@@ -25,11 +25,21 @@ void GameScene::LoadFromFile(std::string strFilePath) {
 		// PlaceHolder Scene, for testing;
 		LoadTerrain("Stage1_Terrain.txt");
 
-		b2Body* PlayerBody = CreateBody(2, 2, 1, 1, false);
+		b2Body* PlayerBody = CreateBody(5, 5, 1, 1, false);
 
 		m_Player = Player(0, "PLAYER", "PLAYER_IDLE_DOWN", PlayerBody);
 
-		b2Body* EnemyBody = CreateBody(5, 5, 1, 1, false);
+		b2Body* SensorDown = CreateSensor(TILE_SIZE * 5, TILE_SIZE * 6 + 10, 64, 20);
+		b2Body* SensorUp = CreateSensor(TILE_SIZE * 5, TILE_SIZE * 5 - 30, 64, 20);
+		b2Body* SensorLeft = CreateSensor(TILE_SIZE * 5 - 30, TILE_SIZE * 5, 20, 64);
+		b2Body* SensorRight = CreateSensor(TILE_SIZE * 6 + 10, TILE_SIZE * 5, 20, 64);
+
+		m_Player.m_MeleeAttackDown = Attack(SensorDown, 64, 20);
+		m_Player.m_MeleeAttackUp = Attack(SensorUp, 64, 20);
+		m_Player.m_MeleeAttackLeft = Attack(SensorLeft, 20, 64);
+		m_Player.m_MeleeAttackRight = Attack(SensorRight, 20, 64);
+
+		b2Body* EnemyBody = CreateBody(8, 8, 1, 1, false);
 
 		Enemy* Skele = new Enemy(0, "SKELE", "SKELE", EnemyBody);
 

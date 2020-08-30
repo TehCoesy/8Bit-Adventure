@@ -14,14 +14,17 @@ private:
 	int m_iCount;
 	int m_iSteps = 20;
 
-	Attack m_MeleeAttack;
+	
 public:
 	Player();
 	Player(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody);
 	Player(const Player& cObject);
 	~Player();
 
+	Attack m_MeleeAttackDown, m_MeleeAttackUp, m_MeleeAttackLeft, m_MeleeAttackRight;
+
 	void MeleeAttack();
+	void SynchronizeSensor();
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);

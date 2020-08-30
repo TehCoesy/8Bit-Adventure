@@ -7,33 +7,33 @@ Attack::Attack() {
 
 }
 
-Attack::Attack(int iOwnerID, b2Body* SensorBody) {
-	m_iOwnerID = iOwnerID;
-	m_SensorBody = SensorBody;
+Attack::Attack(b2Body* SensorBody, float fX, float fY) {
+	m_iID = 0;
+	m_PhysicsBody = SensorBody;
+	SensorBox = sf::RectangleShape(sf::Vector2f(fX, fY));
 }
 
 Attack::Attack(const Attack& cObject) {
-	m_iOwnerID = cObject.m_iOwnerID;
-	m_SensorBody = cObject.m_SensorBody;
+	m_iID = 0;
+	m_PhysicsBody = cObject.m_PhysicsBody;
 }
 
 Attack::~Attack() {
 
 }
 
+void Attack::Synchronize() {
+	SensorBox.setPosition(m_PhysicsBody->GetPosition().x * PIXELS_METERS, m_PhysicsBody->GetPosition().y * PIXELS_METERS);
+}
+
 void Attack::Update(float fDeltaTime) {
 	m_iCount++;
 	if (m_iCount == m_iSteps) {
-		Finish();
+		if (IsActive()) ToggleActive();
 	}
 }
 
-void Attack::Finish() {
-	m_bDone = true;
-	// Safely delete SensorBody
-	m_SensorBody->GetWorld()->DestroyBody(m_SensorBody);
-}
-
-bool Attack::IsFinished() {
-	return m_bDone;
+void Attack::Render(sf::RenderWindow* RenderWindow) {
+	Synchronize();
+	RenderWindow->draw(SensorBox);
 }

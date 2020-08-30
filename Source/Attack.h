@@ -7,22 +7,21 @@
 #include "Box2D/Box2D.h"
 
 // Local
-#include "MyContactListener.h"
+#include "SensorObject.h"
 
-class Attack {
+class Attack : public SensorObject {
 private:
 	int m_iSteps = 20, m_iCount = 0;
-	int m_iOwnerID = -1;
 
-	bool m_bDone = false;
-	b2Body* m_SensorBody;
+	sf::RectangleShape SensorBox;
+
+	void Synchronize();
 public:
 	Attack();
-	Attack(int iOwnerID, b2Body* SensorBody);
+	Attack(b2Body* SensorBody, float fX, float fY);
 	Attack(const Attack& cObject);
 	~Attack();
 
 	void Update(float fDeltaTime);
-	void Finish();
-	bool IsFinished();
+	void Render(sf::RenderWindow* RenderWindow);
 };
