@@ -15,7 +15,19 @@ float* DynamicObject::GetMaxVelocity() {
 	return &m_fMaxVelocity;
 }
 
+void DynamicObject::Spawn() {
+
+}
+
 void DynamicObject::Death() {
+
+}
+
+void DynamicObject::Despawn() {
+
+}
+
+void DynamicObject::Attack() {
 
 }
 

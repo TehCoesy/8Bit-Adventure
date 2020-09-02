@@ -27,6 +27,10 @@ private:
 	MyContactListener m_myContactListener;
 	b2World* m_World;
 
+	b2Body* CreateProjectile(float fX, float fY, float fVelocityX, float fVelocityY);
+	b2Body* CreateSensor(float fX, float fY, float fSizeX, float fSizeY);
+	b2Body* CreateBody(int iX, int iY, int iSizeX, int iSizeY, bool bStatic);
+
 	std::vector<Wall> m_Walls;
 	std::vector<Ground> m_GroundTiles;
 
@@ -42,9 +46,8 @@ public:
 
 	void LoadFromFile(std::string strFilePath);
 
-	b2Body* CreateProjectile(float fX, float fY, float fVelocityX, float fVelocityY);
-	b2Body* CreateSensor(float fX, float fY, float fSizeX, float fSizeY);
-	b2Body* CreateBody(int iX, int iY, int iSizeX, int iSizeY, bool bStatic);
+	void SingleShot();
+	void SingleArrow();
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* MainWindow);

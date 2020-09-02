@@ -3,15 +3,21 @@
 // Precompiled Headers
 #include "stdafx.h"
 
-// External Libraries
-#include "SFML/Graphics.hpp"
-#include "Box2D/Box2D.h"
+// Local
+#include "DynamicObject.h"
 
-class Projectile {
+class Projectile : public DynamicObject {
 private:
-	sf::Sprite m_Sprite;
-	b2Body* m_PhysicsBody;
+	std::string m_strProjectileType;
+	ObjectType m_ParentType;
+	int m_iParentID;
 public:
 	Projectile();
+	Projectile(int iID, std::string strName, b2Body* physicsBody, std::string strType);
+	Projectile(const Projectile& cObject);
 	~Projectile();
+
+	void SetParent(int iParentID, ObjectType parentType);
+
+
 };

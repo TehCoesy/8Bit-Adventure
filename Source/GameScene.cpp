@@ -199,3 +199,11 @@ void GameScene::Render(sf::RenderWindow* MainWindow) {
 
 	m_Player.Render(MainWindow);
 }
+
+void GameScene::SingleShot() {
+
+}
+
+void GameScene::SingleArrow() {
+
+}

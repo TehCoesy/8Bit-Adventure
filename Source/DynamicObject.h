@@ -23,12 +23,15 @@ public:
 	};
 
 	enum State {
-		SLEEP, IDLE, MOVING, ATTACKING, DEAD
+		SPAWN, SLEEP, IDLE, MOVING, ATTACKING, DEAD, DESPAWN
 	};
 
 	float* GetMaxVelocity();
 		
-	void Death();
+	virtual void Spawn();
+	virtual void Death();
+	virtual void Despawn();
+	virtual void Attack();
 
 	bool CanMove();
 	void ToggleCanMove();
