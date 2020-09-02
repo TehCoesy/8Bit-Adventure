@@ -11,9 +11,9 @@ protected:
 	int m_iDirection = 0; // 0 = Down; 1 = Up; 2 = Left; 3 = Right
 
 	float m_fMaxVelocity = 5.0f;
-	float m_fCurrentVelocityX = 0.0f, m_fCurrentVelocityY = 0.0f;
 
-	bool bIsDead;
+	bool m_bCanMove = true;
+	bool m_bIsDead = false;
 public:
 	DynamicObject();
 	~DynamicObject();
@@ -22,10 +22,22 @@ public:
 		DOWN = 0, UP = 1, LEFT = 2, RIGHT = 3
 	};
 
+	enum State {
+		SLEEP, IDLE, MOVING, ATTACKING, DEAD
+	};
+
 	float* GetMaxVelocity();
 		
 	void Death();
 
-	virtual void Move(float fDeltaTime, int iDirection);
-	virtual void Stop(float fDeltaTime, int iDirection);
+	bool CanMove();
+	void ToggleCanMove();
+
+	void Move(float fDeltaTime, int iDirection);
+	void MoveTo(float fDeltaTime, float fX, float fY);
+
+	void Stop(float fDeltaTime, int iDirection);
+	void CompleteStop(float fDeltaTime);
+
+	void DampenMovement();
 };

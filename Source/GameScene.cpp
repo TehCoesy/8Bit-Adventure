@@ -29,16 +29,6 @@ void GameScene::LoadFromFile(std::string strFilePath) {
 
 		m_Player = Player(0, "PLAYER", "PLAYER_IDLE_DOWN", PlayerBody);
 
-		b2Body* SensorDown = CreateSensor(TILE_SIZE * 5, TILE_SIZE * 6 + 10, 64, 20);
-		b2Body* SensorUp = CreateSensor(TILE_SIZE * 5, TILE_SIZE * 5 - 30, 64, 20);
-		b2Body* SensorLeft = CreateSensor(TILE_SIZE * 5 - 30, TILE_SIZE * 5, 20, 64);
-		b2Body* SensorRight = CreateSensor(TILE_SIZE * 6 + 10, TILE_SIZE * 5, 20, 64);
-
-		m_Player.m_MeleeAttackDown = Attack(SensorDown, 64, 20);
-		m_Player.m_MeleeAttackUp = Attack(SensorUp, 64, 20);
-		m_Player.m_MeleeAttackLeft = Attack(SensorLeft, 20, 64);
-		m_Player.m_MeleeAttackRight = Attack(SensorRight, 20, 64);
-
 		b2Body* EnemyBody = CreateBody(8, 8, 1, 1, false);
 
 		Enemy* Skele = new Enemy(0, "SKELE", "SKELE", EnemyBody);
@@ -185,15 +175,11 @@ void GameScene::Update(float fDeltaTime) {
 		m_Player.Stop(fDeltaTime, 3);
 	}
 
-	if (Keyboard::GetInstance()->GetKeyPressed(Keyboard::ATTACK)) {
-		m_Player.MeleeAttack();
-	}
-
-	m_Player.Update(fDeltaTime);
-
 	for (int i = 0; i < m_Enemies.size(); i++) {
 		m_Enemies.at(i)->Update(fDeltaTime);
 	}
+
+	m_Player.Update(fDeltaTime);
 
 	m_World->Step(fDeltaTime, 4, 2);
 }

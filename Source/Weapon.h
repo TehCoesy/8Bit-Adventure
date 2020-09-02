@@ -9,7 +9,7 @@
 // Local
 #include "SensorObject.h"
 
-class Attack : public SensorObject {
+class Weapon : public SensorObject {
 private:
 	int m_iSteps = 20, m_iCount = 0;
 
@@ -17,10 +17,10 @@ private:
 
 	void Synchronize();
 public:
-	Attack();
-	Attack(b2Body* SensorBody, float fX, float fY);
-	Attack(const Attack& cObject);
-	~Attack();
+	Weapon();
+	Weapon(b2Body* SensorBody, float fX, float fY);
+	Weapon(const Weapon& cObject);
+	~Weapon();
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);

@@ -1,39 +1,39 @@
 // Precompiled Headers
 #include "stdafx.h"
 
-#include "Attack.h"
+#include "Weapon.h"
 
-Attack::Attack() {
+Weapon::Weapon() {
 
 }
 
-Attack::Attack(b2Body* SensorBody, float fX, float fY) {
+Weapon::Weapon(b2Body* SensorBody, float fX, float fY) {
 	m_iID = 0;
 	m_PhysicsBody = SensorBody;
 	SensorBox = sf::RectangleShape(sf::Vector2f(fX, fY));
 }
 
-Attack::Attack(const Attack& cObject) {
+Weapon::Weapon(const Weapon& cObject) {
 	m_iID = 0;
 	m_PhysicsBody = cObject.m_PhysicsBody;
 }
 
-Attack::~Attack() {
+Weapon::~Weapon() {
 
 }
 
-void Attack::Synchronize() {
+void Weapon::Synchronize() {
 	SensorBox.setPosition(m_PhysicsBody->GetPosition().x * PIXELS_METERS, m_PhysicsBody->GetPosition().y * PIXELS_METERS);
 }
 
-void Attack::Update(float fDeltaTime) {
+void Weapon::Update(float fDeltaTime) {
 	m_iCount++;
 	if (m_iCount == m_iSteps) {
 		if (IsActive()) ToggleActive();
 	}
 }
 
-void Attack::Render(sf::RenderWindow* RenderWindow) {
+void Weapon::Render(sf::RenderWindow* RenderWindow) {
 	Synchronize();
 	RenderWindow->draw(SensorBox);
 }
