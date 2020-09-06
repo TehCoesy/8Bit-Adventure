@@ -200,10 +200,44 @@ void GameScene::Render(sf::RenderWindow* MainWindow) {
 	m_Player.Render(MainWindow);
 }
 
-void GameScene::SingleShot() {
+void GameScene::SingleShot(float fPositionX, float fPositionY, float fDeg) {
+	b2Body* ProjectileBody = CreateProjectile(fPositionX, fPositionY, 10.0f, 10.0f);
 
+	if (fDeg == 0.0f) { // Up
+		ProjectileBody->SetLinearVelocity(b2Vec2(0.0f, -20.0f));
+	}
+	if (fDeg == 90.0f) { // Right
+		ProjectileBody->SetLinearVelocity(b2Vec2(20.0f, 0.0f));
+	}
+	if (fDeg == 180.0f) { // Down
+		ProjectileBody->SetLinearVelocity(b2Vec2(0.0f, 20.0f));
+	}
+	if (fDeg == 270.0f) { // Left
+		ProjectileBody->SetLinearVelocity(b2Vec2(-20.0f, 0.0f));
+	}
+
+	Projectile* NewProjectile = new Projectile(0, "Projectile", ProjectileBody, "BULLET");
+
+	m_Projectiles.push_back(NewProjectile);
 }
 
-void GameScene::SingleArrow() {
+void GameScene::SingleArrow(float fPositionX, float fPositionY, float fDeg) {
+	b2Body* ProjectileBody = CreateProjectile(fPositionX, fPositionY, 10.0f, 10.0f);
 
+	if (fDeg == 0.0f) { // Up
+		ProjectileBody->SetLinearVelocity(b2Vec2(0.0f, -20.0f));
+	}
+	if (fDeg == 90.0f) { // Right
+		ProjectileBody->SetLinearVelocity(b2Vec2(20.0f, 0.0f));
+	}
+	if (fDeg == 180.0f) { // Down
+		ProjectileBody->SetLinearVelocity(b2Vec2(0.0f, 20.0f));
+	}
+	if (fDeg == 270.0f) { // Left
+		ProjectileBody->SetLinearVelocity(b2Vec2(-20.0f, 0.0f));
+	}
+
+	Projectile* NewProjectile = new Projectile(0, "Projectile", ProjectileBody, "ARROW");
+
+	m_Projectiles.push_back(NewProjectile);
 }

@@ -21,8 +21,9 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Boss.h"
+#include "Projectile.h"
 
-class GameScene {
+class GameScene : public Singleton<GameScene> {
 private:
 	MyContactListener m_myContactListener;
 	b2World* m_World;
@@ -37,6 +38,7 @@ private:
 	Player m_Player;
 	Boss m_Boss;
 	std::vector<Enemy*> m_Enemies;
+	std::vector<Projectile*> m_Projectiles;
 
 	// Scene loading functions
 	void LoadTerrain(std::string strFilePath);
@@ -46,8 +48,8 @@ public:
 
 	void LoadFromFile(std::string strFilePath);
 
-	void SingleShot();
-	void SingleArrow();
+	void SingleShot(float fPositionX, float fPositionY, float fDeg);
+	void SingleArrow(float fPositionX, float fPositionY, float fDeg);
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* MainWindow);

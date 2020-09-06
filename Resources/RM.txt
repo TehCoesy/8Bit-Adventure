@@ -1,7 +1,11 @@
-#TEXTURES: 2
+#TEXTURES: 6
 
 TEX ID 0 DUNGEON_WALL Textures/Tilesets/Dungeon/Objects/sprite_21.png
 TEX ID 1 DUNGEON_GROUND Textures/Tilesets/Dungeon/Ground/sprite_01.png
+TEX ID 2 BULLET Textures/Items/Bullet.png
+TEX ID 3 ARROW Textures/Items/Arrow.png
+TEX ID 4 BOW Textures/Items/Bow.png
+TEX ID 5 SWORD Textures/Items/Sword.png
 
 #ANIMATIONS: 13
 

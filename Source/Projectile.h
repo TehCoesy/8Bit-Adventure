@@ -19,5 +19,23 @@ public:
 
 	void SetParent(int iParentID, ObjectType parentType);
 
+	void Move(float fDeltaTime, int iDirection) {
+		// Disable applying force on Projectile
+	}
 
+	void MoveTo(float fDeltaTime, float fX, float fY) {
+		// Disable applying force on Projectile
+	}
+
+	void Stop(float fDeltaTime, int iDirection) {
+		// Disable applying force on Projectile
+	}
+
+	void CompleteStop(float fDeltaTime) {
+		// Disable applying force on Projectile
+	}
+
+	void DampenMovement() {
+		// Disable applying force on Projectile
+	}
 };
