@@ -15,6 +15,8 @@ Player::Player(int iID, std::string strName, std::string strAnimationName, b2Bod
 	m_PhysicsBody = PhysicsBody;
 	m_PhysicsBody->SetUserData(this);
 
+	
+
 	m_Animation.Fetch(&m_Sprite);
 	m_Animation.Play();
 
@@ -79,12 +81,19 @@ void Player::Update(float fDeltaTime) {
 		m_Animation.Fetch(&m_Sprite);
 		SynchronizeBody();
 
-		DampenMovement();
+		// Stop movement 
+		Move(fDeltaTime, -1);
 	}
 }
 
 void Player::Render(sf::RenderWindow* RenderWindow) {
 	if (m_iID != -1) {
+		float WorldPositionX = m_Sprite.getPosition().x;
+		float WorldPositionY = m_Sprite.getPosition().y;
+
+		m_Sprite.setPosition(sf::Vector2f(WorldPositionX + MainCamera->GetCameraVector().x, WorldPositionY + MainCamera->GetCameraVector().y));
+		//m_Sprite.setPosition(sf::Vector2f(200, 200));
 		RenderWindow->draw(m_Sprite);
+		m_Sprite.setPosition(sf::Vector2f(WorldPositionX, WorldPositionY));
 	}
 }

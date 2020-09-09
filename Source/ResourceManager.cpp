@@ -18,45 +18,51 @@ void ResourceManager::InitWithFile(std::string strFilePath) {
 		int iVal;
 
 		// Loading static Textures
-		iVal = fscanf(FileStream, "#TEXTURES: %d\n", &m_iTexturesCount);
+		int iTexturesCount = 0;
+		iVal = fscanf(FileStream, "#TEXTURES: %d\n", &iTexturesCount);
 
-		for (int i = 0; i < m_iTexturesCount; i++) {
+		for (int i = 0; i < iTexturesCount; i++) {
 			int iID = -1;
 			char strBuffer1[100], strBuffer2[100];
-			iVal = fscanf(FileStream, "TEX ID %d %s %s\n", &iID, strBuffer1, strBuffer2); // TEX ID [iID] [strTextureName] [strFilePath]
+			float fScaleX = TILE_SIZE, fScaleY = TILE_SIZE;
+
+			iVal = fscanf(FileStream, "TEX ID %d %s %s %f %f\n", &iID, strBuffer1, strBuffer2, &fScaleX, &fScaleY); // TEX ID [iID] [strTextureName] [strFilePath]
 
 			//printf("TEX ID %d %s %s\n", iID, strBuffer1, strBuffer2);
 
 			if (iID != -1) {
-				LoadTexture(iID, std::string(strBuffer1), std::string(strBuffer2));
+				MyTexture NewTexture = LoadTexture(iID, std::string(strBuffer1), std::string(strBuffer2), fScaleX, fScaleY);
+				m_aTextures.push_back(NewTexture);
 			}
 		}
 
 		// Loading Animations
-		iVal = fscanf(FileStream, "#ANIMATIONS: %d\n", &m_iAnimationsCount);
+		int iAnimationsCount = 0;
+		iVal = fscanf(FileStream, "#ANIMATIONS: %d\n", &iAnimationsCount);
 
-		for (int i = 0; i < m_iAnimationsCount; i++) {
+		for (int i = 0; i < iAnimationsCount; i++) {
 			int iID = -1;
 			int iFrames = 0, iTimeSteps = 0;
 			char strBuffer1[100], strBuffer2[100];
+
 			iVal = fscanf(FileStream, "ANI ID %d NAME %s FRAMES %d TIMESTEP %d\n", &iID, strBuffer1, &iFrames, &iTimeSteps); // ANI ID [iID] NAME [cName] FRAMES[iFrames] TIMESTEP[iTimeStep]
 
-			std::vector<std::string> strFilePaths;
-
+			float fScaleX = TILE_SIZE, fScaleY = TILE_SIZE;
+			std::vector<MyTexture> graFrames;
+			
 			for (int k = 0; k < iFrames; k++) {
-				iVal = fscanf(FileStream, "%*d %s\n", strBuffer2);
+				iVal = fscanf(FileStream, "%*d %s %f %f\n", strBuffer2, &fScaleX, &fScaleY);
 
-				strFilePaths.push_back(std::string(strBuffer2));
+				MyTexture NewFrame = LoadTexture(0, "Frame", std::string(strBuffer2), fScaleX, fScaleY);
+
+				graFrames.push_back(NewFrame);
 			}
-
-			//printf("ANI ID %d FRAMES %d TIMESTEP %d\n", iID, iFrames, iTimeSteps);
 
 			if (iID != -1) {
-				LoadAnimation(iID, std::string(strBuffer1), iTimeSteps, strFilePaths);
+				Animation NewAnimation = LoadAnimation(iID, std::string(strBuffer1), iTimeSteps, graFrames);
+				m_aAnimations.push_back(NewAnimation);
 			}
 		}
-
-		// Loading Sounds
 
 		// Close FileStream
 		fclose(FileStream);
@@ -66,43 +72,26 @@ void ResourceManager::InitWithFile(std::string strFilePath) {
 	}
 }
 
-void ResourceManager::LoadTexture(int iID, std::string strName, std::string strFilePath) {
+MyTexture ResourceManager::LoadTexture(int iID, std::string strName, std::string strFilePath, float fScaleX, float fScaleY) {
 	strFilePath = RESOURCESFOLDER + strFilePath;
 
 	sf::Texture* Texture = new sf::Texture;
 	if (!Texture->loadFromFile(strFilePath))
 	{
 		printf("(ResourceManager) Error loading texture! @%s", strFilePath.c_str());
-		return;
-	}
-	MyTexture NewTexture(iID, strName, Texture);
-	m_aTextures.push_back(NewTexture);
-}
-
-void ResourceManager::LoadAnimation(int iID, std::string strName, int iTimeSteps, std::vector<std::string> strFilePaths) {
-	std::vector<sf::Texture*> AnimationFrames;
-
-	for (int i = 0; i < strFilePaths.size(); i++)
-	{
-		std::string strFilePath = RESOURCESFOLDER + strFilePaths.at(i);
-
-		sf::Texture* Texture = new sf::Texture;
-
-		if (!Texture->loadFromFile(strFilePath))
-		{
-			printf("(ResourceManager) Error loading texture! @%s", strFilePath.c_str());
-			return;
-		}
-
-		AnimationFrames.push_back(Texture);
+		return MyTexture();
 	}
 
-	Animation NewAnimation(iID, strName, iTimeSteps, AnimationFrames);
-	m_aAnimations.push_back(NewAnimation);
+	MyTexture NewTexture = MyTexture(iID, strName, Texture);
+
+	NewTexture.SetScale(fScaleX, fScaleY);
+
+	return NewTexture;
 }
 
-void ResourceManager::LoadSoundBuffers(std::string strFilePath) {
-
+Animation ResourceManager::LoadAnimation(int iID, std::string strName, int iTimeSteps, std::vector<MyTexture> graFrames) {
+	Animation NewAnimation = Animation(iID, strName, iTimeSteps, graFrames);
+	return NewAnimation;
 }
 
 MyTexture ResourceManager::GetTexture(std::string strName) {

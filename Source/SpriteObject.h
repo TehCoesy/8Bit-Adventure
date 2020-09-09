@@ -10,6 +10,7 @@ class SpriteObject : public MyObject {
 protected:
 	// Graphics
 	sf::Sprite m_Sprite;
+
 	MyTexture m_StaticTexture;
 	Animation m_Animation;
 

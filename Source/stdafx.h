@@ -14,6 +14,11 @@
 #define RESOURCESFOLDER "./Resources/"
 
 #define RM ResourceManager::GetInstance()
+#define SM SoundManager::GetInstance()
+
+#define GameSceneInstance GameScene::GetInstance()
+#define MainMenuInstance MainMenu::GetInstance()
+#define MainCamera Camera::GetInstance()
 
 #define TILE_SIZE 64.0f
 #define PIXELS_METERS 30.0f

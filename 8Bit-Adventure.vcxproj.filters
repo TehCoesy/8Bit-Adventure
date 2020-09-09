@@ -42,6 +42,12 @@
     <Filter Include="Source Files\Objects\Entities">
       <UniqueIdentifier>{48131d38-91e0-41f4-8034-af7ef12cf64a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{d42625ec-48fb-465c-a820-38659f8ae84a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GUI">
+      <UniqueIdentifier>{18b0e011-e257-446c-a54a-5016d9074fb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\MainApplication.cpp">
@@ -134,6 +140,12 @@
     <ClCompile Include="Source\Mouse.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PlayerGUI.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Score.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Game.h">
@@ -225,6 +237,12 @@
     </ClInclude>
     <ClInclude Include="Source\Mouse.h">
       <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerGUI.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Score.h">
+      <Filter>Header Files\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

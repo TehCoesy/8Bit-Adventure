@@ -4,7 +4,7 @@
 #include "stdafx.h"
 
 // Local
-#include "SFML/Graphics.hpp"
+#include "MyTexture.h"
 
 class Animation {
 private:
@@ -12,12 +12,12 @@ private:
 	std::string m_strName = "";
 	int m_iFrameSteps = 10, m_iFrameIndex = 0, m_iCount = 0;
 	
-	std::vector<sf::Texture*> m_AnimationFrames;
+	std::vector<MyTexture> m_graFrames;
 
 	bool m_bIsPlaying = false;
 public:
 	Animation();
-	Animation(int iID, std::string strName, int iSteps, std::vector<sf::Texture*> AnimationFrames);
+	Animation(int iID, std::string strName, int iSteps, std::vector<MyTexture> AnimationFrames);
 	Animation(const Animation& cObject);
 	~Animation();
 

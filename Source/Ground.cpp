@@ -22,5 +22,10 @@ Ground::~Ground() {
 }
 
 void Ground::Render(sf::RenderWindow* RenderWindow) {
+	float WorldPositionX = m_Sprite.getPosition().x;
+	float WorldPositionY = m_Sprite.getPosition().y;
+
+	m_Sprite.setPosition(sf::Vector2f(WorldPositionX + MainCamera->GetCameraVector().x, WorldPositionY + MainCamera->GetCameraVector().y));
 	RenderWindow->draw(m_Sprite);
+	m_Sprite.setPosition(sf::Vector2f(WorldPositionX, WorldPositionY));
 }

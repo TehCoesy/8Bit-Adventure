@@ -7,10 +7,12 @@
 
 class DynamicObject : public SpriteObject {
 protected:
+	// Movement
 	bool m_bMovingDown, m_bMovingUp, m_bMovingLeft, m_bMovingRight;
 	int m_iDirection = 0; // 0 = Down; 1 = Up; 2 = Left; 3 = Right
 
 	float m_fMaxVelocity = 5.0f;
+	float m_fForce = 100.0f;
 
 	bool m_bCanMove = true;
 	bool m_bIsDead = false;
@@ -27,6 +29,7 @@ public:
 	};
 
 	float* GetMaxVelocity();
+	int GetDirection();
 		
 	virtual void Spawn();
 	virtual void Death();

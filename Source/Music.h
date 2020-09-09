@@ -8,20 +8,23 @@
 
 class Music {
 private:
-	std::string m_strFilePath;
 	sf::Music m_Music;
 
-	bool m_bIsValid;
+	bool m_bIsLoaded;
 public:
 	Music();
 	Music(std::string strFilePath);
-	Music(const Music& cObject);
 	~Music();
+
+	void NewTrack(std::string strFilePath);
 
 	void Play();
 	void Pause();
 	void Stop();
-	void ToggleRepeat();
 
-	bool IsValid();
+	void SetRepeat();
+	void SetNoRepeat();
+
+	bool IsLoaded();
+	bool IsStopped();
 };

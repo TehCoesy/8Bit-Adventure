@@ -9,6 +9,7 @@
 
 // Local
 #include "Singleton.h"
+#include "Game.h"
 
 class Mouse : public Singleton<Mouse> {
 private:

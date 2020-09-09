@@ -17,6 +17,9 @@ MyTexture::MyTexture(const MyTexture& cMyTexture) {
 	m_iID = cMyTexture.m_iID;
 	m_strName = cMyTexture.m_strName;
 	m_Texture = cMyTexture.m_Texture;
+
+	m_fDesiredX = cMyTexture.m_fDesiredX;
+	m_fDesiredY = cMyTexture.m_fDesiredY;
 }
 
 MyTexture::~MyTexture() {
@@ -30,12 +33,22 @@ std::string* MyTexture::GetName() {
 	return &m_strName;
 }
 
+void MyTexture::SetRepeated(bool a)
+{
+	m_Texture->setRepeated(a);
+}
+
+void MyTexture::SetScale(float fScaleX, float fScaleY) {
+	m_fDesiredX = fScaleX;
+	m_fDesiredY = fScaleY;
+}
+
 void MyTexture::Fetch(sf::Sprite* ObjectSprite) {
 	if (m_iID != -1) {
 		ObjectSprite->setTexture(*m_Texture);
 
-		float fScaleX = TILE_SIZE / m_Texture->getSize().x;
-		float fScaleY = TILE_SIZE / m_Texture->getSize().y;
+		float fScaleX = m_fDesiredX / m_Texture->getSize().x;
+		float fScaleY = m_fDesiredY / m_Texture->getSize().y;
 		ObjectSprite->setScale(sf::Vector2f(fScaleX, fScaleY));
 	}
 }

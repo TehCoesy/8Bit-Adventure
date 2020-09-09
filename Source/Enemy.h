@@ -8,6 +8,10 @@
 
 class Enemy : public DynamicObject {
 public:
+
+	float fDistance;
+	float fDistanceX;
+	float fDistanceY;
 	enum {
 		SKELE, GHOST, DARKELF
 	};

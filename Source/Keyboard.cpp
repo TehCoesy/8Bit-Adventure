@@ -13,7 +13,7 @@ Keyboard::~Keyboard() {
 
 void Keyboard::GetInput() {
 	// Movement control
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 		if (!GetBit(&uiKeysHold, Keys::UP)) {
 			SetBit(&uiKeysPressed, Keys::UP);
 			ClearBit(&uiKeysReleased, Keys::UP);
@@ -28,7 +28,7 @@ void Keyboard::GetInput() {
 		ClearBit(&uiKeysHold, Keys::UP);
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
 		if (!GetBit(&uiKeysHold, Keys::DOWN)) {
 			SetBit(&uiKeysPressed, Keys::DOWN);
 			ClearBit(&uiKeysReleased, Keys::DOWN);
@@ -43,7 +43,7 @@ void Keyboard::GetInput() {
 		ClearBit(&uiKeysHold, Keys::DOWN);
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		if (!GetBit(&uiKeysHold, Keys::LEFT)) {
 			SetBit(&uiKeysPressed, Keys::LEFT);
 			ClearBit(&uiKeysReleased, Keys::LEFT);
@@ -58,7 +58,7 @@ void Keyboard::GetInput() {
 		ClearBit(&uiKeysHold, Keys::LEFT);
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		if (!GetBit(&uiKeysHold, Keys::RIGHT)) {
 			SetBit(&uiKeysPressed, Keys::RIGHT);
 			ClearBit(&uiKeysReleased, Keys::RIGHT);

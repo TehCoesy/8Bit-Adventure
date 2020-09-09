@@ -5,7 +5,6 @@
 
 // External Libraries
 #include "SFML/Graphics.hpp"
-#include "SFML/Audio.hpp"
 
 // Local
 #include "Singleton.h"
@@ -19,13 +18,9 @@ class ResourceManager : public Singleton<ResourceManager> {
 private:
 	std::vector<MyTexture> m_aTextures;
 	std::vector<Animation> m_aAnimations;
-	std::vector<sf::SoundBuffer> m_aSoundBuffers;
 
-	void LoadTexture(int iID, std::string strName, std::string strFilePath);
-	void LoadAnimation(int iID, std::string strName, int iTimeSteps, std::vector<std::string> strFilePaths);
-	void LoadSoundBuffers(std::string strFilePath);
-
-	int m_iTexturesCount = 0, m_iAnimationsCount = 0, m_iSoundsCount = 0;
+	MyTexture LoadTexture(int iID, std::string strName, std::string strFilePath, float fScaleX, float fScaleY);
+	Animation LoadAnimation(int iID, std::string strName, int iTimeSteps, std::vector<MyTexture> graFrames);
 public:
 	ResourceManager();
 	~ResourceManager();

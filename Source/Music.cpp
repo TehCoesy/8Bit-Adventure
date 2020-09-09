@@ -8,26 +8,14 @@ Music::Music() {
 }
 
 Music::Music(std::string strFilePath) {
-	m_strFilePath = RESOURCESFOLDER + strFilePath;
-	if (m_Music.openFromFile(m_strFilePath)) {
-		m_bIsValid = true;
-		ToggleRepeat();
+	strFilePath = RESOURCESFOLDER + strFilePath;
+	if (m_Music.openFromFile(strFilePath)) {
+		m_bIsLoaded = true;
+		SetRepeat();
 		Play();
 	}
 	else {
-		printf("Failed to open music file @%s", m_strFilePath.c_str());
-	}
-}
-
-Music::Music(const Music& cObject) {
-	m_strFilePath = cObject.m_strFilePath;
-	if (m_Music.openFromFile(m_strFilePath)) {
-		m_bIsValid = true;
-		ToggleRepeat();
-		Play();
-	}
-	else {
-		printf("Failed to open music file @%s", m_strFilePath.c_str());
+		printf("(Music) Failed to open music file @%s", strFilePath.c_str());
 	}
 }
 
@@ -35,32 +23,57 @@ Music::~Music() {
 
 }
 
+void Music::NewTrack(std::string strFilePath) {
+	strFilePath = RESOURCESFOLDER + strFilePath;
+	if (m_Music.openFromFile(strFilePath)) {
+		m_bIsLoaded = true;
+		SetRepeat();
+		Play();
+	}
+	else {
+		printf("(Music) Failed to open music file @%s", strFilePath.c_str());
+	}
+}
+
 void Music::Play() {
-	if (m_bIsValid) {
+	if (m_bIsLoaded) {
 		m_Music.play();
 	}
 	
 }
 
 void Music::Pause() {
-	if (m_bIsValid) {
+	if (m_bIsLoaded) {
 		m_Music.pause();
 	}
 	
 }
 
 void Music::Stop() {
-	if (m_bIsValid) {
+	if (m_bIsLoaded) {
 		m_Music.stop();
 	}
 }
 
-void Music::ToggleRepeat() {
-	if (m_bIsValid) {
-		m_Music.setLoop(!m_Music.getLoop());
+void Music::SetRepeat() {
+	if (m_bIsLoaded) {
+		m_Music.setLoop(true);
 	}
 }
 
-bool Music::IsValid() {
-	return m_bIsValid;
+void Music::SetNoRepeat() {
+	if (m_bIsLoaded) {
+		m_Music.setLoop(false);
+	}
+}
+
+bool Music::IsLoaded() {
+	return m_bIsLoaded;
+}
+
+bool Music::IsStopped() {
+	if (m_Music.getStatus() == sf::SoundSource::Status::Stopped) {
+		return true;
+	}
+	return false;
 }

@@ -4,14 +4,14 @@
 #include "SoundManager.h"
 
 SoundManager::SoundManager() {
-
+	m_Music = new Music();
 }
 
 SoundManager::~SoundManager() {
 
 }
 
-void SoundManager::LoadFromFile(std::string strFilePath) {
+void SoundManager::InitWithFile(std::string strFilePath) {
 	FILE* FileStream;
 	strFilePath = RESOURCESFOLDER + strFilePath;
 	FileStream = fopen(strFilePath.c_str(), "r");
@@ -25,14 +25,12 @@ void SoundManager::LoadFromFile(std::string strFilePath) {
 		for (int i = 0; i < iSoundEffectCount; i++) {
 			char strBuffer1[100], strBuffer2[100];
 
-			iVal = fscanf(FileStream, "SB %s %s\n", strBuffer1, strBuffer2);
+			iVal = fscanf(FileStream, "%s %s\n", strBuffer1, strBuffer2);
 
 			sf::SoundBuffer* NewSoundBuffer = new sf::SoundBuffer();
-			
-			std::string strSoundEffectFilePath = RESOURCESFOLDER + std::string(strBuffer2);
 
-			if (NewSoundBuffer->loadFromFile(std::string(strSoundEffectFilePath))) {
-				m_SoundEffectsName.push_back(std::string(strBuffer1));
+			if (NewSoundBuffer->loadFromFile(std::string(RESOURCESFOLDER + std::string(strBuffer2)))) {
+				m_strSoundEffects.push_back(std::string(strBuffer1));
 				m_SoundBuffers.push_back(NewSoundBuffer);
 			}
 			else {
@@ -45,9 +43,10 @@ void SoundManager::LoadFromFile(std::string strFilePath) {
 		for (int i = 0; i < iMusicCount; i++) {
 			char strBuffer1[100], strBuffer2[100];
 
-			iVal = fscanf(FileStream, "MUSIC %s %s\n", strBuffer1, strBuffer2);
+			iVal = fscanf(FileStream, "%s %s\n", strBuffer1, strBuffer2);
 
-			m_Musics.push_back(std::string(strBuffer1));
+			m_strMusics.push_back(std::string(strBuffer1));
+			m_strMusicFilePaths.push_back(std::string(strBuffer2));
 		}
 
 		fclose(FileStream);
@@ -55,16 +54,22 @@ void SoundManager::LoadFromFile(std::string strFilePath) {
 }
 
 void SoundManager::PlayEffectByName(std::string strSoundEffect) {
-	for (int i = 0; i < m_SoundEffectsName.size(); i++) {
-		if (m_SoundEffectsName.at(i) == strSoundEffect) {
-			SoundEffect* NewSE = new SoundEffect(m_SoundBuffers.at(i));
-			m_SoundEffects.push_back(NewSE);
+	for (int i = 0; i < m_strSoundEffects.size(); i++) {
+		if (m_strSoundEffects.at(i) == strSoundEffect) {
+			SoundEffect* NewSoundEffect = new SoundEffect(m_SoundBuffers.at(i));
+			m_SoundEffects.push_back(NewSoundEffect);
 			return;
 		}
 	}
 	printf("No such SoundEffect found.");
 }
 
-void SoundManager::PlayMusic(std::string strFilePath) {
-	m_Music = new Music(strFilePath);
+void SoundManager::PlayMusicByName(std::string strMusic) {
+	for (int i = 0; i < m_strMusics.size(); i++) {
+		if (m_strMusics.at(i) == strMusic) {
+			m_Music->NewTrack(m_strMusicFilePaths.at(i));
+			return;
+		}
+	}
+	printf("No such Music track found.");
 }

@@ -1,83 +1,76 @@
-#TEXTURES: 6
+#TEXTURES: 17
 
-TEX ID 0 DUNGEON_WALL Textures/Tilesets/Dungeon/Objects/sprite_21.png
-TEX ID 1 DUNGEON_GROUND Textures/Tilesets/Dungeon/Ground/sprite_01.png
-TEX ID 2 BULLET Textures/Items/Bullet.png
-TEX ID 3 ARROW Textures/Items/Arrow.png
-TEX ID 4 BOW Textures/Items/Bow.png
-TEX ID 5 SWORD Textures/Items/Sword.png
+TEX ID 0 DUNGEON_TOP_WALL Textures/Tilesets/Dungeon/wall/sprite_22.png 64.0 64.0
+TEX ID 1 DUNGEON_SIDE_WALL Textures/Tilesets/Dungeon/wall/sprite_24.png 64.0 64.0
+TEX ID 2 DUNGEON_GROUND Textures/Tilesets/Dungeon/Ground/sprite_18.png 64.0 64.0
+TEX ID 3 SHADOW_ON_WALL Textures/Tilesets/Dungeon/decor/sprite_13.png 64.0 64.0
+TEX ID 4 SHADOW_ON_GROUND Textures/Tilesets/Dungeon/Ground/sprite_19.png 64.0 64.0
+TEX ID 5 SHADOW_OUTSIDE_MAP Textures/Tilesets/Dungeon/Ground/sprite_16.png 64.0 64.0
+TEX ID 6 CANDLE Textures/Tilesets/Dungeon/Ground/sprite_05.png 64.0 64.0
+TEX ID 7 CAVE_ON_WALL1 Textures/Tilesets/Dungeon/Ground/sprite_08.png 64.0 64.0
+TEX ID 8 CAVE_ON_WALL2 Textures/Tilesets/Dungeon/Ground/sprite_09.png 64.0 64.0
+TEX ID 9 DOOR_ON_WALL Textures/Tilesets/Dungeon/Ground/sprite_14.png 64.0 64.0
+TEX ID 10 FLAG Textures/Tilesets/Dungeon/Ground/sprite_23.png 64.0 64.0
+TEX ID 11 HOLE_ON_WALL Textures/Tilesets/Dungeon/Ground/sprite_25.png 64.0 64.0
+TEX ID 12 DOOR_ON_WALL_CLOSE Textures/Tilesets/Dungeon/Ground/sprite_26.png 64.0 64.0
+TEX ID 13 BOW Textures/Items/Bow.png 40.0 40.0
+TEX ID 14 SWORD Textures/Items/Sword.png 40.0 40.0
+TEX ID 15 GRASS1 Textures/Tilesets/Dungeon/Objects/sprite_01.png 64.0 64.0
+TEX ID 16 GRASS2 Textures/Tilesets/Dungeon/Objects/sprite_14.png 64.0 64.0
 
-#ANIMATIONS: 13
-
-ANI ID 8 NAME PLAYER_DOWN_ATTACK FRAMES 4 TIMESTEP 5
-0 Textures/Attack/player/down/sprite_0.png
-1 Textures/Attack/player/down/sprite_1.png
-2 Textures/Attack/player/down/sprite_2.png
-3 Textures/Attack/player/down/sprite_3.png
-
-ANI ID 9 NAME PLAYER_UP_ATTACK FRAMES 4 TIMESTEP 5
-0 Textures/Attack/player/up/sprite_0.png
-1 Textures/Attack/player/up/sprite_1.png
-2 Textures/Attack/player/up/sprite_2.png
-3 Textures/Attack/player/up/sprite_3.png
-
-ANI ID 10 NAME PLAYER_LEFT_ATTACK FRAMES 4 TIMESTEP 5
-0 Textures/Attack/player/left/sprite_0.png
-1 Textures/Attack/player/left/sprite_1.png
-2 Textures/Attack/player/left/sprite_2.png
-3 Textures/Attack/player/left/sprite_3.png
-
-ANI ID 11 NAME PLAYER_RIGHT_ATTACK FRAMES 4 TIMESTEP 5
-0 Textures/Attack/player/right/sprite_0.png
-1 Textures/Attack/player/right/sprite_1.png
-2 Textures/Attack/player/right/sprite_2.png
-3 Textures/Attack/player/right/sprite_3.png
+#ANIMATIONS: 11
 
 ANI ID 0 NAME PLAYER_IDLE_DOWN FRAMES 3 TIMESTEP 20
-0 Textures/Idle/player/down/sprite_0.png
-1 Textures/Idle/player/down/sprite_1.png
-2 Textures/Idle/player/down/sprite_2.png
+0 Textures/Idle/player/down/sprite_0.png 64.0 64.0
+1 Textures/Idle/player/down/sprite_1.png 64.0 64.0
+2 Textures/Idle/player/down/sprite_2.png 64.0 64.0
 
 ANI ID 1 NAME PLAYER_IDLE_UP FRAMES 3 TIMESTEP 20
-0 Textures/Idle/player/up/sprite_0.png
-1 Textures/Idle/player/up/sprite_1.png
-2 Textures/Idle/player/up/sprite_2.png
+0 Textures/Idle/player/up/sprite_0.png 64.0 64.0
+1 Textures/Idle/player/up/sprite_1.png 64.0 64.0
+2 Textures/Idle/player/up/sprite_2.png 64.0 64.0
 
 ANI ID 2 NAME PLAYER_IDLE_LEFT FRAMES 3 TIMESTEP 20
-0 Textures/Idle/player/left/sprite_0.png
-1 Textures/Idle/player/left/sprite_1.png
-2 Textures/Idle/player/left/sprite_2.png
+0 Textures/Idle/player/left/sprite_0.png 64.0 64.0
+1 Textures/Idle/player/left/sprite_1.png 64.0 64.0
+2 Textures/Idle/player/left/sprite_2.png 64.0 64.0
 
 ANI ID 3 NAME PLAYER_IDLE_RIGHT FRAMES 3 TIMESTEP 20
-0 Textures/Idle/player/right/sprite_0.png
-1 Textures/Idle/player/right/sprite_1.png
-2 Textures/Idle/player/right/sprite_2.png
+0 Textures/Idle/player/right/sprite_0.png 64.0 64.0
+1 Textures/Idle/player/right/sprite_1.png 64.0 64.0
+2 Textures/Idle/player/right/sprite_2.png 64.0 64.0
 
 ANI ID 4 NAME PLAYER_MOVE_DOWN FRAMES 4 TIMESTEP 10
-0 Textures/Move/player/down/sprite_0.png
-1 Textures/Move/player/down/sprite_1.png
-2 Textures/Move/player/down/sprite_2.png
-3 Textures/Move/player/down/sprite_1.png
+0 Textures/Move/player/down/sprite_0.png 64.0 64.0
+1 Textures/Move/player/down/sprite_1.png 64.0 64.0
+2 Textures/Move/player/down/sprite_2.png 64.0 64.0
+3 Textures/Move/player/down/sprite_1.png 64.0 64.0
 
 ANI ID 5 NAME PLAYER_MOVE_UP FRAMES 4 TIMESTEP 10
-0 Textures/Move/player/up/sprite_0.png
-1 Textures/Move/player/up/sprite_1.png
-2 Textures/Move/player/up/sprite_2.png
-3 Textures/Move/player/up/sprite_1.png
+0 Textures/Move/player/up/sprite_0.png 64.0 64.0
+1 Textures/Move/player/up/sprite_1.png 64.0 64.0
+2 Textures/Move/player/up/sprite_2.png 64.0 64.0
+3 Textures/Move/player/up/sprite_1.png 64.0 64.0
 
 ANI ID 6 NAME PLAYER_MOVE_LEFT FRAMES 4 TIMESTEP 10
-0 Textures/Move/player/left/sprite_0.png
-1 Textures/Move/player/left/sprite_1.png
-2 Textures/Move/player/left/sprite_2.png
-3 Textures/Move/player/left/sprite_1.png
+0 Textures/Move/player/left/sprite_0.png 64.0 64.0
+1 Textures/Move/player/left/sprite_1.png 64.0 64.0
+2 Textures/Move/player/left/sprite_2.png 64.0 64.0
+3 Textures/Move/player/left/sprite_1.png 64.0 64.0
 
 ANI ID 7 NAME PLAYER_MOVE_RIGHT FRAMES 4 TIMESTEP 10
-0 Textures/Move/player/right/sprite_0.png
-1 Textures/Move/player/right/sprite_1.png
-2 Textures/Move/player/right/sprite_2.png
-3 Textures/Move/player/right/sprite_1.png
+0 Textures/Move/player/right/sprite_0.png 64.0 64.0
+1 Textures/Move/player/right/sprite_1.png 64.0 64.0
+2 Textures/Move/player/right/sprite_2.png 64.0 64.0
+3 Textures/Move/player/right/sprite_1.png 64.0 64.0
 
-ANI ID 12 NAME SKELE_IDLE_DOWN FRAMES 3 TIMESTEP 20
-0 Textures/Idle/skeleton/down/sprite_0.png
-1 Textures/Idle/skeleton/down/sprite_1.png
-2 Textures/Idle/skeleton/down/sprite_2.png
+ANI ID 8 NAME SKELE_IDLE_DOWN FRAMES 3 TIMESTEP 20
+0 Textures/Idle/skeleton/down/sprite_0.png 64.0 64.0
+1 Textures/Idle/skeleton/down/sprite_1.png 64.0 64.0
+2 Textures/Idle/skeleton/down/sprite_2.png 64.0 64.0
+
+ANI ID 9 NAME ARROW FRAMES 1 TIMESTEP 100
+0 Textures/Items/Arrow.png 20.0 40.0
+
+ANI ID 10 NAME BULLET FRAMES 1 TIMESTEP 100
+0 Textures/Items/Bullet.png 20.0 20.0

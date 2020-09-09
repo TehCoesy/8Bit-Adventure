@@ -13,7 +13,7 @@ private:
 	int m_iParentID;
 public:
 	Projectile();
-	Projectile(int iID, std::string strName, b2Body* physicsBody, std::string strType);
+	Projectile(std::string strName, b2Body* physicsBody, std::string strType);
 	Projectile(const Projectile& cObject);
 	~Projectile();
 
@@ -38,4 +38,7 @@ public:
 	void DampenMovement() {
 		// Disable applying force on Projectile
 	}
+
+	void Update(float fDeltaTime);
+	void Render(sf::RenderWindow* RenderWindow);
 };

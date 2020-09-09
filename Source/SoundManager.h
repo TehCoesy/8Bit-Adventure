@@ -13,17 +13,19 @@
 
 class SoundManager : public Singleton<SoundManager> {
 private:
-	std::vector<sf::SoundBuffer*> m_SoundBuffers;
 	std::vector<SoundEffect*> m_SoundEffects;
-	std::vector<std::string> m_SoundEffectsName;
-	std::vector<std::string> m_Musics;
+	std::vector<std::string> m_strSoundEffects;
+	std::vector<sf::SoundBuffer*> m_SoundBuffers;
+
 	Music* m_Music;
+	std::vector<std::string> m_strMusics;
+	std::vector<std::string> m_strMusicFilePaths;
 public:
 	SoundManager();
 	~SoundManager();
 
-	void LoadFromFile(std::string strFilePath);
+	void InitWithFile(std::string strFilePath);
 
 	void PlayEffectByName(std::string strSoundEffect);
-	void PlayMusic(std::string strFilePath);
+	void PlayMusicByName(std::string strMusic);
 };

@@ -1,5 +1,12 @@
 #SOUNDEFFECTS: 1
 
-SB PLAYER_ATTACK Sounds/Effects/Weapon_Blow.wav
+PLAYER_ATTACK Sounds/Effects/Weapon_Blow.wav
 
-#MUSICS: 0
+#MUSICS: 6
+
+CELESTIAL Sounds/Music/Celestial.wav
+BATTLE Sounds/Music/Battle.wav
+CARPET Sounds/Music/Carpet.wav
+NOCTURNAL Sounds/Music/Nocturnal.wav
+WOODS Sounds/Music/Woods.wav
+SLOPES Sounds/Music/Slopes.wav

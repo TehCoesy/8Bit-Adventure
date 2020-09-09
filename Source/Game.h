@@ -18,14 +18,13 @@ private:
 	sf::RenderWindow m_MainWindow;
 	sf::Clock m_Clock;
 
-	GameScene m_GameScene;
-	MainMenu m_MainMenu;
-
 	void Update(float fDeltaTime);
 	void Render();
 public:
 	Game();
 	~Game();
+
+	sf::RenderWindow* GetMainWindow();
 
 	void Init();
 	void RunMainLoop();

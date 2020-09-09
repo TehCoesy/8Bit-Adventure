@@ -31,5 +31,5 @@ bool Mouse::IsPressed() {
 }
 
 sf::Vector2i Mouse::GetPosition() {
-	return sf::Mouse::getPosition();
+	return sf::Mouse::getPosition(*Game::GetInstance()->GetMainWindow());
 }

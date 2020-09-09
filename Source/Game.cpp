@@ -13,14 +13,14 @@ Game::~Game() {
 
 void Game::Update(float fDeltaTime) {
 	// State?
-	m_GameScene.Update(fDeltaTime);
+	GameSceneInstance->Update(fDeltaTime);
 }
 
 void Game::Render() {
 	m_MainWindow.clear();
 	
 	// State?
-	m_GameScene.Render(&m_MainWindow);
+	GameSceneInstance->Render(&m_MainWindow);
 
 	m_MainWindow.display();
 }
@@ -31,11 +31,16 @@ void Game::Init() {
 	m_MainWindow.setFramerateLimit(static_cast<int>(FRAMERATE));
 
 	RM->InitWithFile("RM.txt");
-	MainMenu::GetInstance()->LoadFromFile("Resources/Textures/bg/main.jpg");
-	
-	m_GameScene.LoadFromFile("Stage1.txt");
+	SM->InitWithFile("Sound.txt");
 
-	SoundManager::GetInstance()->LoadFromFile("Sound.txt");
+	MainMenuInstance->LoadFromFile("Resources/Textures/bg/main.jpg");
+
+	// Load first Stage
+	GameSceneInstance->LoadFromFile("Stage1.txt");
+}
+
+sf::RenderWindow* Game::GetMainWindow() {
+	return &m_MainWindow;
 }
 
 void Game::RunMainLoop() {

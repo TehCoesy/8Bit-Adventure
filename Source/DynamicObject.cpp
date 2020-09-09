@@ -15,6 +15,10 @@ float* DynamicObject::GetMaxVelocity() {
 	return &m_fMaxVelocity;
 }
 
+int DynamicObject::GetDirection() {
+	return m_iDirection;
+}
+
 void DynamicObject::Spawn() {
 
 }
@@ -44,43 +48,39 @@ void DynamicObject::Move(float fDeltaTime, int iDirection) {
 		float fCurrentVelocityX = m_PhysicsBody->GetLinearVelocity().x;
 		float fCurrentVelocityY = m_PhysicsBody->GetLinearVelocity().y;
 
-		// 0 = Down; 1 = Up; 2 = Left; 3 = Right;
-		if (iDirection == 0) {
-			m_iDirection = iDirection;
-			m_bMovingDown = true;
+		// 0 = Down; 1 = Up; 2 = Left; 3 = Right for iDirection;
+		b2Vec2 fCurrentVelocity = m_PhysicsBody->GetLinearVelocity();
+		b2Vec2 fDesiredVelocity = b2Vec2(0.0f, 0.0f);
 
-			if (fCurrentVelocityY < m_fMaxVelocity) {
-				float fForce = 100.0f;
-				m_PhysicsBody->ApplyForce(b2Vec2(0.0f, fForce), m_PhysicsBody->GetWorldCenter(), true);
-			}
+		switch (iDirection) {
+		case 0: m_bMovingDown = true; break;
+		case 1: m_bMovingUp = true; break;
+		case 2: m_bMovingLeft = true; break;
+		case 3: m_bMovingRight = true; break;
 		}
-		if (iDirection == 1) {
-			m_iDirection = iDirection;
-			m_bMovingUp = true;
 
-			if (fCurrentVelocityY > -m_fMaxVelocity) {
-				float fForce = -100.0f;
-				m_PhysicsBody->ApplyForce(b2Vec2(0.0f, fForce), m_PhysicsBody->GetWorldCenter(), true);
-			}
+		if (m_bMovingDown) {
+			m_iDirection = 0;
+			fDesiredVelocity.y = m_fMaxVelocity; 
 		}
-		if (iDirection == 2) {
-			m_iDirection = iDirection;
-			m_bMovingLeft = true;
+		if (m_bMovingUp) {
+			m_iDirection = 1;
+			fDesiredVelocity.y = -m_fMaxVelocity;
+		}
+		if (m_bMovingLeft) {
+			m_iDirection = 2;
+			fDesiredVelocity.x = -m_fMaxVelocity;
+		}
+		if (m_bMovingRight) {
+			m_iDirection = 3;
+			fDesiredVelocity.x = m_fMaxVelocity;
+		}
 
-			if (fCurrentVelocityX > -m_fMaxVelocity) {
-				float fForce = -100.0f;
-				m_PhysicsBody->ApplyForce(b2Vec2(fForce, 0.0f), m_PhysicsBody->GetWorldCenter(), true);
-			}
-		}
-		if (iDirection == 3) {
-			m_iDirection = iDirection;
-			m_bMovingRight = true;
+		b2Vec2 fVelChange = b2Vec2(fDesiredVelocity.x - fCurrentVelocity.x, fDesiredVelocity.y - fCurrentVelocity.y);
+		float fImpulseX = m_PhysicsBody->GetMass() * fVelChange.x;
+		float fImpulseY = m_PhysicsBody->GetMass() * fVelChange.y;
 
-			if (fCurrentVelocityX < m_fMaxVelocity) {
-				float fForce = 100.0f;
-				m_PhysicsBody->ApplyForce(b2Vec2(fForce, 0.0f), m_PhysicsBody->GetWorldCenter(), true);
-			}
-		}
+		m_PhysicsBody->ApplyLinearImpulse(b2Vec2(fImpulseX, fImpulseY), m_PhysicsBody->GetWorldCenter(), true);
 	}
 }
 
@@ -93,7 +93,8 @@ void DynamicObject::MoveTo(float fDeltaTime, float fX, float fY) {
 
 void DynamicObject::Stop(float fDeltaTime, int iDirection) {
 	if (m_iID != 1 && m_PhysicsBody) {
-		// 0 = Down; 1 = Up; 2 = Left; 3 = Right;
+		// 0 = Down; 1 = Up; 2 = Left; 3 = Right; 4= all direction;
+
 		if (iDirection == 0) {
 			m_bMovingDown = false;
 		}
@@ -104,6 +105,12 @@ void DynamicObject::Stop(float fDeltaTime, int iDirection) {
 			m_bMovingLeft = false;
 		}
 		if (iDirection == 3) {
+			m_bMovingRight = false;
+		}
+		if (iDirection == 4) {
+			m_bMovingDown = false;
+			m_bMovingUp = false;
+			m_bMovingLeft = false;
 			m_bMovingRight = false;
 		}
 	}
@@ -118,15 +125,15 @@ void DynamicObject::DampenMovement() {
 	float fCurrentVelocityY = m_PhysicsBody->GetLinearVelocity().y;
 
 	if (!m_bMovingDown && !m_bMovingUp && std::fabsf(fCurrentVelocityY) < 10.0f) {
-		m_PhysicsBody->SetLinearVelocity(b2Vec2(fCurrentVelocityX, 0.0f));
+		//m_PhysicsBody->SetLinearVelocity(b2Vec2(fCurrentVelocityX, 0.0f));
 	}
 
 	fCurrentVelocityX = m_PhysicsBody->GetLinearVelocity().x;
 	fCurrentVelocityY = m_PhysicsBody->GetLinearVelocity().y;
 
 	if (!m_bMovingLeft && !m_bMovingRight && std::fabsf(fCurrentVelocityX) < 10.0f) {
-		m_PhysicsBody->SetLinearVelocity(b2Vec2(0.0f, fCurrentVelocityY));
+		//m_PhysicsBody->SetLinearVelocity(b2Vec2(0.0f, fCurrentVelocityY));
 	}
 
-	m_bMovingDown = false; m_bMovingUp = false; m_bMovingLeft = false; m_bMovingRight = false;
+	//m_bMovingDown = false; m_bMovingUp = false; m_bMovingLeft = false; m_bMovingRight = false;
 }

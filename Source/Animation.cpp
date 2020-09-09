@@ -7,12 +7,12 @@ Animation::Animation() {
 
 }
 
-Animation::Animation(int iID, std::string strName, int iSteps, std::vector<sf::Texture*> AnimationFrames) {
+Animation::Animation(int iID, std::string strName, int iSteps, std::vector<MyTexture> graFrames) {
 	m_iID = iID;
 	m_strName = strName;
 	m_iFrameSteps = iSteps;
 
-	m_AnimationFrames = AnimationFrames;
+	m_graFrames = graFrames;
 
 	m_iFrameIndex = 0;
 
@@ -24,7 +24,7 @@ Animation::Animation(const Animation& cObject) {
 	m_strName = cObject.m_strName;
 	m_iFrameSteps = cObject.m_iFrameSteps;
 
-	m_AnimationFrames = cObject.m_AnimationFrames;
+	m_graFrames = cObject.m_graFrames;
 
 	m_iFrameIndex = 0;
 
@@ -55,7 +55,7 @@ void Animation::Update(float fDeltaTime) {
 		m_iCount++;
 		if (m_iCount == m_iFrameSteps) {
 			m_iCount = 0;
-			if (m_iFrameIndex == m_AnimationFrames.size() - 1) {
+			if (m_iFrameIndex == m_graFrames.size() - 1) {
 				m_iFrameIndex = 0;
 			}
 			else {
@@ -67,11 +67,6 @@ void Animation::Update(float fDeltaTime) {
 
 void Animation::Fetch(sf::Sprite* ObjectSprite) {
 	if (m_iID != -1) {
-		sf::Texture* Texture = m_AnimationFrames.at(m_iFrameIndex);
-		ObjectSprite->setTexture(*Texture, true);
-
-		float fScaleX = TILE_SIZE / Texture->getSize().x;
-		float fScaleY = TILE_SIZE / Texture->getSize().y;
-		ObjectSprite->setScale(sf::Vector2f(fScaleX, fScaleY));
+		m_graFrames.at(m_iFrameIndex).Fetch(ObjectSprite);
 	}
 }

@@ -9,19 +9,22 @@
 class SoundEffect {
 private:
 	sf::Sound m_Sound;
+
+	bool m_bIsLoaded = false;
 public:
 	SoundEffect();
 	SoundEffect(sf::SoundBuffer* SoundBuffer);
-	SoundEffect(const SoundEffect& cObject);
 	~SoundEffect();
 	
 	void SetBuffer(sf::SoundBuffer* SoundBuffer);
-
-	bool IsDone();
 
 	void Play();
 	void Pause();
 	void Stop();
 
-	void ToggleRepeat();
+	void SetRepeat();
+	void SetNoRepeat();
+
+	bool IsLoaded();
+	bool IsStopped();
 };

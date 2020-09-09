@@ -11,6 +11,7 @@
 #include "MyTexture.h"
 #include "Animation.h"
 #include "ResourceManager.h"
+#include "Camera.h"
 
 enum class ObjectType { OBJ, PLAYER, ENEMY, STATIC, MELEE, PROJECTILE };
 
