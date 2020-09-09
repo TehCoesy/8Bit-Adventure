@@ -96,7 +96,7 @@ void GameScene::LoadTerrain(std::string strFilePath) {
 
 				b2Body* WallBody = CreateWall((float)iCorX, (float)iCorY, iHor, iVer, true);
 
-				Wall *NewWall = new Wall(iID, "WALL", cName, WallBody, iHor, iVer, iCorX, iCorY);
+				Wall* NewWall = new Wall(iID, "WALL", cName, WallBody, iHor, iVer, iCorX, iCorY);
 
 				m_Walls.push_back(NewWall);
 			}
@@ -117,7 +117,7 @@ void GameScene::LoadTerrain(std::string strFilePath) {
 
 				b2Body* WallBody = CreateWall((float)iCorX, (float)iCorY, 0, 0, true);
 
-				Wall *NewWall = new Wall(iID, "DECOR", cName, WallBody, iHor, iVer, iCorX, iCorY);
+				Wall* NewWall = new Wall(iID, "DECOR", cName, WallBody, iHor, iVer, iCorX, iCorY);
 
 				m_Walls.push_back(NewWall);
 			}
@@ -222,7 +222,7 @@ b2Body* GameScene::CreateWall(float iX, float iY, int iSizeX, int iSizeY, bool b
 
 	b2PolygonShape BodyShape;
 	BodyShape.SetAsBox(((TILE_SIZE * iSizeX)) / PIXELS_METERS / 2, ((TILE_SIZE * iSizeY)) / PIXELS_METERS / 2); // Takes 1/2 Width and 1/2 Height
-	
+
 
 	b2FixtureDef FixtureDef;
 	FixtureDef.density = 1.0f;
@@ -237,7 +237,7 @@ void GameScene::Update(float fDeltaTime) {
 	float fPlayerPosX = m_Player.GetPhysicsBody()->GetWorldCenter().x * PIXELS_METERS;
 	float fPlayerPosY = m_Player.GetPhysicsBody()->GetWorldCenter().y * PIXELS_METERS;
 	//float fDistance = 999999999999;
-	MainCamera->SetCameraPosition(fPlayerPosX,fPlayerPosY);
+	MainCamera->SetCameraPosition(fPlayerPosX, fPlayerPosY);
 
 	// Update Input
 	if (Keyboard::GetInstance()->GetKeyHold(Keyboard::DOWN)) {
@@ -267,7 +267,7 @@ void GameScene::Update(float fDeltaTime) {
 	else {
 		m_Player.Stop(fDeltaTime, 3);
 	}
-	
+
 	if (Mouse::GetInstance()->IsPressed()) {
 		b2Vec2 fOrigin = MainCamera->GetCameraCenter();
 		float fAngle = GetMouseAngleRadians(fOrigin, b2Vec2(Mouse::GetInstance()->GetPosition().x, Mouse::GetInstance()->GetPosition().y));
@@ -279,16 +279,28 @@ void GameScene::Update(float fDeltaTime) {
 	for (int i = 0; i < m_Enemies.size(); i++) {
 		float fEnemyPosX = m_Enemies.at(i)->GetPhysicsBody()->GetWorldCenter().x * PIXELS_METERS;
 		float fEnemyPosY = m_Enemies.at(i)->GetPhysicsBody()->GetWorldCenter().y * PIXELS_METERS;
-		m_Enemies.at(i)->fDistanceY = sqrt((fPlayerPosY - fEnemyPosY)*(fPlayerPosY - fEnemyPosY));
-		m_Enemies.at(i)->fDistanceX = sqrt((fPlayerPosX - fEnemyPosX)*(fPlayerPosX - fEnemyPosX));
-		m_Enemies.at(i)->fDistance = sqrt((m_Enemies.at(i)->fDistanceX * m_Enemies.at(i)->fDistanceX) + (m_Enemies.at(i)->fDistanceY *m_Enemies.at(i)->fDistanceY));
+		m_Enemies.at(i)->fDistanceY = sqrt((fPlayerPosY - fEnemyPosY) * (fPlayerPosY - fEnemyPosY));
+		m_Enemies.at(i)->fDistanceX = sqrt((fPlayerPosX - fEnemyPosX) * (fPlayerPosX - fEnemyPosX));
+		m_Enemies.at(i)->fDistance = sqrt((m_Enemies.at(i)->fDistanceX * m_Enemies.at(i)->fDistanceX) + (m_Enemies.at(i)->fDistanceY * m_Enemies.at(i)->fDistanceY));
 		if (m_Enemies.at(i)->fDistance < 500) {
-			if (fPlayerPosX <fEnemyPosX && fPlayerPosY < fEnemyPosY) {
-					if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX <1 || m_Enemies.at(i)->fDistanceY <1)) {
+			if (fPlayerPosX < fEnemyPosX && fPlayerPosY < fEnemyPosY) {
+				if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX < 1 || m_Enemies.at(i)->fDistanceY < 1)) {
+					m_Enemies.at(i)->Stop(fDeltaTime, 4);
+					m_Enemies.at(i)->Move(fDeltaTime, -1);
+				}
+				else if (m_Enemies.at(i)->fDistanceX < 1) {
+					m_Enemies.at(i)->Stop(fDeltaTime, 4);
+					m_Enemies.at(i)->Move(fDeltaTime, 1);
+					if (m_Enemies.at(i)->fDistanceY < 70) {
 						m_Enemies.at(i)->Stop(fDeltaTime, 4);
 						m_Enemies.at(i)->Move(fDeltaTime, -1);
+					}
 				}
-				else if (m_Enemies.at(i)->fDistanceX < 70) {
+				else if (m_Enemies.at(i)->fDistanceX < 70 && m_Enemies.at(i)->fDistanceY > 70) {
+					m_Enemies.at(i)->Stop(fDeltaTime, 4);
+					m_Enemies.at(i)->Move(fDeltaTime, 2);
+				}
+				else if (m_Enemies.at(i)->fDistanceX < 70 && m_Enemies.at(i)->fDistanceY < 70) {
 					m_Enemies.at(i)->Stop(fDeltaTime, 4);
 					m_Enemies.at(i)->Move(fDeltaTime, 1);
 				}
@@ -299,11 +311,23 @@ void GameScene::Update(float fDeltaTime) {
 				}
 			}
 			if (fPlayerPosX < fEnemyPosX && fPlayerPosY > fEnemyPosY) {
-				if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX <1 || m_Enemies.at(i)->fDistanceY <1)) {
+				if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX < 1 || m_Enemies.at(i)->fDistanceY < 1)) {
 					m_Enemies.at(i)->Stop(fDeltaTime, 4);
 					m_Enemies.at(i)->Move(fDeltaTime, -1);
 				}
-				else if (m_Enemies.at(i)->fDistanceX < 70) {
+				else if (m_Enemies.at(i)->fDistanceX < 1) {
+					m_Enemies.at(i)->Stop(fDeltaTime, 4);
+					m_Enemies.at(i)->Move(fDeltaTime, 0);
+					if (m_Enemies.at(i)->fDistanceY < 70) {
+						m_Enemies.at(i)->Stop(fDeltaTime, 4);
+						m_Enemies.at(i)->Move(fDeltaTime, -1);
+					}
+				}
+				else if (m_Enemies.at(i)->fDistanceX < 70 && m_Enemies.at(i)->fDistanceY > 70) {
+					m_Enemies.at(i)->Stop(fDeltaTime, 4);
+					m_Enemies.at(i)->Move(fDeltaTime, 2);
+				}
+				else if (m_Enemies.at(i)->fDistanceX < 70 && m_Enemies.at(i)->fDistanceY < 70) {
 					m_Enemies.at(i)->Stop(fDeltaTime, 4);
 					m_Enemies.at(i)->Move(fDeltaTime, 0);
 				}
@@ -314,14 +338,27 @@ void GameScene::Update(float fDeltaTime) {
 				}
 			}
 			if (fPlayerPosX > fEnemyPosX && fPlayerPosY < fEnemyPosY) {
-				if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX <1 || m_Enemies.at(i)->fDistanceY <1)) {
+				if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX < 1 || m_Enemies.at(i)->fDistanceY < 1)) {
 					m_Enemies.at(i)->Stop(fDeltaTime, 4);
 					m_Enemies.at(i)->Move(fDeltaTime, -1);
 				}
-				else if (m_Enemies.at(i)->fDistanceX < 70) {
+				else if (m_Enemies.at(i)->fDistanceX < 1) {
+					m_Enemies.at(i)->Stop(fDeltaTime, 4);
+					m_Enemies.at(i)->Move(fDeltaTime, 1);
+					if (m_Enemies.at(i)->fDistanceY < 70) {
+						m_Enemies.at(i)->Stop(fDeltaTime, 4);
+						m_Enemies.at(i)->Move(fDeltaTime, -1);
+					}
+				}
+				else if (m_Enemies.at(i)->fDistanceX < 70 && m_Enemies.at(i)->fDistanceY > 70) {
+					m_Enemies.at(i)->Stop(fDeltaTime, 4);
+					m_Enemies.at(i)->Move(fDeltaTime, 3);
+				}
+				else if (m_Enemies.at(i)->fDistanceX < 70 && m_Enemies.at(i)->fDistanceY < 70) {
 					m_Enemies.at(i)->Stop(fDeltaTime, 4);
 					m_Enemies.at(i)->Move(fDeltaTime, 1);
 				}
+
 				else {
 					m_Enemies.at(i)->Stop(fDeltaTime, 4);
 					m_Enemies.at(i)->Move(fDeltaTime, 3);
@@ -329,11 +366,23 @@ void GameScene::Update(float fDeltaTime) {
 				}
 			}
 			if (fPlayerPosX > fEnemyPosX && fPlayerPosY > fEnemyPosY) {
-				if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX <1 || m_Enemies.at(i)->fDistanceY <1)) {
+				if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX < 1 || m_Enemies.at(i)->fDistanceY < 1)) {
 					m_Enemies.at(i)->Stop(fDeltaTime, 4);
 					m_Enemies.at(i)->Move(fDeltaTime, -1);
 				}
-				else if (m_Enemies.at(i)->fDistanceX < 70) {
+				else if (m_Enemies.at(i)->fDistanceX < 1) {
+					m_Enemies.at(i)->Stop(fDeltaTime, 4);
+					m_Enemies.at(i)->Move(fDeltaTime, 0);
+					if (m_Enemies.at(i)->fDistanceY < 70) {
+						m_Enemies.at(i)->Stop(fDeltaTime, 4);
+						m_Enemies.at(i)->Move(fDeltaTime, -1);
+					}
+				}
+				else if (m_Enemies.at(i)->fDistanceX < 70 && m_Enemies.at(i)->fDistanceY > 70) {
+					m_Enemies.at(i)->Stop(fDeltaTime, 4);
+					m_Enemies.at(i)->Move(fDeltaTime, 3);
+				}
+				else if (m_Enemies.at(i)->fDistanceX < 70 && m_Enemies.at(i)->fDistanceY < 70) {
 					m_Enemies.at(i)->Stop(fDeltaTime, 4);
 					m_Enemies.at(i)->Move(fDeltaTime, 0);
 				}
@@ -352,11 +401,11 @@ void GameScene::Update(float fDeltaTime) {
 		m_Enemies.at(i)->Update(fDeltaTime);
 	}
 
-	
+
 	for (int i = 0; i < m_Projectiles.size(); i++) {
 		m_Projectiles.at(i)->Update(fDeltaTime);
 	}
-	
+
 	m_Player.Update(fDeltaTime);
 
 	m_World->Step(fDeltaTime, 4, 2);
@@ -366,14 +415,14 @@ void GameScene::Render(sf::RenderWindow* MainWindow) {
 	for (int i = 0; i < m_GroundTiles.size(); i++) {
 		m_GroundTiles.at(i).Render(MainWindow);
 	}
-	
+
 	for (int i = 0; i < m_Walls.size(); i++) {
 		m_Walls.at(i)->Render(MainWindow);
 	}
 
 	for (int i = 0; i < m_Enemies.size(); i++) {
 		m_Enemies.at(i)->Render(MainWindow);
-}
+	}
 
 	for (int i = 0; i < m_Projectiles.size(); i++) {
 		m_Projectiles.at(i)->Render(MainWindow);
@@ -433,7 +482,7 @@ void GameScene::UpdateScore() {
 void GameScene::GameOver(sf::RenderWindow* window) {
 	sf::RectangleShape r;
 	r.setFillColor(sf::Color(0, 0, 0, 150));
-	r.setSize(sf::Vector2f((float)WINDOW_W,(float)WINDOW_H));
+	r.setSize(sf::Vector2f((float)WINDOW_W, (float)WINDOW_H));
 	window->draw(r);
 	sf::Text t;
 	t.setString("GAME OVER");
