@@ -25,6 +25,7 @@ public:
 	void SetRepeat();
 	void SetNoRepeat();
 
+	bool IsRepeating();
 	bool IsLoaded();
 	bool IsStopped();
 };

@@ -12,15 +12,14 @@ Game::~Game() {
 }
 
 void Game::Update(float fDeltaTime) {
-	// State?
-	GameSceneInstance->Update(fDeltaTime);
+	StateMachine->GetActiveState()->Update(fDeltaTime);
+	
 }
 
 void Game::Render() {
 	m_MainWindow.clear();
 	
-	// State?
-	GameSceneInstance->Render(&m_MainWindow);
+	StateMachine->GetActiveState()->Render(&m_MainWindow);
 
 	m_MainWindow.display();
 }
@@ -33,10 +32,8 @@ void Game::Init() {
 	RM->InitWithFile("RM.txt");
 	SM->InitWithFile("Sound.txt");
 
-	MainMenuInstance->LoadFromFile("Resources/Textures/bg/main.jpg");
-
-	// Load first Stage
-	GameSceneInstance->LoadFromFile("Stage1.txt");
+	//state machine
+	StateMachine->AddState(StateRef(new MainMenu()));
 }
 
 sf::RenderWindow* Game::GetMainWindow() {
@@ -51,14 +48,11 @@ void Game::RunMainLoop() {
 	float fAccumulator = 0.0f;
 	bool isMainMenu = true;
 	while (m_MainWindow.isOpen()) {
-		if (isMainMenu) {
-			int t = MainMenu::GetInstance()->HandleInput(&m_MainWindow);
-			m_MainWindow.clear();
-			MainMenu::GetInstance()->Render(&m_MainWindow);
-			m_MainWindow.display();
-			if (t == 1) isMainMenu = 0;
-			continue;
-		}
+
+		StateMachine->ProcessStateChanges();
+		StateMachine->GetActiveState()->HandleInput(&m_MainWindow);
+
+
 		sf::Event event;
 		while (m_MainWindow.pollEvent(event))
 		{
@@ -82,6 +76,8 @@ void Game::RunMainLoop() {
 		}
 
 		Render();
+
+		SM->Clean();
 	}
 
 	printf("Application Closed!\n");

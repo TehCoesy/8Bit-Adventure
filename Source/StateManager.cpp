@@ -1,63 +1,54 @@
-// Precompiled Headers
-#include "stdafx.h"
-
 #include "StateManager.h"
 
-StateManager::StateManager() {
+
+void StateManager::AddState(StateRef newState, bool isReplacing)
+{
+	this->_isAdding = true;
+	this->_isReplacing = isReplacing;
+
+	this->_newState = std::move(newState);
 }
 
-StateManager::~StateManager() {
-}
-
-void StateManager::AddState(StateRef newState, bool isReplacing) {
-	this->m_isAdding = true;
-	this->m_isReplacing = isReplacing;
-
-	this->m_srNewState = std::move(newState);
-}
-
-void StateManager::AddState(StateRef newState) {
-	this->m_isAdding = true;
-	this->m_isReplacing = true;
-
-	this->m_srNewState = std::move(newState);
-}
-
-void StateManager::RemoveState() {
-	this->m_isRemoving = true;
+void StateManager::RemoveState()
+{
+	this->_isRemoving = true;
 }
 
 void StateManager::ProcessStateChanges()
 {
-	if (this->m_isRemoving && !this->m_aState.empty())
+	if (this->_isRemoving && !this->_states.empty())
 	{
-		this->m_aState.pop();
-		if (!this->m_aState.empty())
+		this->_states.pop();
+
+		if (!this->_states.empty())
 		{
-			this->m_aState.top()->Resume();
+			this->_states.top()->Resume();
 		}
-		this->m_isRemoving = false;
+
+		this->_isRemoving = false;
 	}
 
-	if (this->m_isAdding)
+	if (this->_isAdding)
 	{
-		if (!this->m_aState.empty())
+		if (!this->_states.empty())
 		{
-			if (this->m_isReplacing)
+			if (this->_isReplacing)
 			{
-				this->m_aState.pop();
+				this->_states.pop();
 			}
 			else
 			{
-				this->m_aState.top()->Pause();
+				this->_states.top()->Pause();
 			}
 		}
-		this->m_aState.push(std::move(this->m_srNewState));
-		this->m_aState.top()->Init();
-		this->m_isAdding = false;
+
+		this->_states.push(std::move(this->_newState));
+		this->_states.top()->Init();
+		this->_isAdding = false;
 	}
 }
-StateRef& StateManager::GetActiveState()
+
+StateRef &StateManager::GetActiveState()
 {
-	return this->m_aState.top();
+	return this->_states.top();
 }

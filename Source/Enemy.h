@@ -7,20 +7,25 @@
 #include "DynamicObject.h"
 
 class Enemy : public DynamicObject {
+private:
+	Enemy(Enemy const&) = delete;
+	Enemy& operator=(Enemy const&) = delete;
 public:
-
 	float fDistance;
 	float fDistanceX;
 	float fDistanceY;
-	enum {
-		SKELE, GHOST, DARKELF
-	};
 
 	Enemy();
-	Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* PhysicsBody);
-	Enemy(const Enemy& cObject);
+	Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* PhysicsBody, b2Vec2 fSizeP);
 	~Enemy();
+
+	void Death();
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);
+
+	// Enemy types
+	enum {
+		SKELE, GHOST, DARKELF
+	};
 };

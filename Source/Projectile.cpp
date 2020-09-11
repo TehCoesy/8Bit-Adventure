@@ -12,6 +12,9 @@ Projectile::Projectile(std::string strName, b2Body* physicsBody, std::string str
 	m_strName = strName;
 
 	m_PhysicsBody = physicsBody;
+	m_PhysicsBody->SetUserData(this);
+
+	m_ObjectType = ObjectType::PROJECTILE;
 
 	m_strProjectileType = strType;
 	if (m_strProjectileType == "ARROW") {
@@ -21,37 +24,13 @@ Projectile::Projectile(std::string strName, b2Body* physicsBody, std::string str
 		m_Animation = RM->GetAnimation("BULLET");
 	}
 
-	m_StaticTexture.Fetch(&m_Sprite);
-
-	m_ObjectType = ObjectType::PROJECTILE;
-	m_bIsActive = true;
-}
-
-Projectile::Projectile(const Projectile& cObject) {
-	m_iID = 0;
-	m_strName = cObject.m_strName;
-
-	m_PhysicsBody = cObject.m_PhysicsBody;
-
-	m_strProjectileType = cObject.m_strProjectileType;
-	if (m_strProjectileType == "ARROW") {
-		m_Animation = RM->GetAnimation("ARROW");
-	}
-	else if (m_strProjectileType == "BULLET") {
-		m_Animation = RM->GetAnimation("BULLET");
-	}
-
-	m_StaticTexture.Fetch(&m_Sprite);
-
-	m_ObjectType = ObjectType::PROJECTILE;
 	m_bIsActive = true;
 
-	m_iParentID = cObject.m_iParentID;
-	m_ParentType = cObject.m_ParentType;
+	m_StaticTexture.Fetch(&m_Sprite);
 }
 
 Projectile::~Projectile() {
-
+	DestroyBody();
 }
 
 void Projectile::SetParent(int iParentID, ObjectType parentType) {
@@ -59,10 +38,30 @@ void Projectile::SetParent(int iParentID, ObjectType parentType) {
 	m_ParentType = parentType;
 }
 
+void Projectile::Death() {
+	m_ObjectState = ObjectState::DEATH;
+}
+
+void Projectile::Destroy() {
+	m_bIsActive = false;
+	m_ObjectState = ObjectState::DESTROYED;
+}
+
 void Projectile::Update(float fDeltaTime) {
+	if (m_ObjectState == ObjectState::DEATH) {
+		CompleteStop(fDeltaTime);
+		m_bCanMove = false;
+		Destroy();
+	}
+
 	m_Animation.Update(fDeltaTime);
 	m_Animation.Fetch(&m_Sprite);
 	SynchronizeBody();
+
+	m_iFrameCount++;
+	if (m_iFrameCount == 150) {
+		Death();
+	}
 }
 
 void Projectile::Render(sf::RenderWindow* RenderWindow) {

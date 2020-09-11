@@ -4,11 +4,9 @@
 #include "DynamicObject.h"
 
 DynamicObject::DynamicObject() {
-
 }
 
 DynamicObject::~DynamicObject() {
-
 }
 
 float* DynamicObject::GetMaxVelocity() {
@@ -27,8 +25,9 @@ void DynamicObject::Death() {
 
 }
 
-void DynamicObject::Despawn() {
-
+void DynamicObject::Destroy() {
+	m_bIsActive = false;
+	m_ObjectState = ObjectState::DESTROYED;
 }
 
 void DynamicObject::Attack() {
@@ -118,22 +117,4 @@ void DynamicObject::Stop(float fDeltaTime, int iDirection) {
 
 void DynamicObject::CompleteStop(float fDeltaTime) {
 	m_PhysicsBody->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-}
-
-void DynamicObject::DampenMovement() {
-	float fCurrentVelocityX = m_PhysicsBody->GetLinearVelocity().x;
-	float fCurrentVelocityY = m_PhysicsBody->GetLinearVelocity().y;
-
-	if (!m_bMovingDown && !m_bMovingUp && std::fabsf(fCurrentVelocityY) < 10.0f) {
-		//m_PhysicsBody->SetLinearVelocity(b2Vec2(fCurrentVelocityX, 0.0f));
-	}
-
-	fCurrentVelocityX = m_PhysicsBody->GetLinearVelocity().x;
-	fCurrentVelocityY = m_PhysicsBody->GetLinearVelocity().y;
-
-	if (!m_bMovingLeft && !m_bMovingRight && std::fabsf(fCurrentVelocityX) < 10.0f) {
-		//m_PhysicsBody->SetLinearVelocity(b2Vec2(0.0f, fCurrentVelocityY));
-	}
-
-	//m_bMovingDown = false; m_bMovingUp = false; m_bMovingLeft = false; m_bMovingRight = false;
 }

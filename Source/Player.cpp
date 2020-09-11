@@ -7,40 +7,51 @@ Player::Player() {
 
 }
 
-Player::Player(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody) {
+Player::Player(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody, b2Vec2 fSizeP) {
+	// Always do the following:
+	// + Setup object's identity
+	// + Setup object's state
+	// + m_bIsActive / m_bCanMove / m_bIsDead;
+	// + Setup object's m_PhysicsBody
+	// + Setup object's Animation / Texture
+	// + Setup sprite's m_fSizeP and setup proper origin (!Important) (call SetSpriteChanged() and SynchronizeBody())
+	// + Setup m_fMaxVelocity (if needed) (default is 5.0f)
+	
+	// Setup object's identity
 	m_iID = iID;
 	m_strName = strName;
+	m_ObjectType = ObjectType::PLAYER;
 
-	m_Animation = RM->GetAnimation(strAnimationName);
+	// Setup object's state
+	m_ObjectState = ObjectState::IDLE;
+	m_bIsActive = true;
+
+	// Setup object's m_PhysicsBody
 	m_PhysicsBody = PhysicsBody;
 	m_PhysicsBody->SetUserData(this);
 
-	
-
-	m_Animation.Fetch(&m_Sprite);
+	// Setup object's Animation
+	m_Animation = RM->GetAnimation(strAnimationName);
 	m_Animation.Play();
 
-	m_ObjectType = ObjectType::PLAYER;
-	m_bIsActive = true;
-}
-
-Player::Player(const Player& cObject) {
-	m_iID = cObject.m_iID;
-	m_strName = cObject.m_strName;
-
-	m_Animation = cObject.m_Animation;
-	m_PhysicsBody = cObject.m_PhysicsBody;
-	m_PhysicsBody->SetUserData(this);
-
 	m_Animation.Fetch(&m_Sprite);
-	m_Animation.Play();
 
-	m_ObjectType = ObjectType::PLAYER;
-	m_bIsActive = true;
+	// Setup sprite's size + origin
+	m_fSizeP = fSizeP;
+	SetSpriteChanged();
+
+	SynchronizeBody();
+
+	// Debug
+	m_DebugBox.setFillColor(sf::Color::Transparent);
+	m_DebugBox.setOutlineColor(sf::Color::Red);
+	m_DebugBox.setOutlineThickness(1.0f);
+	m_DebugBox.setSize(sf::Vector2f(64.0f, 64.0f));
+	m_DebugBox.setOrigin(sf::Vector2f(32.0f, 32.0f));
 }
 
 Player::~Player() {
-
+	DestroyBody();
 }
 
 void Player::Update(float fDeltaTime) {
@@ -81,6 +92,12 @@ void Player::Update(float fDeltaTime) {
 		m_Animation.Fetch(&m_Sprite);
 		SynchronizeBody();
 
+		// Debug
+		if (m_bDebugDraw) {
+			m_DebugBox.setPosition(m_PhysicsBody->GetPosition().x * PIXELS_METERS, m_PhysicsBody->GetPosition().y * PIXELS_METERS);
+			m_DebugBox.setRotation(Radian2Degree(m_PhysicsBody->GetAngle()));
+		}
+
 		// Stop movement 
 		Move(fDeltaTime, -1);
 	}
@@ -92,8 +109,16 @@ void Player::Render(sf::RenderWindow* RenderWindow) {
 		float WorldPositionY = m_Sprite.getPosition().y;
 
 		m_Sprite.setPosition(sf::Vector2f(WorldPositionX + MainCamera->GetCameraVector().x, WorldPositionY + MainCamera->GetCameraVector().y));
-		//m_Sprite.setPosition(sf::Vector2f(200, 200));
 		RenderWindow->draw(m_Sprite);
 		m_Sprite.setPosition(sf::Vector2f(WorldPositionX, WorldPositionY));
+
+		if (m_bDebugDraw) {
+			WorldPositionX = m_DebugBox.getPosition().x;
+			WorldPositionY = m_DebugBox.getPosition().y;
+
+			m_DebugBox.setPosition(sf::Vector2f(WorldPositionX + MainCamera->GetCameraVector().x, WorldPositionY + MainCamera->GetCameraVector().y));
+			RenderWindow->draw(m_DebugBox);
+			m_DebugBox.setPosition(sf::Vector2f(WorldPositionX, WorldPositionY));
+		}
 	}
 }

@@ -1,11 +1,14 @@
 #pragma once
-class State{
+#include "SFML\Graphics.hpp"
+class State
+{
 public:
 	virtual void Init() = 0;
-	virtual void HandleInput() = 0;
-	virtual void Update() = 0;
-	virtual void Draw(float dt) = 0;
 
-	virtual void Pause() {}
-	virtual void Resume() {}
+	virtual void HandleInput(sf::RenderWindow* window) = 0;
+	virtual void Update(float dt) = 0;
+	virtual void Render(sf::RenderWindow *window) = 0;
+
+	virtual void Pause() { }
+	virtual void Resume() { }
 };

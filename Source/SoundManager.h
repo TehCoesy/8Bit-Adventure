@@ -28,4 +28,6 @@ public:
 
 	void PlayEffectByName(std::string strSoundEffect);
 	void PlayMusicByName(std::string strMusic);
+
+	void Clean();
 };

@@ -8,13 +8,18 @@
 
 class Projectile : public DynamicObject {
 private:
+	Projectile(Projectile const&) = delete;
+	Projectile& operator=(Projectile const&) = delete;
+
 	std::string m_strProjectileType;
+
 	ObjectType m_ParentType;
 	int m_iParentID;
+
+	int m_iFrameCount = 0;
 public:
 	Projectile();
 	Projectile(std::string strName, b2Body* physicsBody, std::string strType);
-	Projectile(const Projectile& cObject);
 	~Projectile();
 
 	void SetParent(int iParentID, ObjectType parentType);
@@ -38,6 +43,9 @@ public:
 	void DampenMovement() {
 		// Disable applying force on Projectile
 	}
+
+	void Death();
+	void Destroy();
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);

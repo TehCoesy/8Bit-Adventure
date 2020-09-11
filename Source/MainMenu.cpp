@@ -7,7 +7,7 @@ MainMenu::MainMenu() {
 	menuSprite = nullptr;
 	menuTexture = nullptr;
 	sf::Text text;
-	font.loadFromFile("Resources/Font/font2.ttf");
+	font.loadFromFile(FONT_FONT2);
 	text.setFont(font);
 	text.setPosition(100, 300);
 	text.setCharacterSize(30);                         
@@ -43,10 +43,10 @@ MainMenu::~MainMenu() {
 	}
 }
 
-void MainMenu::LoadFromFile(std::string strFilePath) {
+void MainMenu::Init() {
 	if (!menuTexture) menuTexture = new sf::Texture;
-	//menuTexture.loadFromFile("Resource/Textures/bg/main.jpg");
-	menuTexture->loadFromFile(strFilePath);
+	menuTexture->loadFromFile(MAINMENU_BACKGROUND);
+	//menuTexture->loadFromFile(strFilePath);
 	if (!menuSprite) menuSprite = new sf::Sprite;
 	menuSprite->setTexture(*menuTexture);
 	sf::Vector2f targetSize(800.0f, 800.0f);
@@ -59,7 +59,7 @@ void MainMenu::Update(const float dt) {
 }
 
 void MainMenu::Render(sf::RenderWindow *window) {
-	window->draw(*(MainMenu::GetInstance()->menuSprite));
+	window->draw(*(this)->menuSprite);
 	for (auto x : buttons) window->draw(x);
 }
 
@@ -74,7 +74,7 @@ bool MainMenu::isTextClicked(sf::RenderWindow* window,sf::Text text) {
 	return false;
 }
 
-int MainMenu::HandleInput(sf::RenderWindow* window) {
+void MainMenu::HandleInput(sf::RenderWindow* window) {
 	sf::Event event;
 
 	while (window->pollEvent(event))
@@ -91,7 +91,6 @@ int MainMenu::HandleInput(sf::RenderWindow* window) {
 			if (event.key.code == sf::Keyboard::Escape)
 				window->close();
 			else if (event.key.code == sf::Keyboard::Return) {
-				return 1;
 				//loadgame();
 			}
 			break;
@@ -116,13 +115,9 @@ int MainMenu::HandleInput(sf::RenderWindow* window) {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		if (isTextClicked(window, buttons[0])) {
-			return 1;
-		//	loadgame();
+			StateMachine->AddState(StateRef(new GameScene()), true);
 		}
 		else if (isTextClicked(window,buttons[2]))
 			window->close();
-
-
 	}
-	return 0;
 }

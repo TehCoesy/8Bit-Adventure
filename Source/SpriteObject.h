@@ -7,6 +7,9 @@
 #include "MyObject.h"
 
 class SpriteObject : public MyObject {
+private:
+	SpriteObject(SpriteObject const&) = delete;
+	SpriteObject& operator=(SpriteObject const&) = delete;
 protected:
 	// Graphics
 	sf::Sprite m_Sprite;
@@ -20,6 +23,9 @@ protected:
 
 	// Synchronize Sprite with PhysicsBody
 	void SynchronizeBody();
+
+	bool m_bSpriteChanged = false;
+	void SetSpriteChanged();
 public:
 	SpriteObject();
 	~SpriteObject();

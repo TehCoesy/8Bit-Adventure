@@ -4,7 +4,6 @@
 #include "Ground.h"
 
 Ground::Ground() {
-
 }
 
 Ground::Ground(std::string strTextureName, int TileX, int TileY) {
@@ -13,12 +12,7 @@ Ground::Ground(std::string strTextureName, int TileX, int TileY) {
 	m_Sprite.setPosition(sf::Vector2f(TILE_SIZE * TileX, TILE_SIZE * TileY));
 }
 
-Ground::Ground(const Ground& cObject) {
-	m_Sprite = cObject.m_Sprite;
-}
-
 Ground::~Ground() {
-
 }
 
 void Ground::Render(sf::RenderWindow* RenderWindow) {

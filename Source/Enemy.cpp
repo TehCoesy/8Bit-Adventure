@@ -7,48 +7,50 @@ Enemy::Enemy() {
 
 }
 
-Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* PhysicsBody) {
+Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* PhysicsBody, b2Vec2 fSizeP) {
+	// Setup object's identity
 	m_iID = iID;
 	m_strName = strName;
+	m_ObjectType = ObjectType::ENEMY;
 
-	m_Animation = RM->GetAnimation("SKELE_IDLE_DOWN");
+	// Setup object's state
+	m_ObjectState = ObjectState::IDLE;
+	m_bIsActive = true;
+
+	// Setup object's m_PhysicsBody
 	m_PhysicsBody = PhysicsBody;
 	m_PhysicsBody->SetUserData(this);
 
-	m_fMaxVelocity = 1.0f;
-
+	// Setup object's Animation
+	m_Animation = RM->GetAnimation("SKELE_IDLE_DOWN");
+	m_Animation.Play();
+	
 	m_Animation.Fetch(&m_Sprite);
 
-	m_ObjectType = ObjectType::ENEMY;
-	m_bIsActive = true;
-}
+	// Setup sprite's size + origin
+	m_fSizeP = fSizeP;
+	SetSpriteChanged();
 
-Enemy::Enemy(const Enemy& cObject) {
-	m_iID = cObject.m_iID;
-	m_strName = cObject.m_strName;
-
-	m_StaticTexture = cObject.m_StaticTexture;
-	m_PhysicsBody = cObject.m_PhysicsBody;
-	m_PhysicsBody->SetUserData(this);
+	SynchronizeBody();
 
 	m_fMaxVelocity = 1.0f;
-
-	m_StaticTexture.Fetch(&m_Sprite);
-
-	m_bIsActive = true;
 }
 
 Enemy::~Enemy() {
+	DestroyBody();
+}
 
+void Enemy::Death() {
+	m_bIsDead = true;
 }
 
 void Enemy::Update(float fDeltaTime) {
-/*	if (m_iID != -1) {
-		SynchronizeBody();
-		m_Animation.Update(fDeltaTime);
-		m_Animation.Fetch(&m_Sprite);
+	if (m_bIsDead) {
+		CompleteStop(fDeltaTime);
+		m_bCanMove = false;
+		// Switch death animation
 	}
-	*/
+
 	if (m_iID != -1) {
 		float fCurrentVelocityX = m_PhysicsBody->GetLinearVelocity().x;
 		float fCurrentVelocityY = m_PhysicsBody->GetLinearVelocity().y;

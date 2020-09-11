@@ -55,6 +55,10 @@ void SoundEffect::SetNoRepeat() {
 	}
 }
 
+bool SoundEffect::IsRepeating() {
+	return m_Sound.getLoop();
+}
+
 bool SoundEffect::IsLoaded() {
 	return m_bIsLoaded;
 }

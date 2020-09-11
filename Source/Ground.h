@@ -7,11 +7,13 @@
 
 class Ground {
 private:
+	Ground(Ground const&) = delete;
+	Ground& operator=(Ground const&) = delete;
+
 	sf::Sprite m_Sprite;
 public:
 	Ground();
 	Ground(std::string strTextureName, int TileX, int TileY);
-	Ground(const Ground& cObject);
 	~Ground();
 
 	void Render(sf::RenderWindow* RenderWindow);

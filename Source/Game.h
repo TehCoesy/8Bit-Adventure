@@ -12,6 +12,8 @@
 #include "SoundManager.h"
 #include "GameScene.h"
 #include "MainMenu.h"
+#include "StateManager.h"
+
 
 class Game : public Singleton<Game> {
 private:

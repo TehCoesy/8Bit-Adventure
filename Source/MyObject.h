@@ -13,19 +13,28 @@
 #include "ResourceManager.h"
 #include "Camera.h"
 
-enum class ObjectType { OBJ, PLAYER, ENEMY, STATIC, MELEE, PROJECTILE };
+enum class ObjectType { OBJ, PLAYER, ENEMY, STATIC, MELEE, PROJECTILE, WALL };
+enum class ObjectState { SPAWN, SLEEP, IDLE, MOVING, ATTACK, DEATH, DESTROYED};
 
 class MyObject {
+private:
+	MyObject(MyObject const&) = delete;
+	MyObject& operator=(MyObject const&) = delete;
 protected:
 	MyObject();
 	~MyObject();
 
-	// Identity
+	void DestroyBody();
+
+	// Object
 	int m_iID = -1;
-	ObjectType m_ObjectType = ObjectType::OBJ;
 	std::string m_strName = "";
 
+	ObjectType m_ObjectType = ObjectType::OBJ;
+	ObjectState m_ObjectState = ObjectState::SPAWN;
+
 	// Physics
+	b2Vec2 m_fSizeP; // Object's size in pixels, for setting Sprite's origin
 	b2Body* m_PhysicsBody;
 
 	// States
@@ -34,10 +43,13 @@ public:
 	// Identity
 	int* GetID();
 	std::string* GetName();
+
+	ObjectState GetObjectState();
 	ObjectType GetObjectType();
 
 	// Physics
 	b2Body* GetPhysicsBody();
+	b2Vec2* GetSizeP(); // Get Object's size in pixels
 
 	// States
 	bool IsActive();
@@ -45,4 +57,8 @@ public:
 
 	virtual void Update(float fDeltaTime);
 	virtual void Render(sf::RenderWindow* MainWindow);
+
+	// Utility functions
+	float Radian2Degree(float fRadian);
+	float Degree2Radian(float fDegree);
 };

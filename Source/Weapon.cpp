@@ -13,13 +13,8 @@ Weapon::Weapon(b2Body* SensorBody, float fX, float fY) {
 	SensorBox = sf::RectangleShape(sf::Vector2f(fX, fY));
 }
 
-Weapon::Weapon(const Weapon& cObject) {
-	m_iID = 0;
-	m_PhysicsBody = cObject.m_PhysicsBody;
-}
-
 Weapon::~Weapon() {
-
+	DestroyBody();
 }
 
 void Weapon::Synchronize() {

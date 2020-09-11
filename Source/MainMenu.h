@@ -6,8 +6,11 @@
 // Local
 #include "Singleton.h"
 #include "MyObject.h"
+#include "State.h"
+#include "StateManager.h"
+#include "GameScene.h"
 
-class MainMenu : public Singleton<MainMenu> {
+class MainMenu : public State {
 private:
 	//sf::Sprite menuSprite;
 	sf::Sprite* menuSprite;
@@ -22,6 +25,6 @@ public:
 	~MainMenu();
 	void Update(const float dt);
 	void Render(sf::RenderWindow *window);
-	int HandleInput(sf::RenderWindow* window);
-	void LoadFromFile(std::string strFilePath);
+	void HandleInput(sf::RenderWindow* window);
+	void Init();
 };

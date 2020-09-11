@@ -8,6 +8,9 @@
 
 class SensorObject : public MyObject {
 private:
+	SensorObject(SensorObject const&) = delete;
+	SensorObject& operator=(SensorObject const&) = delete;
+
 	bool m_bSensorDebug = true;
 public:
 	SensorObject();

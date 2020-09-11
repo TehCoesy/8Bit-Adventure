@@ -8,7 +8,12 @@
 
 // Local
 #include "MyObject.h"
-#include "DynamicObject.h"
+#include "Wall.h"
+#include "Ground.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Boss.h"
+#include "Projectile.h"
 
 class MyContactListener : public b2ContactListener {
 public:

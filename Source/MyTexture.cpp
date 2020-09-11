@@ -46,9 +46,5 @@ void MyTexture::SetScale(float fScaleX, float fScaleY) {
 void MyTexture::Fetch(sf::Sprite* ObjectSprite) {
 	if (m_iID != -1) {
 		ObjectSprite->setTexture(*m_Texture);
-
-		float fScaleX = m_fDesiredX / m_Texture->getSize().x;
-		float fScaleY = m_fDesiredY / m_Texture->getSize().y;
-		ObjectSprite->setScale(sf::Vector2f(fScaleX, fScaleY));
 	}
 }

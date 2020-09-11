@@ -6,6 +6,9 @@
 #include "SpriteObject.h"
 
 class DynamicObject : public SpriteObject {
+private:
+	DynamicObject(DynamicObject const&) = delete;
+	DynamicObject& operator=(DynamicObject const&) = delete;
 protected:
 	// Movement
 	bool m_bMovingDown, m_bMovingUp, m_bMovingLeft, m_bMovingRight;
@@ -20,20 +23,12 @@ public:
 	DynamicObject();
 	~DynamicObject();
 
-	enum Direction {
-		DOWN = 0, UP = 1, LEFT = 2, RIGHT = 3
-	};
-
-	enum State {
-		SPAWN, SLEEP, IDLE, MOVING, ATTACKING, DEAD, DESPAWN
-	};
-
 	float* GetMaxVelocity();
 	int GetDirection();
 		
 	virtual void Spawn();
 	virtual void Death();
-	virtual void Despawn();
+	virtual void Destroy();
 	virtual void Attack();
 
 	bool CanMove();
@@ -45,5 +40,8 @@ public:
 	void Stop(float fDeltaTime, int iDirection);
 	void CompleteStop(float fDeltaTime);
 
-	void DampenMovement();
+	// Utility
+	enum Direction {
+		DOWN = 0, UP = 1, LEFT = 2, RIGHT = 3
+	};
 };

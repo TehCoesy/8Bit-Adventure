@@ -7,10 +7,11 @@
 
 class EnemySpawner : public SpriteObject {
 private:
+	EnemySpawner(EnemySpawner const&) = delete;
+	EnemySpawner& operator=(EnemySpawner const&) = delete;
 public:
 	EnemySpawner();
 	EnemySpawner(int iID, std::string strName, std::string strTextureName, b2Body* PhysicsBody);
-	EnemySpawner(const EnemySpawner& cObject);
 	~EnemySpawner();
 
 	void Update(float fDeltaTime);

@@ -4,9 +4,7 @@
 #include "SensorObject.h"
 
 SensorObject::SensorObject() {
-
 }
 
 SensorObject::~SensorObject() {
-
 }

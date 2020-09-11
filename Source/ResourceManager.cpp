@@ -95,7 +95,7 @@ Animation ResourceManager::LoadAnimation(int iID, std::string strName, int iTime
 }
 
 MyTexture ResourceManager::GetTexture(std::string strName) {
-	for (int i = 0; i < m_aTextures.size(); i++) {
+	for (unsigned int i = 0; i < m_aTextures.size(); i++) {
 		if (*m_aTextures.at(i).GetName() == strName) {
 			return m_aTextures.at(i);
 		}
@@ -104,7 +104,7 @@ MyTexture ResourceManager::GetTexture(std::string strName) {
 }
 
 Animation ResourceManager::GetAnimation(std::string strName) {
-	for (int i = 0; i < m_aAnimations.size(); i++) {
+	for (unsigned int i = 0; i < m_aAnimations.size(); i++) {
 		if (*m_aAnimations.at(i).GetName() == strName) {
 			return m_aAnimations.at(i);
 		}
