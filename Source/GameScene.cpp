@@ -277,78 +277,7 @@ void GameScene::Update(float fDeltaTime) {
 	}
 
 	for (int i = 0; i < m_Enemies.size(); i++) {
-		float fEnemyPosX = m_Enemies.at(i)->GetPhysicsBody()->GetWorldCenter().x * PIXELS_METERS;
-		float fEnemyPosY = m_Enemies.at(i)->GetPhysicsBody()->GetWorldCenter().y * PIXELS_METERS;
-		m_Enemies.at(i)->fDistanceY = sqrt((fPlayerPosY - fEnemyPosY)*(fPlayerPosY - fEnemyPosY));
-		m_Enemies.at(i)->fDistanceX = sqrt((fPlayerPosX - fEnemyPosX)*(fPlayerPosX - fEnemyPosX));
-		m_Enemies.at(i)->fDistance = sqrt((m_Enemies.at(i)->fDistanceX * m_Enemies.at(i)->fDistanceX) + (m_Enemies.at(i)->fDistanceY *m_Enemies.at(i)->fDistanceY));
-		if (m_Enemies.at(i)->fDistance < 500) {
-			if (fPlayerPosX <fEnemyPosX && fPlayerPosY < fEnemyPosY) {
-					if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX <1 || m_Enemies.at(i)->fDistanceY <1)) {
-						m_Enemies.at(i)->Stop(fDeltaTime, 4);
-						m_Enemies.at(i)->Move(fDeltaTime, -1);
-				}
-				else if (m_Enemies.at(i)->fDistanceX < 70) {
-					m_Enemies.at(i)->Stop(fDeltaTime, 4);
-					m_Enemies.at(i)->Move(fDeltaTime, 1);
-				}
-				else {
-					m_Enemies.at(i)->Stop(fDeltaTime, 4);
-					m_Enemies.at(i)->Move(fDeltaTime, 2);
-					m_Enemies.at(i)->Move(fDeltaTime, 1);
-				}
-			}
-			if (fPlayerPosX < fEnemyPosX && fPlayerPosY > fEnemyPosY) {
-				if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX <1 || m_Enemies.at(i)->fDistanceY <1)) {
-					m_Enemies.at(i)->Stop(fDeltaTime, 4);
-					m_Enemies.at(i)->Move(fDeltaTime, -1);
-				}
-				else if (m_Enemies.at(i)->fDistanceX < 70) {
-					m_Enemies.at(i)->Stop(fDeltaTime, 4);
-					m_Enemies.at(i)->Move(fDeltaTime, 0);
-				}
-				else {
-					m_Enemies.at(i)->Stop(fDeltaTime, 4);
-					m_Enemies.at(i)->Move(fDeltaTime, 2);
-					m_Enemies.at(i)->Move(fDeltaTime, 0);
-				}
-			}
-			if (fPlayerPosX > fEnemyPosX && fPlayerPosY < fEnemyPosY) {
-				if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX <1 || m_Enemies.at(i)->fDistanceY <1)) {
-					m_Enemies.at(i)->Stop(fDeltaTime, 4);
-					m_Enemies.at(i)->Move(fDeltaTime, -1);
-				}
-				else if (m_Enemies.at(i)->fDistanceX < 70) {
-					m_Enemies.at(i)->Stop(fDeltaTime, 4);
-					m_Enemies.at(i)->Move(fDeltaTime, 1);
-				}
-				else {
-					m_Enemies.at(i)->Stop(fDeltaTime, 4);
-					m_Enemies.at(i)->Move(fDeltaTime, 3);
-					m_Enemies.at(i)->Move(fDeltaTime, 1);
-				}
-			}
-			if (fPlayerPosX > fEnemyPosX && fPlayerPosY > fEnemyPosY) {
-				if (m_Enemies.at(i)->fDistance < 70 && (m_Enemies.at(i)->fDistanceX <1 || m_Enemies.at(i)->fDistanceY <1)) {
-					m_Enemies.at(i)->Stop(fDeltaTime, 4);
-					m_Enemies.at(i)->Move(fDeltaTime, -1);
-				}
-				else if (m_Enemies.at(i)->fDistanceX < 70) {
-					m_Enemies.at(i)->Stop(fDeltaTime, 4);
-					m_Enemies.at(i)->Move(fDeltaTime, 0);
-				}
-				else {
-					m_Enemies.at(i)->Stop(fDeltaTime, 4);
-					m_Enemies.at(i)->Move(fDeltaTime, 3);
-					m_Enemies.at(i)->Move(fDeltaTime, 0);
-				}
-			}
-
-		}
-		else {
-			m_Enemies.at(i)->Stop(fDeltaTime, 4);
-			m_Enemies.at(i)->Move(fDeltaTime, -1);
-		}
+		Normal_Enemy::GetInstance()->Interaction(m_Enemies.at(i), fPlayerPosX, fPlayerPosY, fDeltaTime);
 		m_Enemies.at(i)->Update(fDeltaTime);
 	}
 

@@ -25,6 +25,7 @@
 #include "Projectile.h"
 #include "PlayerGUI.h"
 #include "Score.h"
+#include "Normal_Enemy.h"
 
 
 class GameScene : public Singleton<GameScene> {
