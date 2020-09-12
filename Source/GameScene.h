@@ -19,6 +19,7 @@
 #include "PlayerGUI.h"
 #include "Score.h"
 #include "State.h"
+#include "Normal_Enemy.h"
 
 
 class GameScene : public State {
