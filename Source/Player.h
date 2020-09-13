@@ -13,7 +13,7 @@ private:
 	Player& operator=(Player const&) = delete;
 public:
 	Player();
-	Player(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody, b2Vec2 fSizeP);
+	Player(int iID, std::string strName, std::string strAnimationName, b2Body* physicsBody, b2Vec2 fSizeP);
 	~Player();
 
 	void Update(float fDeltaTime);

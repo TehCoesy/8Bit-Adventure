@@ -11,7 +11,7 @@ private:
 	EnemySpawner& operator=(EnemySpawner const&) = delete;
 public:
 	EnemySpawner();
-	EnemySpawner(int iID, std::string strName, std::string strTextureName, b2Body* PhysicsBody, b2Vec2 fSizeP);
+	EnemySpawner(int iID, std::string strName, std::string strTextureName, b2Body* physicsBody, b2Vec2 fSizeP);
 	~EnemySpawner();
 
 	void Update(float fDeltaTime);

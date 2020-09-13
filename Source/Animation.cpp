@@ -56,7 +56,12 @@ void Animation::Update(float fDeltaTime) {
 		if (m_iCount == m_iFrameSteps) {
 			m_iCount = 0;
 			if (m_iFrameIndex == m_graFrames.size() - 1) {
-				m_iFrameIndex = 0;
+				if (m_bRepeat) {
+					m_iFrameIndex = 0;
+				}
+				else {
+					m_bIsPlaying = false;
+				}
 			}
 			else {
 				m_iFrameIndex++;
@@ -69,4 +74,16 @@ void Animation::Fetch(sf::Sprite* ObjectSprite) {
 	if (m_iID != -1) {
 		m_graFrames.at(m_iFrameIndex).Fetch(ObjectSprite);
 	}
+}
+
+bool Animation::IsRepeating() {
+	return m_bRepeat;
+}
+
+void Animation::ToggleRepeat() {
+	m_bRepeat = !m_bRepeat;
+}
+
+bool Animation::IsDone() {
+	return !m_bIsPlaying;
 }

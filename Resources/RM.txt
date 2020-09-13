@@ -18,7 +18,7 @@ TEX ID 14 SWORD Textures/Items/Sword.png 40.0 40.0
 TEX ID 15 GRASS1 Textures/Tilesets/Dungeon/Objects/sprite_01.png 64.0 64.0
 TEX ID 16 GRASS2 Textures/Tilesets/Dungeon/Objects/sprite_14.png 64.0 64.0
 
-#ANIMATIONS: 11
+#ANIMATIONS: 12
 
 ANI ID 0 NAME PLAYER_IDLE_DOWN FRAMES 3 TIMESTEP 20
 0 Textures/Idle/player/down/sprite_0.png 64.0 64.0
@@ -69,8 +69,22 @@ ANI ID 8 NAME SKELE_IDLE_DOWN FRAMES 3 TIMESTEP 20
 1 Textures/Idle/skeleton/down/sprite_1.png 64.0 64.0
 2 Textures/Idle/skeleton/down/sprite_2.png 64.0 64.0
 
-ANI ID 9 NAME ARROW FRAMES 1 TIMESTEP 100
-0 Textures/Items/Arrow.png 20.0 40.0
+ANI ID 9 NAME ARROW FRAMES 6 TIMESTEP 10
+0 Textures/Items/Arrows/Arrow.png 20.0 40.0
+1 Textures/Items/Arrows/Arrow1.png 20.0 40.0
+2 Textures/Items/Arrows/Arrow2.png 20.0 40.0
+3 Textures/Items/Arrows/Arrow3.png 20.0 40.0
+4 Textures/Items/Arrows/Arrow4.png 20.0 40.0
+5 Textures/Items/Arrows/Arrow5.png 20.0 40.0
 
-ANI ID 10 NAME BULLET FRAMES 1 TIMESTEP 100
+ANI ID 10 NAME ARROW_BREAK FRAMES 7 TIMESTEP 2
+0 Textures/Items/Arrows_Break/Arrow5.png 20.0 40.0
+1 Textures/Items/Arrows_Break/Arrow5.png 20.0 40.0
+2 Textures/Items/Arrows_Break/Arrow5.png 20.0 40.0
+3 Textures/Items/Arrows_Break/Arrow5.png 20.0 40.0
+4 Textures/Items/Arrows_Break/Arrow5.png 20.0 40.0
+5 Textures/Items/Arrows_Break/Arrow5.png 20.0 40.0
+6 Textures/Items/Arrows_Break/Arrow5.png 20.0 40.0
+
+ANI ID 11 NAME BULLET FRAMES 1 TIMESTEP 100
 0 Textures/Items/Bullet.png 20.0 20.0

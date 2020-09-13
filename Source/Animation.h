@@ -15,6 +15,7 @@ private:
 	std::vector<MyTexture> m_graFrames;
 
 	bool m_bIsPlaying = false;
+	bool m_bRepeat = true;
 public:
 	Animation();
 	Animation(int iID, std::string strName, int iSteps, std::vector<MyTexture> AnimationFrames);
@@ -29,4 +30,8 @@ public:
 
 	void Update(float fDeltaTime);
 	void Fetch(sf::Sprite* ObjectSprite);
+
+	bool IsRepeating();
+	void ToggleRepeat();
+	bool IsDone();
 };

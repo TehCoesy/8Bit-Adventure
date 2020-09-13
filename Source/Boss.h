@@ -12,7 +12,7 @@ private:
 	Boss& operator=(Boss const&) = delete;
 public:
 	Boss();
-	Boss(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody, b2Vec2 fSizeP);
+	Boss(int iID, std::string strName, std::string strAnimationName, b2Body* physicsBody, b2Vec2 fSizeP);
 	~Boss();
 
 	void Update(float fDeltaTime);

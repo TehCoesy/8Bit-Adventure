@@ -36,14 +36,6 @@ public:
 		// Disable applying force on Projectile
 	}
 
-	void CompleteStop(float fDeltaTime) {
-		// Disable applying force on Projectile
-	}
-
-	void DampenMovement() {
-		// Disable applying force on Projectile
-	}
-
 	void Death();
 	void Destroy();
 

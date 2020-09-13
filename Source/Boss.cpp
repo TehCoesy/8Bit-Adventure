@@ -7,7 +7,7 @@ Boss::Boss() {
 
 }
 
-Boss::Boss(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody, b2Vec2 fSizeP) {
+Boss::Boss(int iID, std::string strName, std::string strAnimationName, b2Body* physicsBody, b2Vec2 fSizeP) {
 	// Setup object's identity
 	m_iID = iID;
 	m_strName = strName;
@@ -18,7 +18,7 @@ Boss::Boss(int iID, std::string strName, std::string strAnimationName, b2Body* P
 	m_bIsActive = true;
 
 	// Setup object's m_PhysicsBody
-	m_PhysicsBody = PhysicsBody;
+	m_PhysicsBody = physicsBody;
 	m_PhysicsBody->SetUserData(this);
 
 	// Setup object's Animation

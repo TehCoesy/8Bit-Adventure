@@ -7,7 +7,7 @@ Player::Player() {
 
 }
 
-Player::Player(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody, b2Vec2 fSizeP) {
+Player::Player(int iID, std::string strName, std::string strAnimationName, b2Body* physicsBody, b2Vec2 fSizeP) {
 	// Always do the following:
 	// + Setup object's identity
 	// + Setup object's state
@@ -27,7 +27,7 @@ Player::Player(int iID, std::string strName, std::string strAnimationName, b2Bod
 	m_bIsActive = true;
 
 	// Setup object's m_PhysicsBody
-	m_PhysicsBody = PhysicsBody;
+	m_PhysicsBody = physicsBody;
 	m_PhysicsBody->SetUserData(this);
 
 	// Setup object's Animation

@@ -51,6 +51,10 @@ void Projectile::SetParent(int iParentID, ObjectType parentType) {
 
 void Projectile::Death() {
 	m_ObjectState = ObjectState::DEATH;
+	m_Animation = RM->GetAnimation("ARROW_BREAK");
+	if (m_Animation.IsRepeating()) {
+		m_Animation.ToggleRepeat();
+	}
 }
 
 void Projectile::Destroy() {
@@ -62,7 +66,9 @@ void Projectile::Update(float fDeltaTime) {
 	if (m_ObjectState == ObjectState::DEATH) {
 		CompleteStop(fDeltaTime);
 		m_bCanMove = false;
-		Destroy();
+		if (m_Animation.IsDone()) {
+			Destroy();
+		}
 	}
 
 	m_Animation.Update(fDeltaTime);

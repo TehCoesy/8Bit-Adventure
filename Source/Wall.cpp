@@ -4,10 +4,9 @@
 #include "Wall.h"
 
 Wall::Wall() {
-
 }
 
-Wall::Wall(int iID, std::string strName, std::string strTextureName, b2Body* PhysicsBody, int iTileX, int iTileY, int iCorX, int iCorY) {
+Wall::Wall(int iID, std::string strName, std::string strTextureName, b2Body* physicsBody, int iTileX, int iTileY, int iCorX, int iCorY) {
 	// Setup object's identity
 	m_iID = iID;
 	m_strName = strName;
@@ -24,7 +23,7 @@ Wall::Wall(int iID, std::string strName, std::string strTextureName, b2Body* Phy
 	m_bIsActive = true;
 
 	// Setup object's m_PhysicsBody
-	m_PhysicsBody = PhysicsBody;
+	m_PhysicsBody = physicsBody;
 	m_PhysicsBody->SetUserData(this);
 
 	// Setup object's StaticTexture;

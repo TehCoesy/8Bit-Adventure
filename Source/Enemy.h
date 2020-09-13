@@ -16,7 +16,7 @@ public:
 	float fDistanceY;
 
 	Enemy();
-	Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* PhysicsBody, b2Vec2 fSizeP);
+	Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* physicsBody, b2Vec2 fSizeP);
 	~Enemy();
 
 	void Death();

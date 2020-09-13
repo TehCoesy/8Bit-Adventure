@@ -14,7 +14,7 @@ private:
 	int m_iCordinateX, m_iCordinateY;
 public:
 	Wall();
-	Wall(int iID, std::string strName, std::string strTextureName, b2Body* PhysicsBody, int iTileX, int iTileY, int iCorX, int iCorY);
+	Wall(int iID, std::string strName, std::string strTextureName, b2Body* physicsBody, int iTileX, int iTileY, int iCorX, int iCorY);
 	~Wall();
 
 	void Update(float fDeltaTime);
