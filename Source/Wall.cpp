@@ -8,23 +8,32 @@ Wall::Wall() {
 }
 
 Wall::Wall(int iID, std::string strName, std::string strTextureName, b2Body* PhysicsBody, int iTileX, int iTileY, int iCorX, int iCorY) {
+	// Setup object's identity
 	m_iID = iID;
 	m_strName = strName;
+	m_ObjectType = ObjectType::WALL;
+
+	// Setup wall's position and size
 	m_iTileX = iTileX;
 	m_iTileY = iTileY;
 	m_iCordinateX = iCorX;
 	m_iCordinateY = iCorY;
 
-	m_StaticTexture = RM->GetTexture(strTextureName);
-	//m_StaticTexture.SetRepeated(true);
-	m_StaticTexture.Fetch(&m_Sprite);
-	//m_Sprite.setTextureRect({ 0, 0, iTileX, iTileY });
+	// Setup object's state
+	m_ObjectState = ObjectState::IDLE;
+	m_bIsActive = true;
+
+	// Setup object's m_PhysicsBody
 	m_PhysicsBody = PhysicsBody;
 	m_PhysicsBody->SetUserData(this);
 
-	m_ObjectType = ObjectType::WALL;
+	// Setup object's StaticTexture;
+	m_StaticTexture = RM->GetTexture(strTextureName);
+	m_StaticTexture.Fetch(&m_Sprite);
 
-	m_bIsActive = true;
+	// Setup sprite's size + origin
+	m_fSizeP = b2Vec2(TILE_SIZE, TILE_SIZE);
+	SetSpriteChanged();
 
 	SynchronizeBody();
 }

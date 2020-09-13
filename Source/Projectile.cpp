@@ -7,15 +7,21 @@ Projectile::Projectile() {
 
 }
 
-Projectile::Projectile(std::string strName, b2Body* physicsBody, std::string strType) {
+Projectile::Projectile(std::string strName, b2Body* physicsBody, std::string strType, int iParentID, ObjectType parentType, b2Vec2 fSizeP) {
+	// Setup object's identity
 	m_iID = 0;
 	m_strName = strName;
+	m_ObjectType = ObjectType::PROJECTILE;
 
+	// Setup object's state
+	m_ObjectState = ObjectState::MOVING;
+	m_bIsActive = true;
+
+	// Setup object's m_PhysicsBody
 	m_PhysicsBody = physicsBody;
 	m_PhysicsBody->SetUserData(this);
 
-	m_ObjectType = ObjectType::PROJECTILE;
-
+	// Setup object's Animation
 	m_strProjectileType = strType;
 	if (m_strProjectileType == "ARROW") {
 		m_Animation = RM->GetAnimation("ARROW");
@@ -23,10 +29,15 @@ Projectile::Projectile(std::string strName, b2Body* physicsBody, std::string str
 	else if (m_strProjectileType == "BULLET") {
 		m_Animation = RM->GetAnimation("BULLET");
 	}
+	m_Animation.Play();
 
-	m_bIsActive = true;
+	m_Animation.Fetch(&m_Sprite);
 
-	m_StaticTexture.Fetch(&m_Sprite);
+	// Setup sprite's size + origin
+	m_fSizeP = fSizeP;
+	SetSpriteChanged();
+
+	SynchronizeBody();
 }
 
 Projectile::~Projectile() {

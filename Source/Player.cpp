@@ -41,13 +41,6 @@ Player::Player(int iID, std::string strName, std::string strAnimationName, b2Bod
 	SetSpriteChanged();
 
 	SynchronizeBody();
-
-	// Debug
-	m_DebugBox.setFillColor(sf::Color::Transparent);
-	m_DebugBox.setOutlineColor(sf::Color::Red);
-	m_DebugBox.setOutlineThickness(1.0f);
-	m_DebugBox.setSize(sf::Vector2f(64.0f, 64.0f));
-	m_DebugBox.setOrigin(sf::Vector2f(32.0f, 32.0f));
 }
 
 Player::~Player() {
@@ -92,12 +85,6 @@ void Player::Update(float fDeltaTime) {
 		m_Animation.Fetch(&m_Sprite);
 		SynchronizeBody();
 
-		// Debug
-		if (m_bDebugDraw) {
-			m_DebugBox.setPosition(m_PhysicsBody->GetPosition().x * PIXELS_METERS, m_PhysicsBody->GetPosition().y * PIXELS_METERS);
-			m_DebugBox.setRotation(Radian2Degree(m_PhysicsBody->GetAngle()));
-		}
-
 		// Stop movement 
 		Move(fDeltaTime, -1);
 	}
@@ -111,14 +98,5 @@ void Player::Render(sf::RenderWindow* RenderWindow) {
 		m_Sprite.setPosition(sf::Vector2f(WorldPositionX + MainCamera->GetCameraVector().x, WorldPositionY + MainCamera->GetCameraVector().y));
 		RenderWindow->draw(m_Sprite);
 		m_Sprite.setPosition(sf::Vector2f(WorldPositionX, WorldPositionY));
-
-		if (m_bDebugDraw) {
-			WorldPositionX = m_DebugBox.getPosition().x;
-			WorldPositionY = m_DebugBox.getPosition().y;
-
-			m_DebugBox.setPosition(sf::Vector2f(WorldPositionX + MainCamera->GetCameraVector().x, WorldPositionY + MainCamera->GetCameraVector().y));
-			RenderWindow->draw(m_DebugBox);
-			m_DebugBox.setPosition(sf::Vector2f(WorldPositionX, WorldPositionY));
-		}
 	}
 }

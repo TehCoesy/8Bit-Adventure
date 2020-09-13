@@ -8,5 +8,4 @@ public:
 	Normal_Enemy();
 	~Normal_Enemy();
 	void Interaction(Enemy* Enemy, float fPlayerPosX, float fPlayerPosY,float fDeltaTime);
-	
 };

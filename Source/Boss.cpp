@@ -7,17 +7,33 @@ Boss::Boss() {
 
 }
 
-Boss::Boss(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody) {
+Boss::Boss(int iID, std::string strName, std::string strAnimationName, b2Body* PhysicsBody, b2Vec2 fSizeP) {
+	// Setup object's identity
 	m_iID = iID;
 	m_strName = strName;
+	m_ObjectType = ObjectType::ENEMY;
 
-	m_Animation = RM->GetAnimation(strAnimationName);
+	// Setup object's state
+	m_ObjectState = ObjectState::IDLE;
+	m_bIsActive = true;
+
+	// Setup object's m_PhysicsBody
 	m_PhysicsBody = PhysicsBody;
 	m_PhysicsBody->SetUserData(this);
 
-	m_ObjectType = ObjectType::ENEMY;
+	// Setup object's Animation
+	m_Animation = RM->GetAnimation(strAnimationName);
+	m_Animation.Play();
 
 	m_Animation.Fetch(&m_Sprite);
+
+	// Setup sprite's size + origin
+	m_fSizeP = fSizeP;
+	SetSpriteChanged();
+
+	SynchronizeBody();
+
+	m_fMaxVelocity = 2.0f;
 }
 
 Boss::~Boss() {

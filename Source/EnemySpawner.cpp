@@ -7,15 +7,28 @@ EnemySpawner::EnemySpawner() {
 
 }
 
-EnemySpawner::EnemySpawner(int iID, std::string strName, std::string strTextureName, b2Body* PhysicsBody) {
+EnemySpawner::EnemySpawner(int iID, std::string strName, std::string strTextureName, b2Body* PhysicsBody, b2Vec2 fSizeP) {
+	// Setup object's identity
 	m_iID = iID;
 	m_strName = strName;
+	m_ObjectType = ObjectType::STATIC;
 
-	m_StaticTexture = RM->GetTexture(strTextureName);
+	// Setup object's state
+	m_ObjectState = ObjectState::IDLE;
+	m_bIsActive = true;
+
+	// Setup object's m_PhysicsBody
 	m_PhysicsBody = PhysicsBody;
 	m_PhysicsBody->SetUserData(this);
 
+	// Setup object's StaticTexture
+	m_StaticTexture = RM->GetTexture(strTextureName);
+
 	m_StaticTexture.Fetch(&m_Sprite);
+
+	// Setup sprite's size + origin
+	m_fSizeP = fSizeP;
+	SetSpriteChanged();
 
 	SynchronizeBody();
 }

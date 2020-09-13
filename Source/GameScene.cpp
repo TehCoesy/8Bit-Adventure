@@ -296,7 +296,7 @@ void GameScene::Update(float fDeltaTime) {
 		b2Vec2 fOrigin = MainCamera->GetCameraCenter();
 		float fAngle = GetMouseAngleRadians(fOrigin, b2Vec2(Mouse::GetInstance()->GetPosition().x, Mouse::GetInstance()->GetPosition().y));
 		//printf("%f\n", )
-		SingleArrow(m_Player->GetPhysicsBody()->GetWorldCenter().x + 1.0f, m_Player->GetPhysicsBody()->GetWorldCenter().y + 1.0f, fAngle);
+		SingleArrow(m_Player->GetPhysicsBody()->GetWorldCenter().x, m_Player->GetPhysicsBody()->GetWorldCenter().y, fAngle);
 		SM->PlayEffectByName("PLAYER_ATTACK");
 	}
 
@@ -377,7 +377,7 @@ float GameScene::GetMouseAngleRadians(b2Vec2 fOrigin, b2Vec2 fTarget) {
 }
 
 void GameScene::SingleShot(float fPositionX, float fPositionY, float fDeg) {
-	b2Body* ProjectileBody = CreateProjectile(fPositionX * PIXELS_METERS, fPositionY * PIXELS_METERS, 10.0f, 10.0f);
+	b2Body* ProjectileBody = CreateProjectile(fPositionX * PIXELS_METERS, fPositionY * PIXELS_METERS, 10.0f, 20.0f);
 
 	if (fDeg == 0.0f) { // Up
 		ProjectileBody->SetLinearVelocity(b2Vec2(0.0f, -20.0f));
@@ -392,13 +392,13 @@ void GameScene::SingleShot(float fPositionX, float fPositionY, float fDeg) {
 		ProjectileBody->SetLinearVelocity(b2Vec2(-20.0f, 0.0f));
 	}
 
-	Projectile* NewProjectile = new Projectile("Bullet", ProjectileBody, "BULLET");
+	Projectile* NewProjectile = new Projectile("Bullet", ProjectileBody, "BULLET", 0, ObjectType::PLAYER, b2Vec2(10.0f, 20.0f));
 
 	m_Projectiles.push_back(NewProjectile);
 }
 
 void GameScene::SingleArrow(float fPositionX, float fPositionY, float fDeg) {
-	b2Body* ProjectileBody = CreateProjectile(fPositionX * PIXELS_METERS, fPositionY * PIXELS_METERS, 10.0f, 10.0f);
+	b2Body* ProjectileBody = CreateProjectile(fPositionX * PIXELS_METERS, fPositionY * PIXELS_METERS, 15.0f, 30.0f);
 
 	//fDeg = 180.0f * (b2_pi / 180.0f) + fDeg;
 
@@ -407,7 +407,7 @@ void GameScene::SingleArrow(float fPositionX, float fPositionY, float fDeg) {
 
 	ProjectileBody->SetLinearVelocity(b2Vec2(20.0f * cosf(fDeg + 90.0f * (b2_pi / 180.0f)), 20.0f * sinf(fDeg + 90.0f * (b2_pi / 180.0f))));
 
-	Projectile* NewProjectile = new Projectile("Arrow", ProjectileBody, "ARROW");
+	Projectile* NewProjectile = new Projectile("Arrow", ProjectileBody, "ARROW", 0, ObjectType::PLAYER, b2Vec2(15.0f, 30.0f));
 
 	m_Projectiles.push_back(NewProjectile);
 }
