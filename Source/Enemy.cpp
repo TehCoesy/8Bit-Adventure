@@ -7,7 +7,7 @@ Enemy::Enemy() {
 
 }
 
-Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* physicsBody, b2Vec2 fSizeP, int health, int scores, int damage) {
+Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* physicsBody, b2Vec2 fSizeP, int health, int scores, int damage,Player* player) {
 	// Setup object's identity
 	m_iID = iID;
 	m_strName = strName;
@@ -38,6 +38,7 @@ Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* phy
 	m_iScores = scores;
 	m_iDamage = damage;
 	m_iHealth = health;
+	this->player = player;
 }
 
 Enemy::~Enemy() {
@@ -53,7 +54,10 @@ void Enemy::Update(float fDeltaTime) {
 	}
 	if (m_bIsDead) {
 		CompleteStop(fDeltaTime);
-		m_bCanMove = false;
+		if (m_bCanMove) {
+			m_bCanMove = false;
+			player->setScores(player->getScores() + this->getScores());
+		}
 		this->Destroy();
 		// Switch death animation
 	}

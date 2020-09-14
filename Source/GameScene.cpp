@@ -66,7 +66,7 @@ void GameScene::LoadObject(std::string strFilePath) {
 				if (strcmp(strName, "SKELETON") == 0)
 				{
 					b2Body* EnemyBody = CreateBody(iPos_X, iPos_Y, 1, 1, false);
-					Enemy* Skele = new Enemy(iID, "SKELE", "SKELE", EnemyBody, b2Vec2(TILE_SIZE, TILE_SIZE), iHealth, iScores, iDamage);
+					Enemy* Skele = new Enemy(iID, "SKELE", "SKELE", EnemyBody, b2Vec2(TILE_SIZE, TILE_SIZE), iHealth, iScores, iDamage,m_Player);
 					m_Enemies.push_back(Skele);
 
 				}
