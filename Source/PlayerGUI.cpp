@@ -20,17 +20,17 @@ void PlayerGUI::initHPBar() {
 	this->hpBarBack.setFillColor(sf::Color(50, 50, 50, 200));
 	this->hpBarBack.setPosition(20.0f, 20.0f);
 
-	this->hpBarInside.setSize(sf::Vector2f(120.0f, 20.0f));
+	this->hpBarInside.setSize(sf::Vector2f(200.0f*(player->getHealth())/(player->getMaxHealth()), 20.0f));
 	this->hpBarInside.setFillColor(sf::Color(250, 50, 50, 200));
 	this->hpBarInside.setPosition(this->hpBarBack.getPosition());
 }
 
-void PlayerGUI::updateHPBar() {
-
+void PlayerGUI::updateHPBar(float newHP) {
+	this->hpBarInside.setSize(sf::Vector2f(200.0f * newHP / (player->getMaxHealth()),20.0f));
 }
 
 void PlayerGUI::update(const float& dt) {
-
+	updateHPBar(player->getHealth());
 }
 
 void PlayerGUI::renderHPBar(sf::RenderTarget* target) {

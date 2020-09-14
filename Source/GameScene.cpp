@@ -334,6 +334,7 @@ void GameScene::Update(float fDeltaTime) {
 	}
 	
 	m_Player->Update(fDeltaTime);
+	playerGUI->update(fDeltaTime);
 
 	m_World->Step(fDeltaTime, 4, 2);
 

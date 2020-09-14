@@ -41,6 +41,7 @@ Player::Player(int iID, std::string strName, std::string strAnimationName, b2Bod
 	SetSpriteChanged();
 
 	m_iHealth = health;
+	max_iHealth = health;
 	m_iScores = scores;
 	m_iDamage = damage;
 	SynchronizeBody();
@@ -102,4 +103,8 @@ void Player::Render(sf::RenderWindow* RenderWindow) {
 		RenderWindow->draw(m_Sprite);
 		m_Sprite.setPosition(sf::Vector2f(WorldPositionX, WorldPositionY));
 	}
+}
+
+int Player::getMaxHealth() {
+	return max_iHealth;
 }

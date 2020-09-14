@@ -11,7 +11,7 @@ class Player : public DynamicObject {
 private:
 	Player(Player const&) = delete;
 	Player& operator=(Player const&) = delete;
-	
+	int max_iHealth;
 public:
 	Player();
 	Player(int iID, std::string strName, std::string strAnimationName, b2Body* physicsBody, b2Vec2 fSizeP, int health, int scores, int damage);
@@ -19,4 +19,5 @@ public:
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);
+	int getMaxHealth();
 };

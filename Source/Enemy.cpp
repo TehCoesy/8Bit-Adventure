@@ -39,6 +39,7 @@ Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* phy
 	m_iDamage = damage;
 	m_iHealth = health;
 	this->player = player;
+	ping = 0;
 }
 
 Enemy::~Enemy() {
@@ -63,6 +64,12 @@ void Enemy::Update(float fDeltaTime) {
 	}
 
 	if (m_iID != -1) {
+		float distance = sqrt(pow(player->GetPhysicsBody()->GetWorldCenter().x - this->GetPhysicsBody()->GetWorldCenter().x, 2) + pow(player->GetPhysicsBody()->GetWorldCenter().y - this->GetPhysicsBody()->GetWorldCenter().y, 2));
+		if (distance < 4.0f) {
+			if (!ping) player->Damaged(this->GetDamage());
+			ping++;
+		}
+		if (ping >= 100) ping = 0;
 		float fCurrentVelocityX = m_PhysicsBody->GetLinearVelocity().x;
 		float fCurrentVelocityY = m_PhysicsBody->GetLinearVelocity().y;
 		if (fCurrentVelocityX == 0.0f && fCurrentVelocityY == 0.0f) {

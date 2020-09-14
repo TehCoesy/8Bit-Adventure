@@ -12,6 +12,7 @@ private:
 	Enemy(Enemy const&) = delete;
 	Enemy& operator=(Enemy const&) = delete;
 	Player* player;
+	int ping;
 public:
 	float fDistance;
 	float fDistanceX;

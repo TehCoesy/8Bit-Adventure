@@ -21,7 +21,7 @@ public:
 	PlayerGUI(Player* player);
 	virtual ~PlayerGUI();
 
-	void updateHPBar();
+	void updateHPBar(float newHP);
 
 	void update(const float& dt);
 
