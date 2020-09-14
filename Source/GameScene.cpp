@@ -16,7 +16,7 @@ GameScene::GameScene() {
 	t.setFont(font);
 	t.setCharacterSize(20);
 	t.setStyle(sf::Text::Bold);
-	
+	fix = false;
 	
 
 }
@@ -66,7 +66,7 @@ void GameScene::LoadObject(std::string strFilePath) {
 				if (strcmp(strName, "SKELETON") == 0)
 				{
 					b2Body* EnemyBody = CreateBody(iPos_X, iPos_Y, 1, 1, false);
-					Enemy* Skele = new Enemy(iID, "SKELE", "SKELE", EnemyBody, b2Vec2(TILE_SIZE, TILE_SIZE), iHealth, iScores, iDamage);
+					Enemy* Skele = new Enemy(iID, "SKELE", "SKELE", EnemyBody, b2Vec2(TILE_SIZE, TILE_SIZE), iHealth, iScores, iDamage,m_Player);
 					m_Enemies.push_back(Skele);
 
 				}
@@ -334,6 +334,7 @@ void GameScene::Update(float fDeltaTime) {
 	}
 	
 	m_Player->Update(fDeltaTime);
+	playerGUI->update(fDeltaTime);
 
 	m_World->Step(fDeltaTime, 4, 2);
 
@@ -369,7 +370,8 @@ bool GameScene::isWin()
 
 void GameScene::HandleInput(sf::RenderWindow* window)
 {
-	if (Mouse::GetInstance()->IsPressed()) {
+	if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !fix) fix = true;
+	if (Mouse::GetInstance()->IsPressed() && fix) {
 		b2Vec2 fOrigin = MainCamera->GetCameraCenter();
 		float fAngle = GetMouseAngleRadians(fOrigin, b2Vec2(Mouse::GetInstance()->GetPosition().x, Mouse::GetInstance()->GetPosition().y));
 		//printf("%f\n", )

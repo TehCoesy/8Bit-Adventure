@@ -5,11 +5,14 @@
 
 // Local
 #include "DynamicObject.h"
+#include "Player.h"
 
 class Enemy : public DynamicObject {
 private:
 	Enemy(Enemy const&) = delete;
 	Enemy& operator=(Enemy const&) = delete;
+	Player* player;
+	int ping;
 
 	// Debug
 	bool m_bDebug = false;
@@ -21,7 +24,7 @@ public:
 	float fDistanceY;
 
 	Enemy();
-	Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* physicsBody, b2Vec2 fSizeP, int health, int scores, int damage);
+	Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* physicsBody, b2Vec2 fSizeP, int health, int scores, int damage,Player* player);
 	~Enemy();
 
 	void Update(float fDeltaTime);

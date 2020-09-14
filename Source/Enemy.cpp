@@ -7,7 +7,7 @@ Enemy::Enemy() {
 
 }
 
-Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* physicsBody, b2Vec2 fSizeP, int health, int scores, int damage) {
+Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* physicsBody, b2Vec2 fSizeP, int health, int scores, int damage,Player* player) {
 	// Setup object's identity
 	m_iID = iID;
 	m_strName = strName;
@@ -38,6 +38,8 @@ Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* phy
 	m_iScores = scores;
 	m_iDamage = damage;
 	m_iHealth = health;
+	this->player = player;
+	ping = 0;
 
 	m_DebugBox.setFillColor(sf::Color::Transparent);
 	m_DebugBox.setOutlineColor(sf::Color::Red);
@@ -64,12 +66,21 @@ void Enemy::Update(float fDeltaTime) {
 	}
 	if (m_bIsDead) {
 		CompleteStop(fDeltaTime);
-		m_bCanMove = false;
+		if (m_bCanMove) {
+			m_bCanMove = false;
+			player->setScores(player->getScores() + this->getScores());
+		}
 		this->Destroy();
 		// Switch death animation
 	}
 
 	if (m_iID != -1) {
+		float distance = sqrt(pow(player->GetPhysicsBody()->GetWorldCenter().x - this->GetPhysicsBody()->GetWorldCenter().x, 2) + pow(player->GetPhysicsBody()->GetWorldCenter().y - this->GetPhysicsBody()->GetWorldCenter().y, 2));
+		if (distance < 4.0f) {
+			if (!ping) player->Damaged(this->GetDamage());
+			ping++;
+		}
+		if (ping >= 100) ping = 0;
 		float fCurrentVelocityX = m_PhysicsBody->GetLinearVelocity().x;
 		float fCurrentVelocityY = m_PhysicsBody->GetLinearVelocity().y;
 		if (fCurrentVelocityX == 0.0f && fCurrentVelocityY == 0.0f) {

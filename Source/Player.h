@@ -11,7 +11,8 @@ class Player : public DynamicObject {
 private:
 	Player(Player const&) = delete;
 	Player& operator=(Player const&) = delete;
-	
+	int max_iHealth;
+
 	// Debug
 	bool m_bDebug = false;
 	sf::RectangleShape m_DebugBox;
@@ -23,4 +24,5 @@ public:
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);
+	int getMaxHealth();
 };
