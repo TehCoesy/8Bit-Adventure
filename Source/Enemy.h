@@ -10,6 +10,11 @@ class Enemy : public DynamicObject {
 private:
 	Enemy(Enemy const&) = delete;
 	Enemy& operator=(Enemy const&) = delete;
+
+	// Debug
+	bool m_bDebug = false;
+	sf::RectangleShape m_DebugBox;
+	sf::CircleShape m_DebugCircle;
 public:
 	float fDistance;
 	float fDistanceX;
