@@ -15,6 +15,7 @@ protected:
 	int m_iHealth;
 	int m_iScores;
 	int m_iDamage;
+	int max_iHealth;
 	// Movement
 	bool m_bMovingDown, m_bMovingUp, m_bMovingLeft, m_bMovingRight;
 	int m_iDirection = 0; // 0 = Down; 1 = Up; 2 = Left; 3 = Right
@@ -36,6 +37,7 @@ public:
 	virtual void Destroy();
 	virtual void Attack();
 	void Damaged(int damage);
+	int getMaxHealth();
 
 
 

@@ -153,3 +153,7 @@ void DynamicObject::SetDamage(int damage)
 {
 	this->m_iDamage = damage;
 }
+
+int DynamicObject::getMaxHealth() {
+	return max_iHealth;
+}

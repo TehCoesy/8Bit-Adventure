@@ -38,19 +38,9 @@ Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* phy
 	m_iScores = scores;
 	m_iDamage = damage;
 	m_iHealth = health;
+	max_iHealth = health;
 	this->player = player;
 	ping = 0;
-
-	m_DebugBox.setFillColor(sf::Color::Transparent);
-	m_DebugBox.setOutlineColor(sf::Color::Red);
-	m_DebugBox.setOutlineThickness(1.0f);
-	m_DebugBox.setSize(sf::Vector2f(64.0f, 64.0f));
-	m_DebugBox.setOrigin(sf::Vector2f(32.0f, 32.0f));
-	m_DebugCircle.setFillColor(sf::Color::Transparent);
-	m_DebugCircle.setOutlineColor(sf::Color::Red);
-	m_DebugCircle.setOutlineThickness(1.0f);
-	m_DebugCircle.setRadius(32.0f);
-	m_DebugCircle.setOrigin(32.0f, 32.0f);
 }
 
 Enemy::~Enemy() {
@@ -131,17 +121,16 @@ void Enemy::Render(sf::RenderWindow* RenderWindow) {
 		m_Sprite.setPosition(sf::Vector2f(WorldPositionX + MainCamera->GetCameraVector().x, WorldPositionY + MainCamera->GetCameraVector().y));
 		RenderWindow->draw(m_Sprite);
 		m_Sprite.setPosition(sf::Vector2f(WorldPositionX, WorldPositionY));
+		sf::RectangleShape hpBarBack;
+		sf::RectangleShape hpBarInside;
+		hpBarBack.setSize(sf::Vector2f(40.0f, 5.0f));
+		hpBarBack.setFillColor(sf::Color(50, 50, 50, 200));
+		hpBarBack.setPosition(sf::Vector2f(WorldPositionX + MainCamera->GetCameraVector().x - 20.0f, WorldPositionY + MainCamera->GetCameraVector().y - 35.0f));
 
-		if (m_bDebug) {
-			m_DebugBox.setPosition(m_PhysicsBody->GetPosition().x * PIXELS_METERS, m_PhysicsBody->GetPosition().y * PIXELS_METERS);
-			m_DebugBox.setRotation(Radian2Degree(m_PhysicsBody->GetAngle()));
-
-			WorldPositionX = m_DebugBox.getPosition().x;
-			WorldPositionY = m_DebugBox.getPosition().y;
-
-			m_DebugBox.setPosition(sf::Vector2f(WorldPositionX + MainCamera->GetCameraVector().x, WorldPositionY + MainCamera->GetCameraVector().y));
-			RenderWindow->draw(m_DebugBox);
-			m_DebugBox.setPosition(sf::Vector2f(WorldPositionX, WorldPositionY));
-		}
+		hpBarInside.setSize(sf::Vector2f(40.0*getHealth()/getMaxHealth(), 5.0f));
+		hpBarInside.setFillColor(sf::Color(250, 50, 50, 200));
+		hpBarInside.setPosition(hpBarBack.getPosition());
+		RenderWindow->draw(hpBarBack);
+		RenderWindow->draw(hpBarInside);
 	}
 }
