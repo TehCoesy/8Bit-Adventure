@@ -48,6 +48,7 @@ private:
 	std::vector<Enemy*> m_Enemies;
 
 	sf::Font font;
+	bool fix;
 
 
 	// UI

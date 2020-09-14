@@ -16,7 +16,7 @@ GameScene::GameScene() {
 	t.setFont(font);
 	t.setCharacterSize(20);
 	t.setStyle(sf::Text::Bold);
-	
+	fix = false;
 	
 
 }
@@ -370,7 +370,8 @@ bool GameScene::isWin()
 
 void GameScene::HandleInput(sf::RenderWindow* window)
 {
-	if (Mouse::GetInstance()->IsPressed()) {
+	if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && !fix) fix = true;
+	if (Mouse::GetInstance()->IsPressed() && fix) {
 		b2Vec2 fOrigin = MainCamera->GetCameraCenter();
 		float fAngle = GetMouseAngleRadians(fOrigin, b2Vec2(Mouse::GetInstance()->GetPosition().x, Mouse::GetInstance()->GetPosition().y));
 		//printf("%f\n", )
