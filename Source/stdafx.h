@@ -26,7 +26,9 @@
 
 #define MAINMENU_BACKGROUND "Resources/Textures/bg/main.jpg"
 #define GAMESCENE_FILEPATH "./Resources/Stage1.txt"
-#define STAGE1_TERRAIN_FILEPATH "Stage1_Terrain.txt"
+#define STAGE1_TERRAIN_FILEPATH "/Stage1/Stage1_Terrain.txt"
+#define STAGE1_OBJECTS_FILEPATH "/Stage1/Stage1_Objects.txt"
+#define STAGE1_PLAYER_FILEPATH "/Stage1/Stage1_PlayerData.txt"
 
 #define FONT_VIDEOPHREAK "Resources/Font/VIDEOPHREAK.ttf"
 #define FONT_FONT2 "Resources/Font/font2.ttf"

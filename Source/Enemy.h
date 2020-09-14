@@ -16,10 +16,8 @@ public:
 	float fDistanceY;
 
 	Enemy();
-	Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* physicsBody, b2Vec2 fSizeP);
+	Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* physicsBody, b2Vec2 fSizeP, int health, int scores, int damage);
 	~Enemy();
-
-	void Death();
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);

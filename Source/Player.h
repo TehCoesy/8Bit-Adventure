@@ -11,9 +11,10 @@ class Player : public DynamicObject {
 private:
 	Player(Player const&) = delete;
 	Player& operator=(Player const&) = delete;
+	
 public:
 	Player();
-	Player(int iID, std::string strName, std::string strAnimationName, b2Body* physicsBody, b2Vec2 fSizeP);
+	Player(int iID, std::string strName, std::string strAnimationName, b2Body* physicsBody, b2Vec2 fSizeP, int health, int scores, int damage);
 	~Player();
 
 	void Update(float fDeltaTime);

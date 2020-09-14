@@ -1,6 +1,7 @@
-#SOUNDEFFECTS: 1
+#SOUNDEFFECTS: 2
 
-PLAYER_ATTACK Sounds/Effects/arrow-hit.wav
+PLAYER_ATTACK Sounds/Effects/bow.wav
+ARROW_HIT Sounds/Effects/arrow-hit.wav
 
 #MUSICS: 6
 

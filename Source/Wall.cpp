@@ -15,8 +15,8 @@ Wall::Wall(int iID, std::string strName, std::string strTextureName, b2Body* phy
 	// Setup wall's position and size
 	m_iTileX = iTileX;
 	m_iTileY = iTileY;
-	m_iCordinateX = iCorX;
-	m_iCordinateY = iCorY;
+	m_iCoordinateX = iCorX;
+	m_iCoordinateY = iCorY;
 
 	// Setup object's state
 	m_ObjectState = ObjectState::IDLE;
@@ -51,11 +51,10 @@ void Wall::Render(sf::RenderWindow* RenderWindow) {
 	if (m_iID != -1) {
 		float WorldPositionX = m_Sprite.getPosition().x;
 		float WorldPositionY = m_Sprite.getPosition().y;
-
 		
 		for (int i = 0; i < m_iTileX; i++) {
 			for (int k = 0; k < m_iTileY; k++) {
-				m_Sprite.setPosition(sf::Vector2f(m_iCordinateX * TILE_SIZE + MainCamera->GetCameraVector().x + i * TILE_SIZE , m_iCordinateY * TILE_SIZE + MainCamera->GetCameraVector().y + k * TILE_SIZE));
+				m_Sprite.setPosition(sf::Vector2f(m_iCoordinateX * TILE_SIZE + MainCamera->GetCameraVector().x + i * TILE_SIZE , m_iCoordinateY * TILE_SIZE + MainCamera->GetCameraVector().y + k * TILE_SIZE));
 				RenderWindow->draw(m_Sprite);
 			}
 		}

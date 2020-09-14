@@ -16,6 +16,10 @@ private:
 
 	bool m_bIsPlaying = false;
 	bool m_bRepeat = true;
+
+	// Blinking
+	bool m_bBlinking = false, m_bTransparent = false;
+	int m_iFrameCount = 0, m_iFrameDuration = 0, m_iBlinkFrames = 20;
 public:
 	Animation();
 	Animation(int iID, std::string strName, int iSteps, std::vector<MyTexture> AnimationFrames);
@@ -34,4 +38,8 @@ public:
 	bool IsRepeating();
 	void ToggleRepeat();
 	bool IsDone();
+
+	// Blinking
+	void BlinkForFrames(int iFrames);
+	void BlinkOnce();
 };

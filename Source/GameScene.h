@@ -20,7 +20,9 @@
 #include "Score.h"
 #include "State.h"
 #include "Normal_Enemy.h"
-
+#include "PauseMenu.h"
+#include "GameOver.h"
+#include "StageClear.h"
 
 class GameScene : public State {
 private:
@@ -44,23 +46,23 @@ private:
 	std::vector<Projectile*> m_Projectiles;
 	Boss* m_Boss;
 	std::vector<Enemy*> m_Enemies;
-	int state; //0:Playing, 1:Pause, 2: Gameover, 3: StageClear
+
 	sf::Font font;
-	std::vector<sf::Text> p_buttons;
-	std::vector<sf::Text> o_buttons;
-	int p_state;
-	std::vector<sf::Text> w_buttons;
-	int w_state;
+
+
 	// UI
 	PlayerGUI* playerGUI;
 	Score* score;
+
+	//check variables
+	
+	bool isWin();
+
 	// Scene loading functions
 	void LoadTerrain(std::string strFilePath);
-	void UpdateScore();
-	void GameOver(sf::RenderWindow* MainWindow);
-	void StageClear(sf::RenderWindow* MainWindow);
-	void Pause(sf::RenderWindow* MainWindow);
-	bool isTextClicked(sf::RenderWindow* window, sf::Text text);
+	void LoadObject(std::string strFilePath);
+	void LoadPlayer(std::string strFilePath);
+
 
 	// Clean-up functions
 	std::vector<MyObject*> m_objectsScheduledForRemoval;
@@ -71,6 +73,8 @@ public:
 	
 	// Scene loading functions
 	
+	void Pause();
+	void Resume();
 	void Init();
 	void HandleInput(sf::RenderWindow* window);
 	// Shooting projectiles

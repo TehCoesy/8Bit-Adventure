@@ -7,7 +7,7 @@ Enemy::Enemy() {
 
 }
 
-Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* physicsBody, b2Vec2 fSizeP) {
+Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* physicsBody, b2Vec2 fSizeP, int health, int scores, int damage) {
 	// Setup object's identity
 	m_iID = iID;
 	m_strName = strName;
@@ -34,20 +34,27 @@ Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* phy
 	SynchronizeBody();
 
 	m_fMaxVelocity = 1.0f;
+
+	m_iScores = scores;
+	m_iDamage = damage;
+	m_iHealth = health;
 }
 
 Enemy::~Enemy() {
 	DestroyBody();
 }
 
-void Enemy::Death() {
-	m_bIsDead = true;
-}
+
 
 void Enemy::Update(float fDeltaTime) {
+	if (m_iHealth <= 0)
+	{
+		m_bIsDead = true;
+	}
 	if (m_bIsDead) {
 		CompleteStop(fDeltaTime);
 		m_bCanMove = false;
+		this->Destroy();
 		// Switch death animation
 	}
 
@@ -58,28 +65,28 @@ void Enemy::Update(float fDeltaTime) {
 			if (m_iDirection == 0 && *m_Animation.GetName() != "SKELE_IDLE_DOWN") {
 				NewAnimation("SKELE_IDLE_DOWN");
 			}
-			else if (m_iDirection == 1 && *m_Animation.GetName() != "SKELE_IDLE_DOWN") {
-				NewAnimation("SKELE_IDLE_DOWN");
+			else if (m_iDirection == 1 && *m_Animation.GetName() != "SKELE_IDLE_UP") {
+				NewAnimation("SKELE_IDLE_UP");
 			}
-			else if (m_iDirection == 2 && *m_Animation.GetName() != "SKELE_IDLE_DOWN") {
-				NewAnimation("SKELE_IDLE_DOWN");
+			else if (m_iDirection == 2 && *m_Animation.GetName() != "SKELE_IDLE_LEFT") {
+				NewAnimation("SKELE_IDLE_LEFT");
 			}
-			else if (m_iDirection == 3 && *m_Animation.GetName() != "SKELE_IDLE_DOWN") {
-				NewAnimation("SKELE_IDLE_DOWN");
+			else if (m_iDirection == 3 && *m_Animation.GetName() != "SKELE_IDLE_RIGHT") {
+				NewAnimation("SKELE_IDLE_RIGHT");
 			}
 		}
 		else {
-			if (m_iDirection == 0 && *m_Animation.GetName() != "SKELE_IDLE_DOWN") {
-				NewAnimation("SKELE_IDLE_DOWN");
+			if (m_iDirection == 0 && *m_Animation.GetName() != "SKELE_MOVE_DOWN") {
+				NewAnimation("SKELE_MOVE_DOWN");
 			}
-			else if (m_iDirection == 1 && *m_Animation.GetName() != "SKELE_IDLE_DOWN") {
-				NewAnimation("SKELE_IDLE_DOWN");
+			else if (m_iDirection == 1 && *m_Animation.GetName() != "SKELE_MOVE_UP") {
+				NewAnimation("SKELE_MOVE_UP");
 			}
-			else if (m_iDirection == 2 && *m_Animation.GetName() != "SKELE_IDLE_DOWN") {
-				NewAnimation("SKELE_IDLE_DOWN");
+			else if (m_iDirection == 2 && *m_Animation.GetName() != "SKELE_MOVE_LEFT") {
+				NewAnimation("SKELE_MOVE_LEFT");
 			}
-			else if (m_iDirection == 3 && *m_Animation.GetName() != "SKELE_IDLE_DOWN") {
-				NewAnimation("SKELE_IDLE_DOWN");
+			else if (m_iDirection == 3 && *m_Animation.GetName() != "SKELE_MOVE_RIGHT") {
+				NewAnimation("SKELE_MOVE_RIGHT");
 			}
 		}
 

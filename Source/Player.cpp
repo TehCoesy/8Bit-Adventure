@@ -7,7 +7,7 @@ Player::Player() {
 
 }
 
-Player::Player(int iID, std::string strName, std::string strAnimationName, b2Body* physicsBody, b2Vec2 fSizeP) {
+Player::Player(int iID, std::string strName, std::string strAnimationName, b2Body* physicsBody, b2Vec2 fSizeP, int health, int scores, int damage) {
 	// Always do the following:
 	// + Setup object's identity
 	// + Setup object's state
@@ -40,6 +40,9 @@ Player::Player(int iID, std::string strName, std::string strAnimationName, b2Bod
 	m_fSizeP = fSizeP;
 	SetSpriteChanged();
 
+	m_iHealth = health;
+	m_iScores = scores;
+	m_iDamage = damage;
 	SynchronizeBody();
 }
 

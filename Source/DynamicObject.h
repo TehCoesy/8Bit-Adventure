@@ -9,7 +9,12 @@ class DynamicObject : public SpriteObject {
 private:
 	DynamicObject(DynamicObject const&) = delete;
 	DynamicObject& operator=(DynamicObject const&) = delete;
+
 protected:
+	//basic info
+	int m_iHealth;
+	int m_iScores;
+	int m_iDamage;
 	// Movement
 	bool m_bMovingDown, m_bMovingUp, m_bMovingLeft, m_bMovingRight;
 	int m_iDirection = 0; // 0 = Down; 1 = Up; 2 = Left; 3 = Right
@@ -30,6 +35,9 @@ public:
 	virtual void Death();
 	virtual void Destroy();
 	virtual void Attack();
+	void Damaged(int damage);
+
+
 
 	bool CanMove();
 	void ToggleCanMove();
@@ -39,6 +47,13 @@ public:
 
 	void Stop(float fDeltaTime, int iDirection);
 	void CompleteStop(float fDeltaTime);
+
+	bool isDead();
+	int getHealth();
+	int getScores();
+	void setScores(int score);
+	int GetDamage();
+	void SetDamage(int damage);
 
 	// Utility
 	enum Direction {

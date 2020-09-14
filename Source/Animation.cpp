@@ -73,6 +73,25 @@ void Animation::Update(float fDeltaTime) {
 void Animation::Fetch(sf::Sprite* ObjectSprite) {
 	if (m_iID != -1) {
 		m_graFrames.at(m_iFrameIndex).Fetch(ObjectSprite);
+		if (m_bBlinking) {
+			if (m_iFrameCount % m_iBlinkFrames == 0) {
+				if (!m_bTransparent) {
+					ObjectSprite->setColor(sf::Color(255, 255, 255, 128));
+					m_bTransparent = !m_bTransparent;
+				}
+				else {
+					ObjectSprite->setColor(sf::Color(255, 255, 255, 255));
+					m_bTransparent = !m_bTransparent;
+				}
+			}
+			m_iFrameCount++;
+			if (m_iFrameCount >= m_iFrameDuration) {
+				ObjectSprite->setColor(sf::Color(255, 255, 255, 255));
+				m_iFrameCount = 0;
+				m_iFrameDuration = 0;
+				m_bBlinking = false;
+			}
+		}
 	}
 }
 
@@ -86,4 +105,18 @@ void Animation::ToggleRepeat() {
 
 bool Animation::IsDone() {
 	return !m_bIsPlaying;
+}
+
+void Animation::BlinkForFrames(int iFrames) {
+	if (!m_bBlinking) {
+		m_bBlinking = true;
+		m_iFrameDuration = iFrames;
+	}
+}
+
+void Animation::BlinkOnce() {
+	if (!m_bBlinking) {
+		m_bBlinking = true;
+		m_iFrameDuration = m_iBlinkFrames;
+	}
 }

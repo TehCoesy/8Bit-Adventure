@@ -2,8 +2,8 @@
 #include "Score.h"
 
 Score::Score(Player* player) {
-	score = 1015;
 	this->player = player;
+	score = player->getScores();
 	init();
 }
 
@@ -38,7 +38,7 @@ sf::String Score::conv(int score) {
 }
 
 void Score::Update() {
-
+	score = player->getScores();
 }
 
 void Score::Render(sf::RenderTarget* target) {

@@ -11,7 +11,7 @@ private:
 	Wall& operator=(Wall const&) = delete;
 
 	int m_iTileX, m_iTileY;
-	int m_iCordinateX, m_iCordinateY;
+	int m_iCoordinateX, m_iCoordinateY;
 public:
 	Wall();
 	Wall(int iID, std::string strName, std::string strTextureName, b2Body* physicsBody, int iTileX, int iTileY, int iCorX, int iCorY);

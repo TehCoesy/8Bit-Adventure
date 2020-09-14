@@ -34,6 +34,11 @@ void DynamicObject::Attack() {
 
 }
 
+void DynamicObject::Damaged(int damage) {
+	m_Animation.BlinkForFrames(100);
+	this->m_iHealth -= damage;
+}
+
 bool DynamicObject::CanMove() {
 	return m_bCanMove;
 }
@@ -117,4 +122,33 @@ void DynamicObject::Stop(float fDeltaTime, int iDirection) {
 
 void DynamicObject::CompleteStop(float fDeltaTime) {
 	m_PhysicsBody->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+}
+
+bool DynamicObject::isDead()
+{
+	return m_bIsDead;
+}
+
+int DynamicObject::getHealth()
+{
+	return m_iHealth;
+}
+int DynamicObject::getScores()
+{
+	return m_iScores;
+}
+void DynamicObject::setScores(int score)
+{
+	this->m_iScores = score;
+}
+
+
+int DynamicObject::GetDamage()
+{
+	return m_iDamage;
+}
+
+void DynamicObject::SetDamage(int damage)
+{
+	this->m_iDamage = damage;
 }

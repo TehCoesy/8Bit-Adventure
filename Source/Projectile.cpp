@@ -51,7 +51,11 @@ void Projectile::SetParent(int iParentID, ObjectType parentType) {
 
 void Projectile::Death() {
 	m_ObjectState = ObjectState::DEATH;
-	m_Animation = RM->GetAnimation("ARROW_BREAK");
+	if (m_strProjectileType == "ARROW") {
+		m_Animation = RM->GetAnimation("ARROW_BREAK");
+		SM->PlayEffectByName("ARROW_HIT");
+	}
+	
 	if (m_Animation.IsRepeating()) {
 		m_Animation.ToggleRepeat();
 	}

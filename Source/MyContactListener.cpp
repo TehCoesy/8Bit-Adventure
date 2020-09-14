@@ -15,17 +15,18 @@ void MyContactListener::BeginContact(b2Contact* contact) {
 	MyObject* objectB = static_cast<MyObject*>(bodyDataB);
 
 	if (objectB->GetObjectType() == ObjectType::PROJECTILE) {
+		Projectile* ProjectileB = static_cast<Projectile*>(objectB);
 		switch (objectA->GetObjectType())
 		{
 		case ObjectType::ENEMY: {
 			printf("Hit Enemy!\n");
 			Enemy* EnemyA = static_cast<Enemy*>(objectA);
-			EnemyA->Death();
+			EnemyA->Damaged(ProjectileB->GetDamage());
+			ProjectileB->Death();
 			break;
 		}
 		case ObjectType::WALL: {
 			printf("Hit Wall!\n");
-			Projectile* ProjectileB = static_cast<Projectile*>(objectB);
 			ProjectileB->Death();
 			break;
 		}

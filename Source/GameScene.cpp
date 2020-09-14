@@ -10,31 +10,15 @@ GameScene::GameScene() {
 		m_World = new b2World(Gravity);
 		m_World->SetContactListener(&m_myContactListener);
 	}
-	state = 0;
+
 	font.loadFromFile(FONT_VIDEOPHREAK);
 	sf::Text t;
 	t.setFont(font);
 	t.setCharacterSize(20);
 	t.setStyle(sf::Text::Bold);
-	o_buttons.push_back(t);
-	o_buttons.push_back(t);
-	o_buttons.push_back(t);
-	o_buttons[0].setString("Play Again");
-	o_buttons[1].setString("Title Screen");
-	o_buttons[2].setString("Quit Game");
-	float margin = 30.0f;
-	float o_row = 750.0f;
-	float x = (float)WINDOW_W - 2*margin;
-	for (int i = 0; i < 3; i++) {
-		x -= o_buttons[i].getGlobalBounds().width;
-	}
-	x /= 2.0f;
-	float pos = margin;
-	for (int i = 0; i < 3; i++) {
-		o_buttons[i].setPosition(pos, o_row);
-		pos += o_buttons[i].getGlobalBounds().width+x;
-	}
-	p_state = 0;
+	
+	
+
 }
 
 GameScene::~GameScene() {
@@ -44,33 +28,72 @@ GameScene::~GameScene() {
 }
 
 void GameScene::Init() {
-	FILE* FileStream;
+	//Load Player
+	LoadPlayer(STAGE1_PLAYER_FILEPATH);
+
+	// Load objects
+	LoadObject(STAGE1_OBJECTS_FILEPATH);
 	
-	FileStream = fopen(GAMESCENE_FILEPATH, "r");
-
-	if (FileStream) {
-		// Load terrain
-		LoadTerrain(STAGE1_TERRAIN_FILEPATH);
-
-		// Load objects
-		b2Body* PlayerBody = CreateBody(5, 5, 1, 1, false);
-		m_Player = new Player(0, "PLAYER", "PLAYER_IDLE_DOWN", PlayerBody, b2Vec2(TILE_SIZE, TILE_SIZE));
-
-		//b2Body* EnemyBody1 = CreateBody(16, 8, 1, 1, false);
-		b2Body* EnemyBody2 = CreateBody(8, 8, 1, 1, false);
-		b2Body* EnemyBody3 = CreateBody(8, 16, 1, 1, false);
-		Enemy* Skele1 = new Enemy(0, "SKELE", "SKELE", EnemyBody3, b2Vec2(TILE_SIZE, TILE_SIZE));
-		m_Enemies.push_back(Skele1);
-		Enemy* Skele2 = new Enemy(0, "SKELE", "SKELE", EnemyBody2, b2Vec2(TILE_SIZE, TILE_SIZE));
-		m_Enemies.push_back(Skele2);
-
-		fclose(FileStream);
-	}
+	// Load terrain
+	LoadTerrain(STAGE1_TERRAIN_FILEPATH);
 
 	// Others
 	SoundManager::GetInstance()->PlayMusicByName("CELESTIAL");
 	this->playerGUI = new PlayerGUI((this->m_Player));
 	this->score = new Score((this->m_Player));
+}
+
+void GameScene::LoadObject(std::string strFilePath) {
+	FILE* FileStream;
+	strFilePath = RESOURCESFOLDER + strFilePath;
+	FileStream = fopen(strFilePath.c_str(), "r");
+
+	if (FileStream) {
+		int iVal;
+		int iNumEnemyType;
+		fscanf(FileStream, "#ENEMIES %d\n", &iNumEnemyType);
+		for (int i = 0; i < iNumEnemyType; i++)
+		{
+			int iHealth, iScores, iDamage, iAmount;
+			char strName[100];
+			iVal = fscanf(FileStream, "NAME: %s HEALTH: %d SCORES: %d DAMAGE: %d AMOUNT: %d\n", strName, &iHealth, &iScores, &iDamage, &iAmount);
+	
+			for (int j = 0; j < iAmount; j++)
+			{
+				int iID, iPos_X, iPos_Y;
+				fscanf(FileStream, "ID: %d, POS_X: %d, POS_Y: %d\n", &iID, &iPos_X, &iPos_Y);
+				//skeleton
+				if (strcmp(strName, "SKELETON") == 0)
+				{
+					b2Body* EnemyBody = CreateBody(iPos_X, iPos_Y, 1, 1, false);
+					Enemy* Skele = new Enemy(iID, "SKELE", "SKELE", EnemyBody, b2Vec2(TILE_SIZE, TILE_SIZE), iHealth, iScores, iDamage);
+					m_Enemies.push_back(Skele);
+
+				}
+			}
+		}
+		
+
+		fclose(FileStream);
+	}
+}
+void GameScene::LoadPlayer(std::string strFilePath) {
+	FILE* FileStream;
+	strFilePath = RESOURCESFOLDER + strFilePath;
+	FileStream = fopen(strFilePath.c_str(), "r");
+
+	if (FileStream) {
+		int iVal;
+
+		int iHealth, iScores, iDamage, iPosX, iPosY;
+		char strName[100];
+		iVal = fscanf(FileStream, "NAME: %s HEALTH: %d SCORES: %d DAMAGE: %d POS_X: %d POS_Y: %d\n", strName, &iHealth, &iScores, &iDamage, &iPosX, &iPosY);
+
+		b2Body* PlayerBody = CreateBody(5, 10, 1, 1, false);
+		m_Player = new Player(0, "PLAYER", "PLAYER_IDLE_DOWN", PlayerBody, b2Vec2(TILE_SIZE, TILE_SIZE), iHealth, iScores, iDamage);
+
+		fclose(FileStream);
+	}
 }
 
 void GameScene::LoadTerrain(std::string strFilePath) {
@@ -255,15 +278,22 @@ b2Body* GameScene::CreateBodyWithSprite(int iTileX, int iTileY, sf::Sprite graSp
 	return nullptr;
 }
 
+void GameScene::Pause()
+{
+
+}
+
+void GameScene::Resume()
+{
+
+}
+
 void GameScene::Update(float fDeltaTime) {
 	float fPlayerPosX = m_Player->GetPhysicsBody()->GetWorldCenter().x * PIXELS_METERS;
 	float fPlayerPosY = m_Player->GetPhysicsBody()->GetWorldCenter().y * PIXELS_METERS;
 	MainCamera->SetCameraPosition(fPlayerPosX,fPlayerPosY);
-	if (state) return;
+
 	// Update Input
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::H)) state = 2;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) state = 1;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) state = 3;
 	if (Keyboard::GetInstance()->GetKeyHold(Keyboard::DOWN)) {
 		m_Player->Move(fDeltaTime, 0);
 	}
@@ -292,13 +322,7 @@ void GameScene::Update(float fDeltaTime) {
 		m_Player->Stop(fDeltaTime, 3);
 	}
 	
-	if (Mouse::GetInstance()->IsPressed()) {
-		b2Vec2 fOrigin = MainCamera->GetCameraCenter();
-		float fAngle = GetMouseAngleRadians(fOrigin, b2Vec2(Mouse::GetInstance()->GetPosition().x, Mouse::GetInstance()->GetPosition().y));
-		//printf("%f\n", )
-		SingleArrow(m_Player->GetPhysicsBody()->GetWorldCenter().x, m_Player->GetPhysicsBody()->GetWorldCenter().y, fAngle);
-		SM->PlayEffectByName("PLAYER_ATTACK");
-	}
+
 
 	for (unsigned int i = 0; i < m_Enemies.size(); i++) {
 		Normal_Enemy::GetInstance()->Interaction(m_Enemies.at(i), fPlayerPosX, fPlayerPosY, fDeltaTime);
@@ -313,12 +337,50 @@ void GameScene::Update(float fDeltaTime) {
 
 	m_World->Step(fDeltaTime, 4, 2);
 
+	//update score
+	score->Update();
+
+	//change gameover state
+	if (m_Player->getHealth() <= 0)
+	{
+		StateMachine->AddState(StateRef(new GameOver));
+	}
+
+	//change stageclear state
+	if (isWin())
+	{
+		StateMachine->AddState(StateRef(new StageClear()));
+	}
+
 	Clean();
+
+}
+bool GameScene::isWin()
+{
+	for (int i = 0; i < m_Enemies.size(); i++)
+	{
+		if (!m_Enemies.at(i)->isDead())
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 void GameScene::HandleInput(sf::RenderWindow* window)
 {
+	if (Mouse::GetInstance()->IsPressed()) {
+		b2Vec2 fOrigin = MainCamera->GetCameraCenter();
+		float fAngle = GetMouseAngleRadians(fOrigin, b2Vec2(Mouse::GetInstance()->GetPosition().x, Mouse::GetInstance()->GetPosition().y));
+		//printf("%f\n", )
+		SingleArrow(m_Player->GetPhysicsBody()->GetWorldCenter().x, m_Player->GetPhysicsBody()->GetWorldCenter().y, fAngle);
+		SM->PlayEffectByName("PLAYER_ATTACK");
+	}
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	{
+		StateMachine->AddState(StateRef(new PauseMenu()), false);
+	}
 }
 
 void GameScene::Render(sf::RenderWindow* MainWindow) {
@@ -340,16 +402,6 @@ void GameScene::Render(sf::RenderWindow* MainWindow) {
 	m_Player->Render(MainWindow);
 	playerGUI->render(MainWindow);
 	score->Render(MainWindow);
-	if (state == 1) {
-		Pause(MainWindow);
-	}
-	else if (state == 2) {
-		GameOver(MainWindow);
-	}
-	else if (state == 3) {
-		StageClear(MainWindow);
-	}
-	//GameOver(MainWindow);
 }
 
 void GameScene::Clean() {
@@ -409,128 +461,10 @@ void GameScene::SingleArrow(float fPositionX, float fPositionY, float fDeg) {
 
 	Projectile* NewProjectile = new Projectile("Arrow", ProjectileBody, "ARROW", 0, ObjectType::PLAYER, b2Vec2(15.0f, 30.0f));
 
+	NewProjectile->SetDamage(m_Player->GetDamage());
 	m_Projectiles.push_back(NewProjectile);
 }
 
-void GameScene::UpdateScore() {
 
-}
 
-bool GameScene::isTextClicked(sf::RenderWindow* window, sf::Text text) {
-	sf::IntRect rect(text.getPosition().x, text.getPosition().y, text.getGlobalBounds().width, text.getGlobalBounds().height);
 
-	if (rect.contains(sf::Mouse::getPosition(*window)))
-		return true;
-
-	return false;
-}
-
-void GameScene::GameOver(sf::RenderWindow* window) {
-	sf::RectangleShape r;
-	r.setFillColor(sf::Color(0, 0, 0, 150));
-	r.setSize(sf::Vector2f((float)WINDOW_W,(float)WINDOW_H));
-	window->draw(r);
-	sf::Text t;
-	t.setFont(font);
-	t.setString("GAME OVER");
-	t.setCharacterSize(80);
-	t.setStyle(sf::Text::Bold);
-	//t.setPosition(sf::Vector2f(150, 400));
-	t.setPosition(sf::Vector2f((float)((WINDOW_W - t.getGlobalBounds().width) / 2.0f), (float)((WINDOW_H - t.getGlobalBounds().height) / 2.0f)));
-	window->draw(t);
-	for (auto x : o_buttons) {
-		window->draw(x);
-	}
-	sf::Event event;
-
-	while (window->pollEvent(event))
-	{
-		switch (event.type)
-		{
-		case sf::Event::Closed:
-			window->close();
-			break;
-
-		case sf::Event::MouseMoved:
-			if (isTextClicked(window, o_buttons[0]))
-				o_buttons[0].setFillColor(sf::Color::Yellow);
-			else
-				o_buttons[0].setFillColor(sf::Color::White);
-			if (isTextClicked(window, o_buttons[1]))
-				o_buttons[1].setFillColor(sf::Color::Yellow);
-			else
-				o_buttons[1].setFillColor(sf::Color::White);
-			if (isTextClicked(window, o_buttons[2]))
-				o_buttons[2].setFillColor(sf::Color::Yellow);
-			else
-				o_buttons[2].setFillColor(sf::Color::White);
-			break;
-		}
-	}
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-		if (isTextClicked(window, o_buttons[0])) {
-			state = 0;
-		}
-		if (isTextClicked(window, o_buttons[1])) {
-			state = 0;
-			StateMachine->AddState(StateRef(new MainMenu()));
-		}
-		if (isTextClicked(window, o_buttons[2])) {
-			window->close();
-		}
-	}
-}
-
-void GameScene::StageClear(sf::RenderWindow* window) {
-	sf::RectangleShape r;
-	r.setFillColor(sf::Color(0, 0, 0, 150));
-	r.setSize(sf::Vector2f((float)WINDOW_W, (float)WINDOW_H));
-	window->draw(r);
-	sf::Text t;
-	t.setFont(font);
-	t.setString("STAGE CLEAR");
-	t.setCharacterSize(80);
-	t.setStyle(sf::Text::Bold);
-	t.setPosition(sf::Vector2f((float)((WINDOW_W - t.getGlobalBounds().width) / 2.0f), (float)((WINDOW_H - t.getGlobalBounds().height) / 2.0f)));
-	window->draw(t);
-	t.setString("Click to continue...");
-	t.setCharacterSize(20);
-	t.setPosition(sf::Vector2f((float)((WINDOW_W - t.getGlobalBounds().width) / 2.0f), 750.0f));
-	window->draw(t);
-	if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && w_state == 0) {
-		w_state = 1;
-	}
-	else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && w_state == 1) {
-		w_state = 2;
-	}
-	else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && w_state == 2) {
-		w_state = 0;
-		state = 0;
-		StateMachine->AddState(StateRef(new MainMenu()));
-	}
-}
-
-void GameScene::Pause(sf::RenderWindow* window) {
-	sf::RectangleShape r;
-	r.setFillColor(sf::Color(0, 0, 0, 150));
-	r.setSize(sf::Vector2f((float)WINDOW_W, (float)WINDOW_H));
-	window->draw(r);
-	sf::Text t;
-	t.setFont(font);
-	t.setString("PAUSED");
-	t.setCharacterSize(80);
-	t.setStyle(sf::Text::Bold);
-	t.setPosition(sf::Vector2f((float)((WINDOW_W - t.getGlobalBounds().width) / 2.0f), (float)((WINDOW_H - t.getGlobalBounds().height) / 2.0f)));
-	window->draw(t);
-
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && p_state == 0) {
-		p_state = 1;
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && p_state == 1) {
-		p_state = 2;
-	}
-	else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && p_state == 2) {
-		p_state = 0;
-		state = 0;
-	}
-}

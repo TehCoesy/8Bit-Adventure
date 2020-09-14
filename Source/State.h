@@ -11,4 +11,6 @@ public:
 
 	virtual void Pause() { }
 	virtual void Resume() { }
+
+	bool isTextClicked(sf::RenderWindow* window, sf::Text text);
 };
