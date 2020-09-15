@@ -37,6 +37,28 @@ void PauseMenu::Init() {
 void PauseMenu::HandleInput(sf::RenderWindow * window)
 {
 	//TODO: change state
+	sf::Event event;
+
+	while (window->pollEvent(event))
+	{
+		switch (event.type)
+		{
+		case sf::Event::Closed:
+			window->close();
+			break;
+
+		case sf::Event::MouseMoved:
+			if (isTextClicked(window, m_aButtons[0]))
+				m_aButtons[0].setFillColor(sf::Color::Yellow);
+			else
+				m_aButtons[0].setFillColor(sf::Color::White);
+			if (isTextClicked(window, m_aButtons[1]))
+				m_aButtons[1].setFillColor(sf::Color::Yellow);
+			else
+				m_aButtons[1].setFillColor(sf::Color::White);
+			break;
+		}
+	}
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && p_state == 0) {
 		p_state = 1;
 	}
