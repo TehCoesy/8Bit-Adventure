@@ -19,7 +19,7 @@ private:
 
 	// Blinking
 	bool m_bBlinking = false, m_bTransparent = false;
-	int m_iFrameCount = 0, m_iFrameDuration = 0, m_iBlinkFrames = 20;
+	int m_iFrameCount = 0, m_iFrameDuration = 0, m_iBlinkFrames = 50;
 public:
 	Animation();
 	Animation(int iID, std::string strName, int iSteps, std::vector<MyTexture> AnimationFrames);
