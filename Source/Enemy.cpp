@@ -138,6 +138,8 @@ void Enemy::Render(sf::RenderWindow* RenderWindow) {
 }
 
 void Enemy::Death() {
+	player->setScores(player->getScores() + this->getScores());
+	this->setScores(0);
 	if (m_ObjectState != ObjectState::DEATH && m_ObjectState != ObjectState::DESTROYED) {
 		m_ObjectState = ObjectState::DEATH;
 		switch (m_iDirection) {
