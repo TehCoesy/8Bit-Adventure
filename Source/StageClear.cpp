@@ -20,8 +20,6 @@ void StageClear::Init() {
 	SM->PlayMusicByName("GAME_WIN");
 	SM->SetMusicLoop(false);
 
-
-
 }
 
 void StageClear::HandleInput(sf::RenderWindow * window)

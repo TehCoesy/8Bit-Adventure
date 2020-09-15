@@ -74,6 +74,16 @@ void SoundManager::PlayMusicByName(std::string strMusic) {
 	printf("No such Music track found.");
 }
 
+void SoundManager::Clean() {
+	for (int i = 0; i < m_SoundEffects.size(); i++) {
+		SoundEffect* soundEffect = m_SoundEffects.at(i);
+		if (soundEffect->IsStopped() && !soundEffect->IsRepeating()) {
+			m_SoundEffects.erase(m_SoundEffects.begin() + i);
+			delete soundEffect;
+		}
+	}
+}
+
 void SoundManager::SetVolume(float number)
 {
 	m_Music->SetVolume(number);
@@ -88,15 +98,5 @@ void SoundManager::SetMusicLoop(bool loop)
 	else
 	{
 		m_Music->SetNoRepeat();
-	}
-}
-
-void SoundManager::Clean() {
-	for (int i = 0; i < m_SoundEffects.size(); i++) {
-		SoundEffect* soundEffect = m_SoundEffects.at(i);
-		if (soundEffect->IsStopped() && !soundEffect->IsRepeating()) {
-			m_SoundEffects.erase(m_SoundEffects.begin() + i);
-			delete soundEffect;
-		}
 	}
 }

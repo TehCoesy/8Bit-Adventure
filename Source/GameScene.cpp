@@ -17,8 +17,14 @@ GameScene::GameScene() {
 	t.setCharacterSize(20);
 	t.setStyle(sf::Text::Bold);
 	fix = false;
-	
+	dif = 0;
+	mode = 0;
+}
 
+GameScene::GameScene(int dif, int mode) {
+	GameScene();
+	this->dif = dif;
+	this->mode = mode;
 }
 
 GameScene::~GameScene() {
@@ -38,7 +44,7 @@ void GameScene::Init() {
 	LoadTerrain(STAGE1_TERRAIN_FILEPATH);
 
 	// Others
-	SM->PlayMusicByName("CELESTIAL");
+	SoundManager::GetInstance()->PlayMusicByName("CELESTIAL");
 	this->playerGUI = new PlayerGUI((this->m_Player));
 	this->score = new Score((this->m_Player));
 }
@@ -89,7 +95,7 @@ void GameScene::LoadPlayer(std::string strFilePath) {
 		char strName[100];
 		iVal = fscanf(FileStream, "NAME: %s HEALTH: %d SCORES: %d DAMAGE: %d POS_X: %d POS_Y: %d\n", strName, &iHealth, &iScores, &iDamage, &iPosX, &iPosY);
 
-		b2Body* PlayerBody = CreateBody(iPosX, iPosY, 1, 1, false);
+		b2Body* PlayerBody = CreateBody(5, 10, 1, 1, false);
 		m_Player = new Player(0, "PLAYER", "PLAYER_IDLE_DOWN", PlayerBody, b2Vec2(TILE_SIZE, TILE_SIZE), iHealth, iScores, iDamage);
 
 		fclose(FileStream);
@@ -284,12 +290,12 @@ b2Body* GameScene::CreateBodyWithSprite(int iTileX, int iTileY, sf::Sprite graSp
 
 void GameScene::Pause()
 {
-	SM->SetVolume(20.f);
+
 }
 
 void GameScene::Resume()
 {
-	SM->SetVolume(100.f);
+
 }
 
 void GameScene::Update(float fDeltaTime) {
@@ -346,15 +352,15 @@ void GameScene::Update(float fDeltaTime) {
 	score->Update();
 
 	//change gameover state
-	if (m_Player->isDead())
+	if (m_Player->getHealth() <= 0)
 	{
-		StateMachine->AddState(StateRef(new GameOver));
+		StateMachine->AddState(StateRef(new GameOver),false,true);
 	}
 
 	//change stageclear state
 	if (isWin())
 	{
-		StateMachine->AddState(StateRef(new StageClear()));
+		StateMachine->AddState(StateRef(new StageClear()),false,true);
 	}
 
 	Clean();

@@ -23,6 +23,7 @@
 #include "PauseMenu.h"
 #include "GameOver.h"
 #include "StageClear.h"
+#include "SettingArg.h"
 
 class GameScene : public State {
 private:
@@ -49,6 +50,8 @@ private:
 
 	sf::Font font;
 	bool fix;
+	int mode;
+	int dif;
 
 
 	// UI
@@ -70,6 +73,7 @@ private:
 	void Clean();
 public:
 	GameScene();
+	GameScene(int dif, int mode);
 	~GameScene();
 	
 	// Scene loading functions

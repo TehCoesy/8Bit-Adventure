@@ -6,6 +6,7 @@
 // Local
 #include "DynamicObject.h"
 #include "Player.h"
+#include "SettingArg.h"
 
 class Enemy : public DynamicObject {
 private:
@@ -30,8 +31,7 @@ public:
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);
-
-	void Damaged(int damage);
+	void Damaged(float damage);
 	// Enemy types
 	enum {
 		SKELE, GHOST, DARKELF

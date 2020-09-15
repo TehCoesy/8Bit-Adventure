@@ -9,6 +9,7 @@
 #include "State.h"
 #include "StateManager.h"
 #include "GameScene.h"
+#include "Options.h"
 
 class MainMenu : public State {
 private:
@@ -19,6 +20,7 @@ private:
 	const int NUM_BUTTONS = 3;
 	sf::Text title;
 	std::vector<sf::Text> buttons;
+	int mode, dif;
 	bool isTextClicked(sf::RenderWindow* window, sf::Text text);
 public:
 	MainMenu();

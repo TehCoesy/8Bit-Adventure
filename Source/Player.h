@@ -18,6 +18,5 @@ public:
 
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);
-
-	void Damaged(int damage);
+	void Damaged(float damage);
 };

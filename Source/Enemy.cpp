@@ -35,10 +35,22 @@ Enemy::Enemy(int iID, std::string strName, std::string strEnemyType, b2Body* phy
 
 	m_fMaxVelocity = 1.0f;
 
-	m_iScores = scores;
-	m_iDamage = damage;
-	m_iHealth = health;
-	max_iHealth = health;
+	m_iScores = (float)scores;
+	m_iDamage = (float)damage;
+	m_iHealth = (float)health;
+
+	int dif = SettingArg::GetInstance()->getDif();
+	if (dif == 0) {
+		m_iDamage *= 0.5;
+		m_iScores *= 0.5;
+		m_iHealth *= 0.5;
+	}
+	else  if (dif == 2) {
+		m_iDamage *= 2;
+		m_iScores *= 2;
+		m_iHealth *= 3;
+	}
+	max_iHealth = m_iHealth;
 	this->player = player;
 	ping = 0;
 }
@@ -60,7 +72,6 @@ void Enemy::Update(float fDeltaTime) {
 			m_bCanMove = false;
 			player->setScores(player->getScores() + this->getScores());
 		}
-		NewAnimation("SKELETON_DIE_DOWN");
 		this->Destroy();
 		// Switch death animation
 	}
@@ -136,7 +147,7 @@ void Enemy::Render(sf::RenderWindow* RenderWindow) {
 	}
 }
 
-void Enemy::Damaged(int damage)
+void Enemy::Damaged(float damage)
 {
 	m_Animation.BlinkForFrames(100);
 	this->m_iHealth -= damage;
