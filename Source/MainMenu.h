@@ -21,6 +21,7 @@ private:
 	sf::Text title;
 	std::vector<sf::Text> buttons;
 	int mode, dif;
+	bool _toGame, _toOption, _toQuit;
 	bool isTextClicked(sf::RenderWindow* window, sf::Text text);
 public:
 	MainMenu();

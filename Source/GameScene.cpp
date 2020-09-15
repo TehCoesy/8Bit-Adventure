@@ -299,12 +299,12 @@ b2Body* GameScene::CreateBodyWithSprite(int iTileX, int iTileY, sf::Sprite graSp
 
 void GameScene::Pause()
 {
-
+	SM->SetVolume(20.0f);
 }
 
 void GameScene::Resume()
 {
-
+	SM->SetVolume(100.0f);
 }
 
 void GameScene::Update(float fDeltaTime) {

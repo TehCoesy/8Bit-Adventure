@@ -23,13 +23,7 @@ MainMenu::MainMenu() {
 	buttons[0].setString("Play Game");
 	buttons[1].setString("Options");
 	buttons[2].setString("Quit");
-	/*titleFont.loadFromFile("Resources/Font/font2.ttf");
-	title.setFont(titleFont);
-	title.setCharacterSize(40);
-	title.setPosition(220, 100);
-	title.setString("CHRONICLE: RISE");
-	title.setFillColor(sf::Color::White);
-	title.setStyle(sf::Text::Bold);*/
+	_toGame = _toOption = _toQuit = false;
 }
 
 MainMenu::~MainMenu() {
@@ -115,17 +109,33 @@ void MainMenu::HandleInput(sf::RenderWindow* window) {
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
-		if (isTextClicked(window, buttons[0])) {
+		if (!_toGame && !_toOption && !_toQuit) {
+			if (isTextClicked(window, buttons[0])) {
+				_toGame = true;
+			}
+			else if (isTextClicked(window, buttons[2])) {
+				_toQuit = true;
+			}
+			else if (isTextClicked(window, buttons[1])) {
+				_toOption = true;
+			}
+		}
+	}
+	else {
+		if (_toGame) {
+			_toGame = false;
 			SM->PlayEffectByName("BTN_CLICK");
 			StateMachine->AddState(StateRef(new GameScene()), true);
 		}
-		else if (isTextClicked(window, buttons[2])) {
+		if (_toOption) {
+			_toOption = false;
+			SM->PlayEffectByName("BTN_CLICK");
+			StateMachine->AddState(StateRef(new Options()), false, true);
+		}
+		if (_toQuit) {
+			_toQuit = false;
 			SM->PlayEffectByName("BTN_CLICK");
 			window->close();
-		}
-		else if (isTextClicked(window, buttons[1])) {
-			SM->PlayEffectByName("BTN_CLICK");
-			StateMachine->AddState(StateRef(new Options()), false,true);
 		}
 	}
 }
