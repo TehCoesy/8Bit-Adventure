@@ -50,22 +50,15 @@ Enemy::~Enemy() {
 
 
 void Enemy::Update(float fDeltaTime) {
-	if (m_iHealth <= 0)
-	{
-		m_bIsDead = true;
-	}
-	if (m_bIsDead) {
+	if (m_ObjectState == ObjectState::DEATH) {
 		CompleteStop(fDeltaTime);
-		if (m_bCanMove) {
-			m_bCanMove = false;
-			player->setScores(player->getScores() + this->getScores());
+		m_bCanMove = false;
+		if (m_Animation.IsDone()) {
+			Destroy();
 		}
-		NewAnimation("SKELETON_DIE_DOWN");
-		this->Destroy();
-		// Switch death animation
 	}
 
-	if (m_iID != -1) {
+	if (m_iID != -1 && m_ObjectState != ObjectState::DEATH) {
 		float distance = sqrt(pow(player->GetPhysicsBody()->GetWorldCenter().x - this->GetPhysicsBody()->GetWorldCenter().x, 2) + pow(player->GetPhysicsBody()->GetWorldCenter().y - this->GetPhysicsBody()->GetWorldCenter().y, 2));
 		if (distance < 4.0f) {
 			if (!ping) player->Damaged(this->GetDamage());
@@ -102,15 +95,11 @@ void Enemy::Update(float fDeltaTime) {
 				NewAnimation("SKELE_MOVE_RIGHT");
 			}
 		}
-
-		m_Animation.Update(fDeltaTime);
-		m_Animation.Fetch(&m_Sprite);
-		SynchronizeBody();
-
-		//DampenMovement();
-		// Stop movement 
-		//Move(fDeltaTime, -1);
 	}
+
+	m_Animation.Update(fDeltaTime);
+	m_Animation.Fetch(&m_Sprite);
+	SynchronizeBody();
 }
 
 void Enemy::Render(sf::RenderWindow* RenderWindow) {
@@ -136,13 +125,34 @@ void Enemy::Render(sf::RenderWindow* RenderWindow) {
 	}
 }
 
+void Enemy::Death() {
+	if (m_ObjectState != ObjectState::DEATH && m_ObjectState != ObjectState::DESTROYED) {
+		m_ObjectState = ObjectState::DEATH;
+		switch (m_iDirection) {
+		case 0: m_Animation = RM->GetAnimation("SKELETON_DIE_DOWN"); break;
+		case 1: m_Animation = RM->GetAnimation("SKELETON_DIE_UP"); break;
+		case 2: m_Animation = RM->GetAnimation("SKELETON_DIE_LEFT"); break;
+		case 3: m_Animation = RM->GetAnimation("SKELETON_DIE_RIGHT"); break;
+		}
+
+		if (m_Animation.IsRepeating()) {
+			m_Animation.ToggleRepeat();
+		}
+	}
+}
+
+void Enemy::Destroy() {
+	m_bIsActive = false;
+	m_ObjectState = ObjectState::DESTROYED;
+}
+
 void Enemy::Damaged(int damage)
 {
 	m_Animation.BlinkForFrames(100);
-	this->m_iHealth -= damage;
-	if (this->m_iHealth <= 0)
-	{
-		this->m_iHealth = 0;
+	m_iHealth -= damage;
+	if (m_iHealth <= 0) {
+		m_iHealth = 0;
+		Death();
 	}
 	SM->PlayEffectByName("ENEMY_HURT");
 }

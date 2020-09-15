@@ -124,52 +124,52 @@ ANI ID 17 NAME ARROW_BREAK FRAMES 7 TIMESTEP 2
 ANI ID 18 NAME BULLET FRAMES 1 TIMESTEP 100
 0 Textures/Items/Bullet.png 20.0 20.0
 
-ANI ID 19 NAME PLAYER_DIE_DOWN FRAMES 4 TIMESTEP 100
+ANI ID 19 NAME PLAYER_DIE_DOWN FRAMES 4 TIMESTEP 20
 0 Textures/die/player/down/sprite_0.png 64.0 64.0
 1 Textures/die/player/down/sprite_1.png 64.0 64.0
 2 Textures/die/player/down/sprite_2.png 64.0 64.0
 3 Textures/die/player/down/sprite_3.png 64.0 64.0
 
-ANI ID 20 NAME PLAYER_DIE_LEFT FRAMES 4 TIMESTEP 100
+ANI ID 20 NAME PLAYER_DIE_LEFT FRAMES 4 TIMESTEP 20
 0 Textures/die/player/left/sprite_0.png 64.0 64.0
 1 Textures/die/player/left/sprite_1.png 64.0 64.0
 2 Textures/die/player/left/sprite_2.png 64.0 64.0
 3 Textures/die/player/left/sprite_3.png 64.0 64.0
 
-ANI ID 21 NAME PLAYER_DIE_RIGHT FRAMES 4 TIMESTEP 100
+ANI ID 21 NAME PLAYER_DIE_RIGHT FRAMES 4 TIMESTEP 20
 0 Textures/die/player/right/sprite_0.png 64.0 64.0
 1 Textures/die/player/right/sprite_1.png 64.0 64.0
 2 Textures/die/player/right/sprite_2.png 64.0 64.0
 3 Textures/die/player/right/sprite_3.png 64.0 64.0
 
-ANI ID 22 NAME PLAYER_DIE_UP FRAMES 4 TIMESTEP 100
+ANI ID 22 NAME PLAYER_DIE_UP FRAMES 4 TIMESTEP 20
 0 Textures/die/player/up/sprite_0.png 64.0 64.0
 1 Textures/die/player/up/sprite_1.png 64.0 64.0
 2 Textures/die/player/up/sprite_2.png 64.0 64.0
 3 Textures/die/player/up/sprite_3.png 64.0 64.0
 
-ANI ID 23 NAME SKELETON_DIE_DOWN FRAMES 5 TIMESTEP 100
+ANI ID 23 NAME SKELETON_DIE_DOWN FRAMES 5 TIMESTEP 10
 0 Textures/die/skeleton/down/sprite_0.png 64.0 64.0
 1 Textures/die/skeleton/down/sprite_1.png 64.0 64.0
 2 Textures/die/skeleton/down/sprite_2.png 64.0 64.0
 3 Textures/die/skeleton/down/sprite_3.png 64.0 64.0
 4 Textures/die/skeleton/down/sprite_4.png 64.0 64.0
 
-ANI ID 24 NAME SKELETON_DIE_LEFT FRAMES 5 TIMESTEP 100
+ANI ID 24 NAME SKELETON_DIE_LEFT FRAMES 5 TIMESTEP 10
 0 Textures/die/skeleton/left/sprite_0.png 64.0 64.0
 1 Textures/die/skeleton/left/sprite_1.png 64.0 64.0
 2 Textures/die/skeleton/left/sprite_2.png 64.0 64.0
 3 Textures/die/skeleton/left/sprite_3.png 64.0 64.0
 4 Textures/die/skeleton/left/sprite_4.png 64.0 64.0
 
-ANI ID 25 NAME SKELETON_DIE_RIGHT FRAMES 5 TIMESTEP 100
+ANI ID 25 NAME SKELETON_DIE_RIGHT FRAMES 5 TIMESTEP 10
 0 Textures/die/skeleton/right/sprite_0.png 64.0 64.0
 1 Textures/die/skeleton/right/sprite_1.png 64.0 64.0
 2 Textures/die/skeleton/right/sprite_2.png 64.0 64.0
 3 Textures/die/skeleton/right/sprite_3.png 64.0 64.0
 4 Textures/die/skeleton/right/sprite_4.png 64.0 64.0
 
-ANI ID 26 NAME SKELETON_DIE_UP FRAMES 5 TIMESTEP 100
+ANI ID 26 NAME SKELETON_DIE_UP FRAMES 5 TIMESTEP 10
 0 Textures/die/skeleton/up/sprite_0.png 64.0 64.0
 1 Textures/die/skeleton/up/sprite_1.png 64.0 64.0
 2 Textures/die/skeleton/up/sprite_2.png 64.0 64.0

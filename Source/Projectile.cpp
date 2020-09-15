@@ -50,14 +50,16 @@ void Projectile::SetParent(int iParentID, ObjectType parentType) {
 }
 
 void Projectile::Death() {
-	m_ObjectState = ObjectState::DEATH;
-	if (m_strProjectileType == "ARROW") {
-		m_Animation = RM->GetAnimation("ARROW_BREAK");
-		SM->PlayEffectByName("ARROW_HIT");
-	}
-	
-	if (m_Animation.IsRepeating()) {
-		m_Animation.ToggleRepeat();
+	if (m_ObjectState != ObjectState::DEATH && m_ObjectState != ObjectState::DESTROYED) {
+		m_ObjectState = ObjectState::DEATH;
+		if (m_strProjectileType == "ARROW") {
+			m_Animation = RM->GetAnimation("ARROW_BREAK");
+			SM->PlayEffectByName("ARROW_HIT");
+		}
+
+		if (m_Animation.IsRepeating()) {
+			m_Animation.ToggleRepeat();
+		}
 	}
 }
 

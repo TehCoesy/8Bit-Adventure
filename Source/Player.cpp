@@ -52,20 +52,15 @@ Player::~Player() {
 }
 
 void Player::Update(float fDeltaTime) {
-	if (m_iHealth <= 0)
-	{
-		m_bIsDead = true;
-	}
-	if (m_bIsDead) {
-		SM->PlayEffectByName("PLAYER_DIE");
+	if (m_ObjectState == ObjectState::DEATH) {
 		CompleteStop(fDeltaTime);
-		if (m_bCanMove) {
-			m_bCanMove = false;
+		m_bCanMove = false;
+		if (m_Animation.IsDone()) {
+			Destroy();
 		}
-		this->Destroy();
-		// Switch death animation
 	}
-	if (m_iID != -1) {
+
+	if (m_iID != -1 && m_ObjectState != ObjectState::DEATH) {
 		float fCurrentVelocityX = m_PhysicsBody->GetLinearVelocity().x;
 		float fCurrentVelocityY = m_PhysicsBody->GetLinearVelocity().y;
 
@@ -97,14 +92,14 @@ void Player::Update(float fDeltaTime) {
 				NewAnimation("PLAYER_MOVE_RIGHT");
 			}
 		}
-		
-		m_Animation.Update(fDeltaTime);
-		m_Animation.Fetch(&m_Sprite);
-		SynchronizeBody();
 
 		// Stop movement 
 		Move(fDeltaTime, -1);
 	}
+
+	m_Animation.Update(fDeltaTime);
+	m_Animation.Fetch(&m_Sprite);
+	SynchronizeBody();
 }
 
 void Player::Render(sf::RenderWindow* RenderWindow) {
@@ -120,8 +115,33 @@ void Player::Render(sf::RenderWindow* RenderWindow) {
 
 void Player::Damaged(int damage)
 {
-	SM->PlayEffectByName("PLAYER_HURT");
 	m_Animation.BlinkForFrames(100);
-	this->m_iHealth -= damage;
-	if (this->m_iHealth < 0) this->m_iHealth = 0;
+	m_iHealth -= damage;
+	if (m_iHealth <= 0) {
+		m_iHealth = 0;
+		Death();
+	}
+	SM->PlayEffectByName("PLAYER_HURT");
+}
+
+void Player::Death() {
+	if (m_ObjectState != ObjectState::DEATH && m_ObjectState != ObjectState::DESTROYED) {
+		SM->PlayEffectByName("PLAYER_DIE");
+		m_ObjectState = ObjectState::DEATH;
+		switch (m_iDirection) {
+		case 0: m_Animation = RM->GetAnimation("PLAYER_DIE_DOWN"); break;
+		case 1: m_Animation = RM->GetAnimation("PLAYER_DIE_UP"); break;
+		case 2: m_Animation = RM->GetAnimation("PLAYER_DIE_LEFT"); break;
+		case 3: m_Animation = RM->GetAnimation("PLAYER_DIE_RIGHT"); break;
+		}
+
+		if (m_Animation.IsRepeating()) {
+			m_Animation.ToggleRepeat();
+		}
+	}
+}
+
+void Player::Destroy() {
+	m_bIsActive = false;
+	m_ObjectState = ObjectState::DESTROYED;
 }

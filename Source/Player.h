@@ -20,4 +20,6 @@ public:
 	void Render(sf::RenderWindow* RenderWindow);
 
 	void Damaged(int damage);
+	void Death();
+	void Destroy();
 };

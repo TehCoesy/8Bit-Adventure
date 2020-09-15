@@ -186,6 +186,7 @@ b2Body* GameScene::CreateProjectile(float fPositionX, float fPositionY, float fS
 	FixtureDef.isSensor = true;
 
 	PhysicsBody->CreateFixture(&FixtureDef);
+	PhysicsBody->SetBullet(true);
 
 	return PhysicsBody;
 }

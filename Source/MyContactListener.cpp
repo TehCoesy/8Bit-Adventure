@@ -21,7 +21,9 @@ void MyContactListener::BeginContact(b2Contact* contact) {
 		case ObjectType::ENEMY: {
 			printf("Hit Enemy!\n");
 			Enemy* EnemyA = static_cast<Enemy*>(objectA);
-			EnemyA->Damaged(ProjectileB->GetDamage());
+			if (EnemyA->IsActive()) {
+				EnemyA->Damaged(ProjectileB->GetDamage());
+			}
 			ProjectileB->Death();
 			break;
 		}
@@ -30,8 +32,29 @@ void MyContactListener::BeginContact(b2Contact* contact) {
 			ProjectileB->Death();
 			break;
 		}
-		default:
+		default: break;
+		}
+	}
+
+	if (objectA->GetObjectType() == ObjectType::PROJECTILE) {
+		Projectile* ProjectileA = static_cast<Projectile*>(objectA);
+		switch (objectB->GetObjectType())
+		{
+		case ObjectType::ENEMY: {
+			printf("Hit Enemy!\n");
+			Enemy* EnemyB = static_cast<Enemy*>(objectB);
+			if (EnemyB->IsActive()) {
+				EnemyB->Damaged(ProjectileA->GetDamage());
+			}
+			ProjectileA->Death();
 			break;
+		}
+		case ObjectType::WALL: {
+			printf("Hit Wall!\n");
+			ProjectileA->Death();
+			break;
+		}
+		default: break;
 		}
 	}
 }
