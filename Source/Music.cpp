@@ -55,11 +55,6 @@ void Music::Stop() {
 	}
 }
 
-void Music::SetVolume(float number)
-{
-	m_Music.setVolume(number);
-}
-
 void Music::SetRepeat() {
 	if (m_bIsLoaded) {
 		m_Music.setLoop(true);
@@ -81,4 +76,9 @@ bool Music::IsStopped() {
 		return true;
 	}
 	return false;
+}
+
+void Music::SetVolume(float number)
+{
+	m_Music.setVolume(number);
 }

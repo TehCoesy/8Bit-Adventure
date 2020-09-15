@@ -34,7 +34,10 @@ void DynamicObject::Attack() {
 
 }
 
-void DynamicObject::Damaged(int damage) {
+void DynamicObject::Damaged(float damage) {
+	m_Animation.BlinkForFrames(100);
+	this->m_iHealth -= damage;
+	if (this->m_iHealth < 0) this->m_iHealth = 0;
 }
 
 bool DynamicObject::CanMove() {
@@ -151,6 +154,6 @@ void DynamicObject::SetDamage(int damage)
 	this->m_iDamage = damage;
 }
 
-int DynamicObject::getMaxHealth() {
+float DynamicObject::getMaxHealth() {
 	return max_iHealth;
 }

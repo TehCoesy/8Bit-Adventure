@@ -23,6 +23,7 @@
 #include "PauseMenu.h"
 #include "GameOver.h"
 #include "StageClear.h"
+#include "SettingArg.h"
 
 class GameScene : public State {
 private:
@@ -46,10 +47,12 @@ private:
 	std::vector<Projectile*> m_Projectiles;
 	Boss* m_Boss;
 	std::vector<Enemy*> m_Enemies;
-
+	static int infCount;
 	sf::Font font;
 	bool fix;
-
+	int mode;
+	int dif;
+	int frameCount;
 
 	// UI
 	PlayerGUI* playerGUI;
@@ -70,6 +73,7 @@ private:
 	void Clean();
 public:
 	GameScene();
+	GameScene(int dif, int mode);
 	~GameScene();
 	
 	// Scene loading functions

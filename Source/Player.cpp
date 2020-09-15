@@ -113,7 +113,7 @@ void Player::Render(sf::RenderWindow* RenderWindow) {
 	}
 }
 
-void Player::Damaged(int damage)
+void Player::Damaged(float damage)
 {
 	m_Animation.BlinkForFrames(100);
 	m_iHealth -= damage;

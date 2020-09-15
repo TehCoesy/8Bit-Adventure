@@ -2,11 +2,17 @@
 
 
 void GameOver::Init() {
+	m_font.loadFromFile(FONT_FONT2);
+	m_text.setFont(m_font);
+	m_text.setString("GAME OVER");
+	m_text.setCharacterSize(20);
+	m_text.setStyle(sf::Text::Bold);
 	m_aButtons.push_back(m_text);
+	m_aButtons.push_back(m_text);
+	m_aButtons.push_back(m_text);
+	m_text.setCharacterSize(80);
 	m_aButtons[0].setString("Play Again");
-	m_aButtons.push_back(m_text);
 	m_aButtons[1].setString("Title Screen");
-	m_aButtons.push_back(m_text);
 	m_aButtons[2].setString("Quit Game");
 	float margin = 30.0f;
 	float o_row = 750.0f;
@@ -23,19 +29,11 @@ void GameOver::Init() {
 	
 	m_rec.setFillColor(sf::Color(0, 0, 0, 150));
 	m_rec.setSize(sf::Vector2f((float)WINDOW_W, (float)WINDOW_H));
-	
-	
-	m_font.loadFromFile(FONT_FONT2);
-	m_text.setFont(m_font);
-	m_text.setString("GAME OVER");
-	m_text.setCharacterSize(80);
-	m_text.setStyle(sf::Text::Bold);
-	//t.setPosition(sf::Vector2f(150, 400));
 	m_text.setPosition(sf::Vector2f((float)((WINDOW_W - m_text.getGlobalBounds().width) / 2.0f), (float)((WINDOW_H - m_text.getGlobalBounds().height) / 2.0f)));
-	
-	//add gameover music
+	//t.setPosition(sf::Vector2f(150, 400));
 	SM->PlayMusicByName("GAME_OVER");
 	SM->SetMusicLoop(false);
+	
 }
 
 void GameOver::HandleInput(sf::RenderWindow * window)
@@ -68,10 +66,10 @@ void GameOver::HandleInput(sf::RenderWindow * window)
 	}
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		if (isTextClicked(window, m_aButtons[0])) {
-			StateMachine->AddState(StateRef(new GameScene));
+			StateMachine->AddState(StateRef(new GameScene),true);
 		}
 		if (isTextClicked(window, m_aButtons[1])) {
-			StateMachine->AddState(StateRef(new MainMenu()));
+			StateMachine->AddState(StateRef(new MainMenu()),true);
 		}
 		if (isTextClicked(window, m_aButtons[2])) {
 			window->close();

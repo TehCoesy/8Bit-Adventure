@@ -6,6 +6,7 @@
 // Local
 #include "DynamicObject.h"
 #include "Player.h"
+#include "SettingArg.h"
 
 class Enemy : public DynamicObject {
 private:

@@ -18,8 +18,8 @@ void Game::Update(float fDeltaTime) {
 
 void Game::Render() {
 	m_MainWindow.clear();
-	
-	StateMachine->GetActiveState()->Render(&m_MainWindow);
+	StateMachine->Render(&m_MainWindow);
+	//StateMachine->GetActiveState()->Render(&m_MainWindow);
 
 	m_MainWindow.display();
 }

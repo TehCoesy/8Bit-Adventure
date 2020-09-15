@@ -3,6 +3,8 @@
 
 #include "GameScene.h"
 
+int GameScene::infCount = 0;
+
 GameScene::GameScene() {
 	// Top-down 2D
 	if (!m_World) {
@@ -17,8 +19,15 @@ GameScene::GameScene() {
 	t.setCharacterSize(20);
 	t.setStyle(sf::Text::Bold);
 	fix = false;
-	
+	dif = 0;
+	mode = 0;
+	frameCount = 0;
+}
 
+GameScene::GameScene(int dif, int mode) {
+	GameScene();
+	this->dif = dif;
+	this->mode = mode;
 }
 
 GameScene::~GameScene() {
@@ -32,13 +41,18 @@ void GameScene::Init() {
 	LoadPlayer(STAGE1_PLAYER_FILEPATH);
 
 	// Load objects
-	LoadObject(STAGE1_OBJECTS_FILEPATH);
+	if (SettingArg::GetInstance()->getMod() == 0) {
+		LoadObject(STAGE1_OBJECTS_FILEPATH);
+	}
+	else {
+
+	}
 	
 	// Load terrain
 	LoadTerrain(STAGE1_TERRAIN_FILEPATH);
 
 	// Others
-	SM->PlayMusicByName("CELESTIAL");
+	SoundManager::GetInstance()->PlayMusicByName("CELESTIAL");
 	this->playerGUI = new PlayerGUI((this->m_Player));
 	this->score = new Score((this->m_Player));
 }
@@ -89,7 +103,7 @@ void GameScene::LoadPlayer(std::string strFilePath) {
 		char strName[100];
 		iVal = fscanf(FileStream, "NAME: %s HEALTH: %d SCORES: %d DAMAGE: %d POS_X: %d POS_Y: %d\n", strName, &iHealth, &iScores, &iDamage, &iPosX, &iPosY);
 
-		b2Body* PlayerBody = CreateBody(iPosX, iPosY, 1, 1, false);
+		b2Body* PlayerBody = CreateBody(5, 10, 1, 1, false);
 		m_Player = new Player(0, "PLAYER", "PLAYER_IDLE_DOWN", PlayerBody, b2Vec2(TILE_SIZE, TILE_SIZE), iHealth, iScores, iDamage);
 
 		fclose(FileStream);
@@ -285,12 +299,12 @@ b2Body* GameScene::CreateBodyWithSprite(int iTileX, int iTileY, sf::Sprite graSp
 
 void GameScene::Pause()
 {
-	SM->SetVolume(20.f);
+
 }
 
 void GameScene::Resume()
 {
-	SM->SetVolume(100.f);
+
 }
 
 void GameScene::Update(float fDeltaTime) {
@@ -347,15 +361,36 @@ void GameScene::Update(float fDeltaTime) {
 	score->Update();
 
 	//change gameover state
-	if (m_Player->isDead())
+	if (m_Player->getHealth() <= 0)
 	{
-		StateMachine->AddState(StateRef(new GameOver));
+		StateMachine->AddState(StateRef(new GameOver),false,true);
 	}
 
 	//change stageclear state
+	if (SettingArg::GetInstance()->getMod() == 1) {
+		for (auto it = m_Enemies.begin(); it != m_Enemies.end();it++) {
+			if ((*it)->isDead()) {
+				(*it)->GetPhysicsBody()->GetWorld()->DestroyBody((*it)->GetPhysicsBody());
+				m_Enemies.erase(it);
+				break;
+			}
+		}
+		if (m_Enemies.size() < 3 && frameCount<50) {
+			frameCount++;
+		}
+		if (frameCount == 50) {
+			for (int i = 0; i < 5; i++) {
+				srand(time(NULL));
+				b2Body* EnemyBody = CreateBody(rand()%10+15, rand()%10+5, 1, 1, false);
+				Enemy* Skele = new Enemy(infCount++, "SKELE", "SKELE", EnemyBody, b2Vec2(TILE_SIZE, TILE_SIZE), 20, 20, 5, m_Player);
+				m_Enemies.push_back(Skele);
+				frameCount = 0;
+			}
+		}
+	}
 	if (isWin())
 	{
-		StateMachine->AddState(StateRef(new StageClear()));
+		StateMachine->AddState(StateRef(new StageClear()),false,true);
 	}
 
 	Clean();
@@ -363,6 +398,7 @@ void GameScene::Update(float fDeltaTime) {
 }
 bool GameScene::isWin()
 {
+	if (SettingArg::GetInstance()->getMod() == 1) return false;
 	for (int i = 0; i < m_Enemies.size(); i++)
 	{
 		if (!m_Enemies.at(i)->isDead())
