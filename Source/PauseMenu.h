@@ -29,6 +29,8 @@ private:
 	sf::Font m_font;
 	std::vector<sf::Text> m_aButtons;
 	int p_state;
+	bool resume, toTitle;
+	bool isTextClicked(sf::RenderWindow* window, sf::Text text);
 public:
 	virtual void Init();
 
