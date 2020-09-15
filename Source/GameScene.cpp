@@ -369,7 +369,7 @@ void GameScene::Update(float fDeltaTime) {
 	if (SettingArg::GetInstance()->getMod() == 1) {
 		for (auto it = m_Enemies.begin(); it != m_Enemies.end();it++) {
 			if ((*it)->isDead()) {
-				(*it)->Destroy();
+				(*it)->GetPhysicsBody()->GetWorld()->DestroyBody((*it)->GetPhysicsBody());
 				m_Enemies.erase(it);
 				break;
 			}
