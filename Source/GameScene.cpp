@@ -381,7 +381,7 @@ void GameScene::Update(float fDeltaTime) {
 		if (frameCount == 50) {
 			for (int i = 0; i < 5; i++) {
 				srand(time(NULL));
-				b2Body* EnemyBody = CreateBody(rand()%10+15, rand()%10+5, 1, 1, false);
+				b2Body* EnemyBody = CreateBody(rand()%10+15, rand()%10+10, 1, 1, false);
 				Enemy* Skele = new Enemy(infCount++, "SKELE", "SKELE", EnemyBody, b2Vec2(TILE_SIZE, TILE_SIZE), 20, 20, 5, m_Player);
 				m_Enemies.push_back(Skele);
 				frameCount = 0;
@@ -422,7 +422,7 @@ void GameScene::HandleInput(sf::RenderWindow* window)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
-		StateMachine->AddState(StateRef(new PauseMenu()), false);
+		StateMachine->AddState(StateRef(new PauseMenu()), false,true);
 	}
 }
 
