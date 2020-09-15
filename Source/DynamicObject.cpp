@@ -35,9 +35,6 @@ void DynamicObject::Attack() {
 }
 
 void DynamicObject::Damaged(int damage) {
-	m_Animation.BlinkForFrames(100);
-	this->m_iHealth -= damage;
-	if (this->m_iHealth < 0) this->m_iHealth = 0;
 }
 
 bool DynamicObject::CanMove() {

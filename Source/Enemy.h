@@ -13,6 +13,7 @@ private:
 	Enemy& operator=(Enemy const&) = delete;
 	Player* player;
 	int ping;
+	int m_iFrameCount = 0;
 
 	// Debug
 	bool m_bDebug = false;
@@ -30,6 +31,7 @@ public:
 	void Update(float fDeltaTime);
 	void Render(sf::RenderWindow* RenderWindow);
 
+	void Damaged(int damage);
 	// Enemy types
 	enum {
 		SKELE, GHOST, DARKELF

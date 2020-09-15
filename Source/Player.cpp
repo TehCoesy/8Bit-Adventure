@@ -52,6 +52,19 @@ Player::~Player() {
 }
 
 void Player::Update(float fDeltaTime) {
+	if (m_iHealth <= 0)
+	{
+		m_bIsDead = true;
+	}
+	if (m_bIsDead) {
+		SM->PlayEffectByName("PLAYER_DIE");
+		CompleteStop(fDeltaTime);
+		if (m_bCanMove) {
+			m_bCanMove = false;
+		}
+		this->Destroy();
+		// Switch death animation
+	}
 	if (m_iID != -1) {
 		float fCurrentVelocityX = m_PhysicsBody->GetLinearVelocity().x;
 		float fCurrentVelocityY = m_PhysicsBody->GetLinearVelocity().y;
@@ -103,4 +116,12 @@ void Player::Render(sf::RenderWindow* RenderWindow) {
 		RenderWindow->draw(m_Sprite);
 		m_Sprite.setPosition(sf::Vector2f(WorldPositionX, WorldPositionY));
 	}
+}
+
+void Player::Damaged(int damage)
+{
+	SM->PlayEffectByName("PLAYER_HURT");
+	m_Animation.BlinkForFrames(100);
+	this->m_iHealth -= damage;
+	if (this->m_iHealth < 0) this->m_iHealth = 0;
 }

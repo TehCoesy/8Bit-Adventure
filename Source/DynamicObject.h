@@ -36,7 +36,7 @@ public:
 	virtual void Death();
 	virtual void Destroy();
 	virtual void Attack();
-	void Damaged(int damage);
+	virtual void Damaged(int damage);
 	int getMaxHealth();
 
 

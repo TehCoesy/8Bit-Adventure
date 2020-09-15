@@ -10,7 +10,13 @@ Wall::Wall(int iID, std::string strName, std::string strTextureName, b2Body* phy
 	// Setup object's identity
 	m_iID = iID;
 	m_strName = strName;
-	m_ObjectType = ObjectType::WALL;
+	if (strName == "DECOR") {
+		m_ObjectType = ObjectType::DECOR;
+	}
+	else {
+		m_ObjectType = ObjectType::WALL;
+	}
+	
 
 	// Setup wall's position and size
 	m_iTileX = iTileX;

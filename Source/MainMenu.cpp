@@ -52,6 +52,7 @@ void MainMenu::Init() {
 	sf::Vector2f targetSize(800.0f, 800.0f);
 	menuSprite->setScale(targetSize.x / menuSprite->getLocalBounds().width,
 		targetSize.y / menuSprite->getLocalBounds().height);
+	SM->PlayMusicByName("SLOPES");
 }
 
 void MainMenu::Update(const float dt) {
@@ -89,7 +90,9 @@ void MainMenu::HandleInput(sf::RenderWindow* window) {
 			/* Change Between game states */
 		case sf::Event::KeyPressed:
 			if (event.key.code == sf::Keyboard::Escape)
+			{
 				window->close();
+			}
 			else if (event.key.code == sf::Keyboard::Return) {
 				//loadgame();
 			}
@@ -115,9 +118,13 @@ void MainMenu::HandleInput(sf::RenderWindow* window) {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		if (isTextClicked(window, buttons[0])) {
+			SM->PlayEffectByName("BTN_CLICK");
 			StateMachine->AddState(StateRef(new GameScene()), true);
 		}
-		else if (isTextClicked(window,buttons[2]))
+		else if (isTextClicked(window, buttons[2]))
+		{
+			SM->PlayEffectByName("BTN_CLICK");
 			window->close();
+		}
 	}
 }

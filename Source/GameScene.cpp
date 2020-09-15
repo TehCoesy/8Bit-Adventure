@@ -38,7 +38,7 @@ void GameScene::Init() {
 	LoadTerrain(STAGE1_TERRAIN_FILEPATH);
 
 	// Others
-	SoundManager::GetInstance()->PlayMusicByName("CELESTIAL");
+	SM->PlayMusicByName("CELESTIAL");
 	this->playerGUI = new PlayerGUI((this->m_Player));
 	this->score = new Score((this->m_Player));
 }
@@ -89,7 +89,7 @@ void GameScene::LoadPlayer(std::string strFilePath) {
 		char strName[100];
 		iVal = fscanf(FileStream, "NAME: %s HEALTH: %d SCORES: %d DAMAGE: %d POS_X: %d POS_Y: %d\n", strName, &iHealth, &iScores, &iDamage, &iPosX, &iPosY);
 
-		b2Body* PlayerBody = CreateBody(5, 10, 1, 1, false);
+		b2Body* PlayerBody = CreateBody(iPosX, iPosY, 1, 1, false);
 		m_Player = new Player(0, "PLAYER", "PLAYER_IDLE_DOWN", PlayerBody, b2Vec2(TILE_SIZE, TILE_SIZE), iHealth, iScores, iDamage);
 
 		fclose(FileStream);
@@ -135,7 +135,7 @@ void GameScene::LoadTerrain(std::string strFilePath) {
 				int iID, iCorX, iCorY, iVer, iHor;
 				iVal = fscanf(FileStream, "ID: %d COR_X: %d COR_Y: %d VERTICAL: %d HORIZONTAL: %d\n", &iID, &iCorX, &iCorY, &iVer, &iHor);
 
-				b2Body* WallBody = CreateWall((float)iCorX, (float)iCorY, iHor, iVer, true);
+				b2Body* WallBody = CreateWall((float)iCorX, (float)iCorY, iHor, iVer, true, true);
 
 				Wall *NewWall = new Wall(iID, "WALL", cName, WallBody, iHor, iVer, iCorX, iCorY);
 
@@ -157,7 +157,7 @@ void GameScene::LoadTerrain(std::string strFilePath) {
 				int iID, iCorX, iCorY, iVer, iHor;
 				iVal = fscanf(FileStream, "ID: %d COR_X: %d COR_Y: %d VERTICAL: %d HORIZONTAL: %d\n", &iID, &iCorX, &iCorY, &iVer, &iHor);
 
-				b2Body* WallBody = CreateWall((float)iCorX, (float)iCorY, 0, 0, true);
+				b2Body* WallBody = CreateWall((float)iCorX, (float)iCorY, 0, 0, true, false);
 
 				Wall *NewWall = new Wall(iID, "DECOR", cName, WallBody, iHor, iVer, iCorX, iCorY);
 
@@ -238,7 +238,7 @@ b2Body* GameScene::CreateBody(int iTileX, int iTileY, int iTileSizeX, int iTileS
 	return PhysicsBody;
 }
 
-b2Body* GameScene::CreateWall(float iX, float iY, int iSizeX, int iSizeY, bool bStatic)
+b2Body* GameScene::CreateWall(float iX, float iY, int iSizeX, int iSizeY, bool bStatic, bool bCollision)
 {
 	if (iSizeX != 1)
 	{
@@ -269,6 +269,10 @@ b2Body* GameScene::CreateWall(float iX, float iY, int iSizeX, int iSizeY, bool b
 	FixtureDef.density = 1.0f;
 	FixtureDef.shape = &BodyShape;
 
+	if (!bCollision) {
+		FixtureDef.isSensor = true;
+	}
+
 	PhysicsBody->CreateFixture(&FixtureDef);
 
 	return PhysicsBody;
@@ -280,12 +284,12 @@ b2Body* GameScene::CreateBodyWithSprite(int iTileX, int iTileY, sf::Sprite graSp
 
 void GameScene::Pause()
 {
-
+	SM->SetVolume(20.f);
 }
 
 void GameScene::Resume()
 {
-
+	SM->SetVolume(100.f);
 }
 
 void GameScene::Update(float fDeltaTime) {
@@ -342,7 +346,7 @@ void GameScene::Update(float fDeltaTime) {
 	score->Update();
 
 	//change gameover state
-	if (m_Player->getHealth() <= 0)
+	if (m_Player->isDead())
 	{
 		StateMachine->AddState(StateRef(new GameOver));
 	}

@@ -60,6 +60,7 @@ void Enemy::Update(float fDeltaTime) {
 			m_bCanMove = false;
 			player->setScores(player->getScores() + this->getScores());
 		}
+		NewAnimation("SKELETON_DIE_DOWN");
 		this->Destroy();
 		// Switch death animation
 	}
@@ -133,4 +134,15 @@ void Enemy::Render(sf::RenderWindow* RenderWindow) {
 		RenderWindow->draw(hpBarBack);
 		RenderWindow->draw(hpBarInside);
 	}
+}
+
+void Enemy::Damaged(int damage)
+{
+	m_Animation.BlinkForFrames(100);
+	this->m_iHealth -= damage;
+	if (this->m_iHealth <= 0)
+	{
+		this->m_iHealth = 0;
+	}
+	SM->PlayEffectByName("ENEMY_HURT");
 }

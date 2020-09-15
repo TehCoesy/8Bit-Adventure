@@ -29,5 +29,8 @@ public:
 	void PlayEffectByName(std::string strSoundEffect);
 	void PlayMusicByName(std::string strMusic);
 
+	void SetVolume(float number);
+	void SetMusicLoop(bool loop);
+
 	void Clean();
 };

@@ -14,7 +14,7 @@
 #include "SoundManager.h"
 #include "Camera.h"
 
-enum class ObjectType { OBJ, PLAYER, ENEMY, STATIC, MELEE, PROJECTILE, WALL };
+enum class ObjectType { OBJ, PLAYER, ENEMY, STATIC, MELEE, PROJECTILE, WALL, DECOR };
 enum class ObjectState { SPAWN, SLEEP, IDLE, MOVING, ATTACK, DEATH, DESTROYED};
 
 class MyObject {

@@ -1,9 +1,14 @@
-#SOUNDEFFECTS: 2
+#SOUNDEFFECTS: 7
 
 PLAYER_ATTACK Sounds/Effects/bow.wav
 ARROW_HIT Sounds/Effects/arrow-hit.wav
+BTN_CLICK Sounds/Effects/button-click-sfx.wav
+PLAYER_DIE Sounds/Effects/player-die.wav
+PLAYER_HURT Sounds/Effects/player-hurt.wav
+ENEMY_DIE Sounds/Effects/enemy-die.wav
+ENEMY_HURT Sounds/Effects/enemy-hurt.wav
 
-#MUSICS: 6
+#MUSICS: 8
 
 CELESTIAL Sounds/Music/Celestial.wav
 BATTLE Sounds/Music/Battle.wav
@@ -11,3 +16,5 @@ CARPET Sounds/Music/Carpet.wav
 NOCTURNAL Sounds/Music/Nocturnal.wav
 WOODS Sounds/Music/Woods.wav
 SLOPES Sounds/Music/Slopes.wav
+GAME_OVER Sounds/Music/game-over-sfx.wav
+GAME_WIN Sounds/Music/game-win.wav

@@ -21,6 +21,7 @@ public:
 	void Play();
 	void Pause();
 	void Stop();
+	void SetVolume(float number);
 
 	void SetRepeat();
 	void SetNoRepeat();

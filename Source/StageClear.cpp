@@ -17,7 +17,8 @@ void StageClear::Init() {
 	m_text.setString("Click to continue...");
 	m_text.setCharacterSize(20);
 	m_text.setPosition(sf::Vector2f((float)((WINDOW_W - m_text.getGlobalBounds().width) / 2.0f), 750.0f));
-	
+	SM->PlayMusicByName("GAME_WIN");
+	SM->SetMusicLoop(false);
 
 
 

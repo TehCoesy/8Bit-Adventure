@@ -3,10 +3,10 @@
 
 void GameOver::Init() {
 	m_aButtons.push_back(m_text);
-	m_aButtons.push_back(m_text);
-	m_aButtons.push_back(m_text);
 	m_aButtons[0].setString("Play Again");
+	m_aButtons.push_back(m_text);
 	m_aButtons[1].setString("Title Screen");
+	m_aButtons.push_back(m_text);
 	m_aButtons[2].setString("Quit Game");
 	float margin = 30.0f;
 	float o_row = 750.0f;
@@ -33,8 +33,9 @@ void GameOver::Init() {
 	//t.setPosition(sf::Vector2f(150, 400));
 	m_text.setPosition(sf::Vector2f((float)((WINDOW_W - m_text.getGlobalBounds().width) / 2.0f), (float)((WINDOW_H - m_text.getGlobalBounds().height) / 2.0f)));
 	
-
-	
+	//add gameover music
+	SM->PlayMusicByName("GAME_OVER");
+	SM->SetMusicLoop(false);
 }
 
 void GameOver::HandleInput(sf::RenderWindow * window)

@@ -86,9 +86,10 @@ void Animation::Fetch(sf::Sprite* ObjectSprite) {
 			}
 			m_iFrameCount++;
 			if (m_iFrameCount >= m_iFrameDuration) {
+				m_bTransparent = false;
 				ObjectSprite->setColor(sf::Color(255, 255, 255, 255));
 				m_iFrameCount = 0;
-				m_iFrameDuration = 0;
+				//m_iFrameDuration = 0;
 				m_bBlinking = false;
 			}
 		}

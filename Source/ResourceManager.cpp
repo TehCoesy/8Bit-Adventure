@@ -12,12 +12,12 @@ ResourceManager::~ResourceManager() {
 void ResourceManager::InitWithFile(std::string strFilePath) {
 	FILE* FileStream;
 	strFilePath = RESOURCESFOLDER + strFilePath;
-	FileStream = fopen(strFilePath.c_str(), "r");
+	FileStream = fopen(strFilePath.c_str(), "r"); 
 
 	if (FileStream) {
 		int iVal;
 
-		// Loading static Textures
+		// Loading static Texturess
 		int iTexturesCount = 0;
 		iVal = fscanf(FileStream, "#TEXTURES: %d\n", &iTexturesCount);
 

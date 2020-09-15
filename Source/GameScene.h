@@ -34,7 +34,7 @@ private:
 	b2Body* CreateProjectile(float fX, float fY, float fSizeX, float fSizeY);
 	b2Body* CreateSensor(float fX, float fY, float fSizeX, float fSizeY);
 	b2Body* CreateBody(int iX, int iY, int iSizeX, int iSizeY, bool bStatic);
-	b2Body* CreateWall(float iX, float iY, int iSizeX, int iSizeY, bool bStatic);
+	b2Body* CreateWall(float iX, float iY, int iSizeX, int iSizeY, bool bStatic, bool bCollision);
 	b2Body* CreateBodyWithSprite(int iTileX, int iTileY, sf::Sprite graSprite);
 
 	// GameObjects

@@ -74,6 +74,23 @@ void SoundManager::PlayMusicByName(std::string strMusic) {
 	printf("No such Music track found.");
 }
 
+void SoundManager::SetVolume(float number)
+{
+	m_Music->SetVolume(number);
+}
+
+void SoundManager::SetMusicLoop(bool loop)
+{
+	if (loop)
+	{
+		m_Music->SetRepeat();
+	}
+	else
+	{
+		m_Music->SetNoRepeat();
+	}
+}
+
 void SoundManager::Clean() {
 	for (int i = 0; i < m_SoundEffects.size(); i++) {
 		SoundEffect* soundEffect = m_SoundEffects.at(i);

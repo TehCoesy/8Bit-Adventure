@@ -15,7 +15,6 @@ void PauseMenu::Init() {
 	m_text.setPosition(sf::Vector2f((float)((WINDOW_W - m_text.getGlobalBounds().width) / 2.0f), (float)((WINDOW_H - m_text.getGlobalBounds().height) / 2.0f)));
 	p_state = 0;
 
-
 }
 
 void PauseMenu::HandleInput(sf::RenderWindow * window)
