@@ -3,6 +3,8 @@
 
 #include "GameScene.h"
 
+int GameScene::infCount = 0;
+
 GameScene::GameScene() {
 	// Top-down 2D
 	if (!m_World) {
@@ -19,6 +21,7 @@ GameScene::GameScene() {
 	fix = false;
 	dif = 0;
 	mode = 0;
+	frameCount = 0;
 }
 
 GameScene::GameScene(int dif, int mode) {
@@ -38,7 +41,12 @@ void GameScene::Init() {
 	LoadPlayer(STAGE1_PLAYER_FILEPATH);
 
 	// Load objects
-	LoadObject(STAGE1_OBJECTS_FILEPATH);
+	if (SettingArg::GetInstance()->getMod() == 0) {
+		LoadObject(STAGE1_OBJECTS_FILEPATH);
+	}
+	else {
+
+	}
 	
 	// Load terrain
 	LoadTerrain(STAGE1_TERRAIN_FILEPATH);
@@ -358,6 +366,27 @@ void GameScene::Update(float fDeltaTime) {
 	}
 
 	//change stageclear state
+	if (SettingArg::GetInstance()->getMod() == 1) {
+		for (auto it = m_Enemies.begin(); it != m_Enemies.end();it++) {
+			if ((*it)->isDead()) {
+				(*it)->Destroy();
+				m_Enemies.erase(it);
+				break;
+			}
+		}
+		if (m_Enemies.size() < 3 && frameCount<50) {
+			frameCount++;
+		}
+		if (frameCount == 50) {
+			for (int i = 0; i < 5; i++) {
+				srand(time(NULL));
+				b2Body* EnemyBody = CreateBody(rand()%10+15, rand()%10+5, 1, 1, false);
+				Enemy* Skele = new Enemy(infCount++, "SKELE", "SKELE", EnemyBody, b2Vec2(TILE_SIZE, TILE_SIZE), 20, 20, 5, m_Player);
+				m_Enemies.push_back(Skele);
+				frameCount = 0;
+			}
+		}
+	}
 	if (isWin())
 	{
 		StateMachine->AddState(StateRef(new StageClear()),false,true);
@@ -368,6 +397,7 @@ void GameScene::Update(float fDeltaTime) {
 }
 bool GameScene::isWin()
 {
+	if (SettingArg::GetInstance()->getMod() == 1) return false;
 	for (int i = 0; i < m_Enemies.size(); i++)
 	{
 		if (!m_Enemies.at(i)->isDead())

@@ -47,12 +47,12 @@ private:
 	std::vector<Projectile*> m_Projectiles;
 	Boss* m_Boss;
 	std::vector<Enemy*> m_Enemies;
-
+	static int infCount;
 	sf::Font font;
 	bool fix;
 	int mode;
 	int dif;
-
+	int frameCount;
 
 	// UI
 	PlayerGUI* playerGUI;
