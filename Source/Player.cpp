@@ -115,7 +115,8 @@ void Player::Render(sf::RenderWindow* RenderWindow) {
 
 void Player::Damaged(int damage)
 {
-	m_Animation.BlinkForFrames(100);
+	//printf("Started blink\n");
+	m_Animation.BlinkForFrames(200);
 	m_iHealth -= damage;
 	if (m_iHealth <= 0) {
 		m_iHealth = 0;
