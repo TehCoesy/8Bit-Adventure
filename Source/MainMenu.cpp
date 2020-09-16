@@ -125,6 +125,7 @@ void MainMenu::HandleInput(sf::RenderWindow* window) {
 		if (_toGame) {
 			_toGame = false;
 			SM->PlayEffectByName("BTN_CLICK");
+			SettingArg::GetInstance()->setTime(time(NULL));
 			StateMachine->AddState(StateRef(new GameScene()), true);
 		}
 		if (_toOption) {

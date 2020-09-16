@@ -20,6 +20,7 @@
 #include "Score.h"
 #include "State.h"
 #include "Normal_Enemy.h"
+#include "Player.h"
 
 class PauseMenu : public State
 {
@@ -28,10 +29,15 @@ private:
 	sf::Text m_text;
 	sf::Font m_font;
 	std::vector<sf::Text> m_aButtons;
+	std::vector<sf::Text> m_Objective;
 	int p_state;
 	bool resume, toTitle;
+	int elap_time;
+	Player* player;
+	//PlayerGUI* playerGUI;
 	bool isTextClicked(sf::RenderWindow* window, sf::Text text);
 public:
+	PauseMenu(int time,Player* player);
 	virtual void Init();
 
 	virtual void HandleInput(sf::RenderWindow* window);

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Player.h"
+#include "SettingArg.h"
+#include <string>
 
 class sf::RectangleShape;
 
@@ -27,5 +29,5 @@ public:
 
 	void renderHPBar(sf::RenderTarget* target);
 
-	void render(sf::RenderTarget* target);
+	void render(sf::RenderTarget* target, bool is_Pause, int elap_time);
 };

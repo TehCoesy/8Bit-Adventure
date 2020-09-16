@@ -74,21 +74,21 @@ void Animation::Fetch(sf::Sprite* ObjectSprite) {
 	if (m_iID != -1) {
 		m_graFrames.at(m_iFrameIndex).Fetch(ObjectSprite);
 		if (m_bBlinking) {
-			printf("Blinking, frameCount = %d %d\n", m_iFrameCount, m_iFrameDuration);
+			//printf("Blinking, frameCount = %d %d\n", m_iFrameCount, m_iFrameDuration);
 			if (m_iFrameCount % m_iBlinkFrames == 0) {
 				if (!m_bTransparent) {
-					printf("Char went half transparent\n");
+					//printf("Char went half transparent\n");
 					ObjectSprite->setColor(sf::Color(255, 255, 255, 128));
 					m_bTransparent = !m_bTransparent;
 				}
 				else {
-					printf("Char went non-transparent\n");
+					//printf("Char went non-transparent\n");
 					ObjectSprite->setColor(sf::Color(255, 255, 255, 255));
 					m_bTransparent = !m_bTransparent;
 				}
 			}
 			if (m_iFrameCount >= m_iFrameDuration) {
-				printf("Blink ended\n");
+				//printf("Blink ended\n");
 				m_bTransparent = false;
 				ObjectSprite->setColor(sf::Color(255, 255, 255, 255));
 				m_iFrameCount = 0;

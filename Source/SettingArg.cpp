@@ -5,6 +5,7 @@
 SettingArg::SettingArg() {
 	this->dif = 1;
 	this->mod = 0;
+	this->start_time = 0;
 }
 
 SettingArg::~SettingArg() {
@@ -25,4 +26,12 @@ int SettingArg::getDif() {
 
 int SettingArg::getMod() {
 	return this->mod;
+}
+
+int SettingArg::getTime() {
+	return this->start_time;
+}
+
+void SettingArg::setTime(time_t time) {
+	this->start_time = time;
 }

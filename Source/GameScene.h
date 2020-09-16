@@ -24,9 +24,11 @@
 #include "GameOver.h"
 #include "StageClear.h"
 #include "SettingArg.h"
+#include "Objectives.h"
 
 class GameScene : public State {
 private:
+	enum Objective { CLEAR_STAGE_IN_TIME = 0, LOSE_HP_LESS_THAN = 1, DIE_LESS_THAN = 2 };
 	// PhysicsWorld
 	MyContactListener m_myContactListener;
 	b2World* m_World;
@@ -47,6 +49,7 @@ private:
 	std::vector<Projectile*> m_Projectiles;
 	Boss* m_Boss;
 	std::vector<Enemy*> m_Enemies;
+	//std::vector<std::pair<Objectives,int>> m_Objectives;
 	static int infCount;
 	sf::Font font;
 	bool fix;
@@ -66,8 +69,9 @@ private:
 	void LoadTerrain(std::string strFilePath);
 	void LoadObject(std::string strFilePath);
 	void LoadPlayer(std::string strFilePath);
-
-
+	void LoadObjective(std::string strFilePath);
+	bool is_Pause;
+	int elap_time;
 	// Clean-up functions
 	std::vector<MyObject*> m_objectsScheduledForRemoval;
 	void Clean();

@@ -38,6 +38,26 @@ void PlayerGUI::renderHPBar(sf::RenderTarget* target) {
 	target->draw(this->hpBarInside);
 }
 
-void PlayerGUI::render(sf::RenderTarget* target) {
+void PlayerGUI::render(sf::RenderTarget* target,bool is_Pause,int elap_time) {
+	if (is_Pause) {
+		SettingArg::GetInstance()->setTime(time(NULL) - elap_time);
+	}
 	this->renderHPBar(target);
+	int second = time(NULL) - SettingArg::GetInstance()->getTime();
+	int minute = second / 60;
+	second %= 60;
+	sf::Text text;
+	sf::Font font;
+	font.loadFromFile("Resources/Font/kirbyss.ttf");
+	text.setFont(font);
+	text.setPosition(700, 20);
+	text.setCharacterSize(20);
+	text.setFillColor(sf::Color::Yellow);
+	std::string str = "";
+	if (minute < 10) str = "0";
+	str = str + std::to_string(minute) + ":";
+	if (second < 10) str = str + "0";
+	str = str + std::to_string(second);
+	text.setString(str);
+	target->draw(text);
 }

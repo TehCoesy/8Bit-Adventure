@@ -22,6 +22,7 @@ GameScene::GameScene() {
 	dif = 0;
 	mode = 0;
 	frameCount = 0;
+	is_Pause = false;
 }
 
 GameScene::GameScene(int dif, int mode) {
@@ -40,21 +41,52 @@ void GameScene::Init() {
 	//Load Player
 	LoadPlayer(STAGE1_PLAYER_FILEPATH);
 
-	// Load objects
+
 	if (SettingArg::GetInstance()->getMod() == 0) {
 		LoadObject(STAGE1_OBJECTS_FILEPATH);
+		LoadTerrain(STAGE1_TERRAIN_FILEPATH);
 	}
 	else {
-
+		LoadTerrain(STAGE1_TERRAIN_INFINITY_FILEPATH);
 	}
 	
-	// Load terrain
-	LoadTerrain(STAGE1_TERRAIN_FILEPATH);
+	LoadObjective(STAGE1_OBJECTIVE);
+
 
 	// Others
 	SoundManager::GetInstance()->PlayMusicByName("CELESTIAL");
 	this->playerGUI = new PlayerGUI((this->m_Player));
 	this->score = new Score((this->m_Player));
+}
+
+void GameScene::LoadObjective(std::string strFilePath) {
+	FILE* FileStream;
+	strFilePath = RESOURCESFOLDER + strFilePath;
+	FileStream = fopen(strFilePath.c_str(), "r");
+	if (FileStream) {
+		int iNumObjective, id, amount;
+		char name[25];
+		fscanf(FileStream, "#OBJECTIVE_NUM %d\n", &iNumObjective);
+		for (int i = 0; i < iNumObjective; i++) {
+			fscanf(FileStream, "ID: %d, NAME: %s AMOUNT: %d\n", &id, name, &amount);
+			if (strcmp(name, "CLEAR_STAGE_IN_TIME") == 0) {
+				Objectives t;
+				t.SetValue(Objectives::CLEAR_STAGE_IN_TIME);
+				SettingArg::GetInstance()->m_Objectives.push_back(std::make_pair(t,amount));
+			}
+			else if (strcmp(name, "LOSE_HP_LESS_THAN") == 0) {
+				Objectives t;
+				t.SetValue(Objectives::LOSE_HP_LESS_THAN);
+				SettingArg::GetInstance()->m_Objectives.push_back(std::make_pair(t, amount));
+			}
+			else if (strcmp(name, "DIE_LESS_THAN") == 0) {
+				Objectives t;
+				t.SetValue(Objectives::DIE_LESS_THAN);
+				SettingArg::GetInstance()->m_Objectives.push_back(std::make_pair(t, amount));
+			}
+		}
+	}
+	printf("%d\n", SettingArg::GetInstance()->m_Objectives.size());
 }
 
 void GameScene::LoadObject(std::string strFilePath) {
@@ -103,7 +135,7 @@ void GameScene::LoadPlayer(std::string strFilePath) {
 		char strName[100];
 		iVal = fscanf(FileStream, "NAME: %s HEALTH: %d SCORES: %d DAMAGE: %d POS_X: %d POS_Y: %d\n", strName, &iHealth, &iScores, &iDamage, &iPosX, &iPosY);
 
-		b2Body* PlayerBody = CreateBody(5, 10, 1, 1, false);
+		b2Body* PlayerBody = CreateBody(iPosX, iPosY, 1, 1, false);
 		m_Player = new Player(0, "PLAYER", "PLAYER_IDLE_DOWN", PlayerBody, b2Vec2(TILE_SIZE, TILE_SIZE), iHealth, iScores, iDamage);
 
 		fclose(FileStream);
@@ -299,11 +331,13 @@ b2Body* GameScene::CreateBodyWithSprite(int iTileX, int iTileY, sf::Sprite graSp
 
 void GameScene::Pause()
 {
+	is_Pause = true;
 	SM->SetVolume(20.0f);
 }
 
 void GameScene::Resume()
 {
+	is_Pause = false;
 	SM->SetVolume(100.0f);
 }
 
@@ -361,7 +395,7 @@ void GameScene::Update(float fDeltaTime) {
 	score->Update();
 
 	//change gameover state
-	if (m_Player->getHealth() <= 0)
+	if (m_Player->GetObjectState() == ObjectState::DESTROYED)
 	{
 		StateMachine->AddState(StateRef(new GameOver),false,true);
 	}
@@ -375,13 +409,13 @@ void GameScene::Update(float fDeltaTime) {
 				break;
 			}
 		}
-		if (m_Enemies.size() < 3 && frameCount<50) {
+		if (m_Enemies.size() < 5 && frameCount<50) {
 			frameCount++;
 		}
 		if (frameCount == 50) {
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 7; i++) {
 				srand(time(NULL));
-				b2Body* EnemyBody = CreateBody(rand()%10+15, rand()%10+10, 1, 1, false);
+				b2Body* EnemyBody = CreateBody(rand()%(30-22)+22, rand()%(15 - 10)+10, 1, 1, false);
 				Enemy* Skele = new Enemy(infCount++, "SKELE", "SKELE", EnemyBody, b2Vec2(TILE_SIZE, TILE_SIZE), 20, 20, 5, m_Player);
 				m_Enemies.push_back(Skele);
 				frameCount = 0;
@@ -422,7 +456,9 @@ void GameScene::HandleInput(sf::RenderWindow* window)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
-		StateMachine->AddState(StateRef(new PauseMenu()), false,true);
+		//is_Pause = true;
+		elap_time = time(NULL) - SettingArg::GetInstance()->getTime();
+		StateMachine->AddState(StateRef(new PauseMenu(elap_time,m_Player)), false,true);
 	}
 }
 
@@ -443,7 +479,7 @@ void GameScene::Render(sf::RenderWindow* MainWindow) {
 		m_Projectiles.at(i)->Render(MainWindow);
 	}
 	m_Player->Render(MainWindow);
-	playerGUI->render(MainWindow);
+	playerGUI->render(MainWindow,is_Pause, elap_time);
 	score->Render(MainWindow);
 }
 

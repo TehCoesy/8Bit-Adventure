@@ -15,7 +15,7 @@ void Score::init() {
 	font.loadFromFile("Resources/Font/kirbyss.ttf");
 	t.setFont(font);
 	t.setCharacterSize(20);
-	t.setPosition(400, 20);
+	t.setPosition(350, 20);
 	t.setFillColor(sf::Color::Yellow);
 	t.setStyle(sf::Text::Bold);
 }

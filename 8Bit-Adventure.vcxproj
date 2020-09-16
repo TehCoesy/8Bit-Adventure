@@ -157,6 +157,7 @@
     <ClCompile Include="Source\GameOver.cpp" />
     <ClCompile Include="Source\Mouse.cpp" />
     <ClCompile Include="Source\Normal_Enemy.cpp" />
+    <ClCompile Include="Source\Objectives.cpp" />
     <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\PauseMenu.cpp" />
     <ClCompile Include="Source\PlayerGUI.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="Source\GameOver.h" />
     <ClInclude Include="Source\Mouse.h" />
     <ClInclude Include="Source\Normal_Enemy.h" />
+    <ClInclude Include="Source\Objectives.h" />
     <ClInclude Include="Source\Options.h" />
     <ClInclude Include="Source\PauseMenu.h" />
     <ClInclude Include="Source\PlayerGUI.h" />

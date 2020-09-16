@@ -1,5 +1,10 @@
 #include "PauseMenu.h"
 
+PauseMenu::PauseMenu(int time, Player* player) {
+	this->player = player;
+	this->elap_time = time;
+	//this->playerGUI = playerGUI;
+}
 
 void PauseMenu::Init() {
 	m_rec.setFillColor(sf::Color(0, 0, 0, 150));
@@ -27,11 +32,34 @@ void PauseMenu::Init() {
 		pos += m_aButtons[i].getGlobalBounds().width + x;
 	}
 	//t.setPosition(sf::Vector2f(150, 400));
-	m_text.setCharacterSize(80);
-	m_text.setPosition(sf::Vector2f((float)((WINDOW_W - m_text.getGlobalBounds().width) / 2.0f), (float)((WINDOW_H - m_text.getGlobalBounds().height) / 2.0f)));
+	m_text.setCharacterSize(30);
+	m_text.setPosition(sf::Vector2f((float)((WINDOW_W - m_text.getGlobalBounds().width) / 2.0f), (float)(0.15f*WINDOW_H)));
+	//m_text.setPosition(sf::Vector2f((float)((WINDOW_W - m_text.getGlobalBounds().width) / 2.0f), (float)((WINDOW_H - m_text.getGlobalBounds().height) / 2.0f)));
 	p_state = 0;
 	resume = false;
 	toTitle = false;
+	sf::Text text;
+	text.setFont(m_font);
+	text.setCharacterSize(15);
+	text.setFillColor(sf::Color::White);
+	text.setStyle(sf::Text::Bold);
+	m_Objective.push_back(text);
+	m_Objective.push_back(text);
+	m_Objective.push_back(text);
+	for (int i = 0; i < 3; i++) {
+		std::string str;
+		if (SettingArg::GetInstance()->m_Objectives[i].first.GetValue() == Objectives::CLEAR_STAGE_IN_TIME) {
+			str = "Clear stage in under " + std::to_string(SettingArg::GetInstance()->m_Objectives[i].second) + " seconds.";
+		}
+		else if (SettingArg::GetInstance()->m_Objectives[i].first.GetValue() == Objectives::LOSE_HP_LESS_THAN) {
+			str = "Lose less than " + std::to_string(SettingArg::GetInstance()->m_Objectives[i].second) + " PERCENTAGE OF TOTAL HP.";
+		}
+		else if (SettingArg::GetInstance()->m_Objectives[i].first.GetValue() == Objectives::DIE_LESS_THAN) {
+			str = "Die less than " + std::to_string(SettingArg::GetInstance()->m_Objectives[i].second) + " times.";
+		}
+		m_Objective[i].setString(str);
+		m_Objective[i].setPosition(100.0f, 250.0f + i*60.0f);
+	}
 }
 
 void PauseMenu::HandleInput(sf::RenderWindow * window)
@@ -92,7 +120,8 @@ void PauseMenu::HandleInput(sf::RenderWindow * window)
 
 void PauseMenu::Update(float dt)
 {
-	
+	SettingArg::GetInstance()->setTime(time(NULL) - elap_time);
+	//SettingArg::GetInstance()->setTime(time(NULL) - start_time+SettingArg::GetInstance()->getTime());
 }
 
 void PauseMenu::Render(sf::RenderWindow * window)
@@ -102,6 +131,37 @@ void PauseMenu::Render(sf::RenderWindow * window)
 
 	for (auto x : m_aButtons) {
 		window->draw(x);
+	}
+	if (SettingArg::GetInstance()->getMod()==0)
+	for (int i = 0; i < 3; i++) {
+		std::string str = m_Objective[i].getString();
+		if (SettingArg::GetInstance()->m_Objectives[i].first.GetValue() == Objectives::CLEAR_STAGE_IN_TIME) {
+			int _time = time(NULL) - SettingArg::GetInstance()->getTime();
+			if (_time >= SettingArg::GetInstance()->m_Objectives[i].second) {
+				m_Objective[i].setFillColor(sf::Color::Red);
+				m_Objective[i].setString(m_Objective[i].getString() + " (Failed)");
+			}
+			else {
+				m_Objective[i].setFillColor(sf::Color::White);
+				m_Objective[i].setString(m_Objective[i].getString() + " (Ongoing)");
+			}
+		}
+		else if (SettingArg::GetInstance()->m_Objectives[i].first.GetValue() == Objectives::LOSE_HP_LESS_THAN) {
+			if (player->getHealth() <= 0.01f * SettingArg::GetInstance()->m_Objectives[i].second * player->getMaxHealth()) {
+				m_Objective[i].setFillColor(sf::Color::Red);
+				m_Objective[i].setString(m_Objective[i].getString() + " (Failed)");
+			}
+			else {
+				m_Objective[i].setFillColor(sf::Color::White);
+				m_Objective[i].setString(m_Objective[i].getString() + " (Ongoing)");
+			}
+		}
+		else if (SettingArg::GetInstance()->m_Objectives[i].first.GetValue() == Objectives::DIE_LESS_THAN) {
+			m_Objective[i].setFillColor(sf::Color::White);
+			m_Objective[i].setString(m_Objective[i].getString() + " (Ongoing)");
+		}
+		window->draw(m_Objective[i]);
+		m_Objective[i].setString(str);
 	}
 }
 
